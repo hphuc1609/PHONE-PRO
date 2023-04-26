@@ -1,5 +1,4 @@
-import { ShoppingCart } from "@mui/icons-material"
-import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material"
+import { AppBar, Box, Toolbar, Typography } from "@mui/material"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { appBarHeight } from "styles/config"
@@ -13,7 +12,8 @@ const Header = () => {
     <AppBar position="static">
       <Toolbar
         sx={{
-          height: appBarHeight,
+          height: { xs: "4rem", md: appBarHeight },
+          margin: { xs: "0 auto", md: "0" },
         }}
       >
         <Link
@@ -24,46 +24,34 @@ const Header = () => {
             color: "inherit",
           }}
         >
-          <Typography
-            variant="h5"
-            textTransform="uppercase"
-            fontWeight={400}
-            letterSpacing={2}
-            display="flex"
-            alignItems="center"
-          >
-            SmartPhone
+          <Box alignItems="center" display="flex">
+            <Typography
+              variant="body1"
+              textTransform="uppercase"
+              fontWeight={300}
+              letterSpacing={2}
+              fontSize={30}
+            >
+              Phone
+            </Typography>
             <img
               src="../assets/logo-pro-white.png"
               alt=""
               height={40}
               width={80}
               style={{
-                borderTopLeftRadius: 3,
-                borderBottomRightRadius: 3,
+                borderTopLeftRadius: 5,
+                borderBottomRightRadius: 5,
                 marginLeft: 5,
               }}
             />
-          </Typography>
+          </Box>
         </Link>
-        <SearchSuggest setSearchQuery={setSearchQuery} />
+        <Box display={{ xs: "none", md: "flex" }} flexGrow={1}>
+          <SearchSuggest setSearchQuery={setSearchQuery} />
+        </Box>
 
-        <Box mr={2}>
-          <UserMenu />
-        </Box>
-        <Box display="flex" alignItems="center">
-          <IconButton
-            size="large"
-            aria-label="cart of current user"
-            aria-controls="cart-appbar"
-            aria-haspopup="true"
-            color="inherit"
-            sx={{ padding: 1 }}
-          >
-            <ShoppingCart />
-          </IconButton>
-          <Typography sx={{ cursor: "default" }}>Giỏ hàng</Typography>
-        </Box>
+        <UserMenu />
       </Toolbar>
     </AppBar>
   )

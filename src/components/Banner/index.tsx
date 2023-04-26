@@ -1,3 +1,4 @@
+import { Box } from "@mui/material"
 import SwiperCore, { Autoplay, Pagination } from "swiper"
 import "swiper/css/pagination"
 import { Swiper, SwiperSlide } from "swiper/react"
@@ -6,7 +7,7 @@ import "swiper/swiper.css"
 // install Swiper modules
 SwiperCore.use([Autoplay, Pagination])
 
-const imageRandom = [
+const slideShow = [
   {
     image: "../assets/images/banner/banner0.gif",
   },
@@ -48,15 +49,11 @@ const SlideSwiper = () => {
       loop={true}
       grabCursor={true}
     >
-      {imageRandom?.map((item, index) => (
-        <SwiperSlide key={index} style={{ height: 400 }}>
-          <img
-            src={item.image}
-            alt=""
-            height="100%"
-            width="100%"
-            style={{ objectFit: "fill" }}
-          />
+      {slideShow.map((item, index) => (
+        <SwiperSlide key={index}>
+          <Box height={{ xs: 220, md: 400 }}>
+            <img src={item.image} alt="..." width="100%" height="100%" />
+          </Box>
         </SwiperSlide>
       ))}
     </Swiper>

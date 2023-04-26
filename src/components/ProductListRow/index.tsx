@@ -1,8 +1,9 @@
+import { ArrowRight } from "@mui/icons-material"
 import StarIcon from "@mui/icons-material/Star"
 import { Box, Button, Grid, Icon, Typography } from "@mui/material"
 import type { ICustomAPIResponse } from "models/api"
 import { Link } from "react-router-dom"
-import { appBackground } from "styles/config"
+import { primaryDark } from "styles/config"
 
 interface Props {
   title: string
@@ -20,12 +21,14 @@ const ProductListRow = ({ title, icon, products }: Props) => {
             width="100%"
             mt={5}
             sx={{
-              borderTop: `2px solid ${appBackground}`,
+              borderTop: `2px solid ${primaryDark}`,
             }}
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
           >
             <Typography
-              variant="h6"
-              bgcolor={appBackground}
+              bgcolor={primaryDark}
               color="white"
               py={0.5}
               paddingLeft={2}
@@ -54,15 +57,26 @@ const ProductListRow = ({ title, icon, products }: Props) => {
                 {icon}
               </Icon>
             </Typography>
+            <Button color="inherit">
+              <Typography
+                fontSize={{ xs: 12, md: 15 }}
+                textTransform="capitalize"
+              >
+                Xem thêm
+              </Typography>
+              <ArrowRight />
+            </Button>
           </Box>
         </Grid>
+
         <Grid item xs={12}>
-          <Grid container borderColor="#e8e8e8">
+          <Grid container borderColor="#e8e8e8" width="100%">
             {products?.map((item, index) => (
               <Grid
                 key={index}
                 item
-                xs={3}
+                xs={6}
+                md={3}
                 border={1}
                 borderColor="#e8e8e8"
                 p={2}
@@ -76,15 +90,23 @@ const ProductListRow = ({ title, icon, products }: Props) => {
                     position: "relative",
                   }}
                 >
-                  <img
-                    src={item.productPhotoImage}
-                    alt="..."
-                    width="fit-content"
-                    height={250}
-                    style={{ margin: "0 auto", display: "flex" }}
-                  />
+                  <Box height={{ xs: 150, md: 300 }}>
+                    <img
+                      src={item.productPhotoImage}
+                      alt="..."
+                      width="100%"
+                      height="100%"
+                      style={{ margin: "0 auto", display: "flex" }}
+                    />
+                  </Box>
                   <Box mt={2}>
-                    <Typography>{item.productName}</Typography>
+                    <Typography
+                      textOverflow="ellipsis"
+                      whiteSpace="nowrap"
+                      overflow="hidden"
+                    >
+                      {item.productName}
+                    </Typography>
                     <Typography fontWeight={500}>
                       {item.productPrice + " đ"}
                     </Typography>
@@ -98,7 +120,14 @@ const ProductListRow = ({ title, icon, products }: Props) => {
                             sx={{ color: "orange" }}
                           />
                         ))}
-                      <Typography fontSize={13} color="gray" ml={1}>
+                      <Typography
+                        fontSize={13}
+                        color="gray"
+                        ml={1}
+                        textOverflow="ellipsis"
+                        whiteSpace="nowrap"
+                        overflow="hidden"
+                      >
                         {item.productRateCount + " đánh giá"}
                       </Typography>
                     </Box>

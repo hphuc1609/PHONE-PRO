@@ -12,9 +12,8 @@ const Page404 = () => {
       alignItems="center"
       justifyContent="space-between"
       flexDirection="column"
-      height="100%"
     >
-      <Typography>Page Not Found</Typography>
+      <img src="../assets/404_page.png" alt="..." height={500} />
       <Button
         variant="contained"
         onClick={handleBackToHome}
@@ -25,7 +24,7 @@ const Page404 = () => {
           width: "fit-content",
         }}
       >
-        Back To Homepage
+        Quay lại trang chủ
       </Button>
     </Box>
   )

@@ -8,7 +8,6 @@ import {
 } from "@mui/material"
 import type { INavItem } from "models/navigation"
 import { useNavigate } from "react-router-dom"
-import { navBackground } from "styles/config"
 
 const navItems: INavItem[] = [
   {
@@ -49,9 +48,9 @@ const Navbar = () => {
     <Box
       position="sticky"
       gridArea="nav"
-      display="flex"
+      display={{ xs: "none", md: "flex" }}
       justifyContent="center"
-      bgcolor={navBackground}
+      bgcolor="white"
       top={0}
       boxShadow="0 2px 10px 0 rgba(0,0,0,0.15)"
       zIndex={999}

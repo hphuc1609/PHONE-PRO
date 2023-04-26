@@ -1,25 +1,30 @@
 import { ArrowRightOutlined, Whatshot } from "@mui/icons-material"
 import { Grid, Typography, styled } from "@mui/material"
 import ProductListRow from "components/ProductListRow"
-import SlideSwiper from "components/Swiper"
+import SlideSwiper from "components/Banner"
 import { dataProducts } from "components/data/apiProducts"
 import { Link } from "react-router-dom"
 import { companyList } from "utils/CompanyList"
 
 const DropDown = styled(Grid)`
   display: flex;
-  border: 1px solid ${({ theme }: any) => theme.palette.primary.main};
+  border: 1px solid ${({ theme }) => theme.palette.primary.main};
   padding: 8px 10px;
   border-radius: 5px;
   cursor: pointer;
-  margin-right: 5px;
 `
 
 const Home = () => {
   return (
     <>
       <SlideSwiper />
-      <Grid container spacing={1} justifyContent="center" marginTop={2}>
+      <Grid
+        container
+        spacing={1}
+        marginTop={2}
+        display={{ xs: "none", md: "flex" }}
+        justifyContent="center"
+      >
         {companyList.map((item, index) => (
           <Grid
             item
@@ -41,7 +46,13 @@ const Home = () => {
         ))}
       </Grid>
 
-      <Grid container justifyContent="center" mt={5} mb={2}>
+      <Grid
+        container
+        columnGap={1}
+        justifyContent="center"
+        mt={5}
+        display={{ xs: "none", md: "flex" }}
+      >
         <DropDown item xs={0}>
           <Typography>Giá tiền</Typography>
           <ArrowRightOutlined color="primary" />

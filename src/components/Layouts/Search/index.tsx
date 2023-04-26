@@ -14,14 +14,14 @@ interface Props {
 }
 
 const SearchSuggest = ({ setSearchQuery }: Props) => {
-  const keyWords = ["Samsung", "Iphone", "Huawei", "Oppo"]
+  // const keyWords = ["Samsung", "Iphone", "Huawei", "Oppo"]
 
   const handleSearchSuggest = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value)
   }
 
   return (
-    <Box flex={1} textAlign="center">
+    <Box flexGrow={1} textAlign="center">
       <TextField
         id="search-bar"
         onChange={handleSearchSuggest}
@@ -53,34 +53,39 @@ const SearchSuggest = ({ setSearchQuery }: Props) => {
         }}
       />
 
-      <Grid container display="flex" width="50%" margin="8px auto 0">
-        <Grid item xs={0}>
+      {/* <Grid
+        container
+        display={{ xs: "none", md: "flex" }}
+        width="50%"
+        margin="8px auto 0"
+      >
+        <Grid item xs={12} display="flex">
           <Typography mr={1}>Từ khóa:</Typography>
-        </Grid>
-        {keyWords.map((key, index) => (
-          <Grid
-            item
-            xs={0}
-            key={index}
-            sx={{
-              "&:hover": {
-                textDecoration: "underline",
-              },
-            }}
-          >
-            <Link
-              to="/seatch/:id"
-              style={{
-                color: "inherit",
-                textDecoration: "none",
-                marginRight: 10,
+          {keyWords.map((key, index) => (
+            <Grid
+              item
+              xs={0}
+              key={index}
+              sx={{
+                "&:hover": {
+                  textDecoration: "underline",
+                },
               }}
             >
-              {key}
-            </Link>
-          </Grid>
-        ))}
-      </Grid>
+              <Link
+                to=""
+                style={{
+                  color: "inherit",
+                  textDecoration: "none",
+                  marginRight: 10,
+                }}
+              >
+                {key}
+              </Link>
+            </Grid>
+          ))}
+        </Grid>
+      </Grid> */}
     </Box>
   )
 }
