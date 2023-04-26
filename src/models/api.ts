@@ -5,6 +5,8 @@ export interface ICustomAPIResponse {
   productPrice: string
   productStar: number
   productRateCount: number
+  productPromotion: IProductPromotion
+  productSpec: IProductSpecifications
 }
 
 export interface IProductSpecifications {
@@ -22,12 +24,4 @@ export interface IProductSpecifications {
 export interface IProductPromotion {
   name: string
   value: string
-}
-
-export interface IGetPromoResponse {
-  productPromotion?: IProductPromotion
-}
-
-export interface IGetSpecResponse {
-  productSpec?: IProductSpecifications
 }

@@ -30,7 +30,7 @@ export const dataProducts = [
     productPrice: "6.690.000",
     productStar: 0,
     productRateCount: 0,
-    promotion: {
+    productPromotion: {
       name: "Trả góp",
       value: "0",
     },
@@ -54,7 +54,7 @@ export const dataProducts = [
     productPrice: "7.690.000",
     productStar: 5,
     productRateCount: 188,
-    promotion: {
+    productPromotion: {
       name: "Sale",
       value: "500.000",
     },
@@ -78,7 +78,7 @@ export const dataProducts = [
     productPrice: "4.790.000",
     productStar: 5,
     productRateCount: 7,
-    promotion: {
+    productPromotion: {
       name: "Sale",
       value: "250.000",
     },
@@ -103,7 +103,7 @@ export const dataProducts = [
     productPrice: "11.990.000",
     productStar: 0,
     productRateCount: 0,
-    promotion: {
+    productPromotion: {
       name: "Sale",
       value: "1.500.000",
     },
@@ -127,7 +127,7 @@ export const dataProducts = [
     productPrice: "31.990.000",
     productStar: 4,
     productRateCount: 10,
-    promotion: {
+    productPromotion: {
       name: "",
       value: "27.990.000",
     },
@@ -151,7 +151,7 @@ export const dataProducts = [
     productPrice: "4.690.000",
     productStar: 0,
     productRateCount: 0,
-    promotion: {
+    productPromotion: {
       name: "Trả góp",
       value: "0",
     },
@@ -175,7 +175,7 @@ export const dataProducts = [
     productPrice: "6.290.000",
     productStar: 0,
     productRateCount: 0,
-    promotion: {
+    productPromotion: {
       name: "Sale",
       value: "500.000",
     },
@@ -199,7 +199,7 @@ export const dataProducts = [
     productPrice: "8.990.000",
     productStar: 0,
     productRateCount: 0,
-    promotion: {
+    productPromotion: {
       name: "Trả góp",
       value: "0",
     },
@@ -223,7 +223,7 @@ export const dataProducts = [
     productPrice: "17.000.000",
     productStar: 0,
     productRateCount: 0,
-    promotion: {
+    productPromotion: {
       name: "",
       value: "16.990.000",
     },
@@ -247,7 +247,7 @@ export const dataProducts = [
     productPrice: "12.990.000",
     productStar: 0,
     productRateCount: 0,
-    promotion: {
+    productPromotion: {
       name: "",
       value: "0",
     },
@@ -271,7 +271,7 @@ export const dataProducts = [
     productPrice: "3.490.000",
     productStar: 4,
     productRateCount: 16,
-    promotion: {
+    productPromotion: {
       name: "Trả góp",
       value: "0",
     },
@@ -296,7 +296,7 @@ export const dataProducts = [
     productPrice: "2.850.000",
     productStar: 4,
     productRateCount: 104,
-    promotion: {
+    productPromotion: {
       name: "New",
       value: "",
     },
@@ -321,7 +321,7 @@ export const dataProducts = [
     productPrice: "2.490.000",
     productStar: 4,
     productRateCount: 80,
-    promotion: {
+    productPromotion: {
       name: "",
       value: "",
     },
@@ -345,7 +345,7 @@ export const dataProducts = [
     productPrice: "260.000",
     productStar: 5,
     productRateCount: 87,
-    promotion: {
+    productPromotion: {
       name: "New",
       value: "",
     },
@@ -369,7 +369,7 @@ export const dataProducts = [
     productPrice: "5.690.000",
     productStar: 4,
     productRateCount: 372,
-    promotion: {
+    productPromotion: {
       name: "New",
       value: "",
     },
@@ -393,7 +393,7 @@ export const dataProducts = [
     productPrice: "4.790.000",
     productStar: 4,
     productRateCount: 347,
-    promotion: {
+    productPromotion: {
       name: "",
       value: "",
     },
@@ -417,7 +417,7 @@ export const dataProducts = [
     productPrice: "21.990.000",
     productStar: 5,
     productRateCount: 4,
-    promotion: {
+    productPromotion: {
       name: "Trả góp",
       value: "0",
     },
@@ -441,7 +441,7 @@ export const dataProducts = [
     productPrice: "9.990.000",
     productStar: 4,
     productRateCount: 22,
-    promotion: {
+    productPromotion: {
       name: "Trả góp",
       value: "0",
     },
@@ -465,7 +465,7 @@ export const dataProducts = [
     productPrice: "1.990.000",
     productStar: 5,
     productRateCount: 54,
-    promotion: {
+    productPromotion: {
       name: "",
       value: "",
     },
@@ -490,7 +490,7 @@ export const dataProducts = [
     productPrice: "999.999.000",
     productStar: 5,
     productRateCount: 9999,
-    promotion: {
+    productPromotion: {
       name: "Sale",
       value: "1.000",
     },
@@ -515,7 +515,7 @@ export const dataProducts = [
     productPrice: "8.990.000",
     productStar: 4,
     productRateCount: 22,
-    promotion: {
+    productPromotion: {
       name: "Trả góp",
       value: "0",
     },
@@ -540,7 +540,7 @@ export const dataProducts = [
     productPrice: "6.990.000",
     productStar: 5,
     productRateCount: 16,
-    promotion: {
+    productPromotion: {
       name: "New",
       value: "",
     },
@@ -565,7 +565,7 @@ export const dataProducts = [
     productPrice: "4.490.000",
     productStar: 5,
     productRateCount: 7,
-    promotion: {
+    productPromotion: {
       name: "New",
       value: "",
     },
@@ -590,7 +590,7 @@ export const dataProducts = [
     productPrice: "2.490.000",
     productStar: 4,
     productRateCount: 4,
-    promotion: {
+    productPromotion: {
       name: "New",
       value: "",
     },
@@ -615,7 +615,7 @@ export const dataProducts = [
     productPrice: "5.590.000",
     productStar: 4,
     productRateCount: 11,
-    promotion: {
+    productPromotion: {
       name: "New",
       value: "",
     },
@@ -640,7 +640,7 @@ export const dataProducts = [
     productPrice: "890.000",
     productStar: 5,
     productRateCount: 6,
-    promotion: {
+    productPromotion: {
       name: "",
       value: "",
     },
@@ -665,7 +665,7 @@ export const dataProducts = [
     productPrice: "2.390.000",
     productStar: 3,
     productRateCount: 30,
-    promotion: {
+    productPromotion: {
       name: "",
       value: "",
     },
@@ -690,7 +690,7 @@ export const dataProducts = [
     productPrice: "260.000",
     productStar: 5,
     productRateCount: 126,
-    promotion: {
+    productPromotion: {
       name: "",
       value: "",
     },
@@ -715,7 +715,7 @@ export const dataProducts = [
     productPrice: "10.990.000",
     productStar: 0,
     productRateCount: 0,
-    promotion: {
+    productPromotion: {
       name: "Trả góp",
       value: "0",
     },
@@ -740,7 +740,7 @@ export const dataProducts = [
     productPrice: "7.490.000",
     productStar: 5,
     productRateCount: 168,
-    promotion: {
+    productPromotion: {
       name: "Sale",
       value: "800.000",
     },
@@ -765,7 +765,7 @@ export const dataProducts = [
     productPrice: "4.990.000",
     productStar: 4,
     productRateCount: 60,
-    promotion: {
+    productPromotion: {
       name: "Sale",
       value: "500.000",
     },
@@ -790,7 +790,7 @@ export const dataProducts = [
     productPrice: "3.290.000",
     productStar: 4,
     productRateCount: 60,
-    promotion: {
+    productPromotion: {
       name: "Trả góp",
       value: "0",
     },
@@ -815,7 +815,7 @@ export const dataProducts = [
     productPrice: "550.000",
     productStar: 4,
     productRateCount: 37,
-    promotion: {
+    productPromotion: {
       name: "",
       value: "",
     },
@@ -840,7 +840,7 @@ export const dataProducts = [
     productPrice: "590.000",
     productStar: 4,
     productRateCount: 58,
-    promotion: {
+    productPromotion: {
       name: "",
       value: "",
     },
@@ -865,7 +865,7 @@ export const dataProducts = [
     productPrice: "1.790.000",
     productStar: 0,
     productRateCount: 0,
-    promotion: {
+    productPromotion: {
       name: "New",
       value: "",
     },
@@ -890,7 +890,7 @@ export const dataProducts = [
     productPrice: "1.890.000",
     productStar: 4,
     productRateCount: 12,
-    promotion: {
+    productPromotion: {
       name: "",
       value: "",
     },
@@ -915,7 +915,7 @@ export const dataProducts = [
     productPrice: "1.350.000",
     productStar: 5,
     productRateCount: 3,
-    promotion: {
+    productPromotion: {
       name: "New",
       value: "",
     },
@@ -940,7 +940,7 @@ export const dataProducts = [
     productPrice: "160.000",
     productStar: 5,
     productRateCount: 302,
-    promotion: {
+    productPromotion: {
       name: "",
       value: "",
     },
@@ -965,7 +965,7 @@ export const dataProducts = [
     productPrice: "170.000",
     productStar: 5,
     productRateCount: 33,
-    promotion: {
+    productPromotion: {
       name: "New",
       value: "",
     },
@@ -990,7 +990,7 @@ export const dataProducts = [
     productPrice: "2.390.000",
     productStar: 0,
     productRateCount: 0,
-    promotion: {
+    productPromotion: {
       name: "New",
       value: "",
     },
@@ -1015,7 +1015,7 @@ export const dataProducts = [
     productPrice: "1.890.000",
     productStar: 3,
     productRateCount: 3,
-    promotion: {
+    productPromotion: {
       name: "New",
       value: "",
     },
@@ -1040,7 +1040,7 @@ export const dataProducts = [
     productPrice: "1.390.000",
     productStar: 4,
     productRateCount: 2,
-    promotion: {
+    productPromotion: {
       name: "New",
       value: "",
     },
@@ -1065,7 +1065,7 @@ export const dataProducts = [
     productPrice: "7.690.000",
     productStar: 4,
     productRateCount: 12,
-    promotion: {
+    productPromotion: {
       name: "New",
       value: "",
     },
@@ -1090,7 +1090,7 @@ export const dataProducts = [
     productPrice: "1.290.000",
     productStar: 4,
     productRateCount: 14,
-    promotion: {
+    productPromotion: {
       name: "",
       value: "",
     },
@@ -1115,7 +1115,7 @@ export const dataProducts = [
     productPrice: "24.990.000",
     productStar: 0,
     productRateCount: 0,
-    promotion: {
+    productPromotion: {
       name: "",
       value: "22.990.000",
     },
@@ -1140,7 +1140,7 @@ export const dataProducts = [
     productPrice: "20.990.000",
     productStar: 5,
     productRateCount: 230,
-    promotion: {
+    productPromotion: {
       name: "Trả góp",
       value: "0",
     },
@@ -1165,7 +1165,7 @@ export const dataProducts = [
     productPrice: "25.790.000",
     productStar: 5,
     productRateCount: 16,
-    promotion: {
+    productPromotion: {
       name: "Sale",
       value: "500.000",
     },
@@ -1190,7 +1190,7 @@ export const dataProducts = [
     productPrice: "22.990.000",
     productStar: 4,
     productRateCount: 5,
-    promotion: {
+    productPromotion: {
       name: "",
       value: "19.990.000",
     },
@@ -1214,7 +1214,7 @@ export const dataProducts = [
     productPrice: "4.490.000",
     productStar: 4,
     productRateCount: 804,
-    promotion: {
+    productPromotion: {
       name: "",
       value: "3.990.000",
     },

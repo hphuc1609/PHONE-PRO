@@ -4,13 +4,13 @@ import {
   List,
   ListItemButton,
   ListItemIcon,
-  ListItemText
+  ListItemText,
 } from "@mui/material"
-import type { NavItem } from "models/navigation"
+import type { INavItem } from "models/navigation"
 import { useNavigate } from "react-router-dom"
 import { navBackground } from "styles/config"
 
-const navItems: NavItem[] = [
+const navItems: INavItem[] = [
   {
     name: "Trang chủ",
     icon: <Home />,
@@ -53,7 +53,7 @@ const Navbar = () => {
       justifyContent="center"
       bgcolor={navBackground}
       top={0}
-      boxShadow="0 2px 10px 0 rgba(0,0,0,0.2)"
+      boxShadow="0 2px 10px 0 rgba(0,0,0,0.15)"
       zIndex={999}
     >
       <List

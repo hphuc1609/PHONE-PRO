@@ -1,8 +1,8 @@
-import styled from "@emotion/styled"
-import { ArrowRightOutlined } from "@mui/icons-material"
-import { Grid, Typography } from "@mui/material"
+import { ArrowRightOutlined, Whatshot } from "@mui/icons-material"
+import { Grid, Typography, styled } from "@mui/material"
 import ProductListRow from "components/ProductListRow"
 import SlideSwiper from "components/Swiper"
+import { dataProducts } from "components/data/apiProducts"
 import { Link } from "react-router-dom"
 import { companyList } from "utils/CompanyList"
 
@@ -60,7 +60,14 @@ const Home = () => {
         </DropDown>
       </Grid>
 
-      <ProductListRow title={""} icon={undefined} />
+      <ProductListRow
+        title="Sản phẩm nổi bật"
+        icon={<Whatshot color="error" />}
+        products={dataProducts}
+      />
+      <ProductListRow title="Sản phẩm mới" icon={<Whatshot color="error" />} />
+      <ProductListRow title="Trả góp 0%" icon={<Whatshot color="error" />} />
+      <ProductListRow title="Giảm giá sốc" icon={<Whatshot color="error" />} />
     </>
   )
 }
