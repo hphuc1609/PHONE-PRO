@@ -14,7 +14,7 @@ const DropDown = styled(Grid)`
   cursor: pointer;
 `
 
-const Home = () => {
+const HomePage = () => {
   return (
     <>
       <SlideSwiper />
@@ -83,4 +83,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default HomePage

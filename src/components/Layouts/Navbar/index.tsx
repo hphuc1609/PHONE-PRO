@@ -18,7 +18,7 @@ const navItems: INavItem[] = [
   {
     name: "Giới thiệu",
     icon: <Info />,
-    link: "/about",
+    link: "/introduce",
   },
   {
     name: "Tin tức",
