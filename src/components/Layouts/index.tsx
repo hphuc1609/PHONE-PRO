@@ -11,13 +11,18 @@ interface Props {
 
 const Layout = ({ children }: Props) => {
   return (
-    <Box width="100%" height="100%" maxHeight="-webkit-fill-available">
+    <Box width="100%" height="100vh" maxHeight="-webkit-fill-available">
       <CssBaseline />
 
       <Header />
       <Navbar />
-      <Box component="main" p={{ xs: 1, md: 5 }} bgcolor={mainBackground}>
-        <Box sx={{ flexGrow: 1, marginY: "auto" }}>{children}</Box>
+      <Box
+        component="main"
+        p={{ xs: "16px 10px", md: 5 }}
+        bgcolor={mainBackground}
+        minHeight="100%"
+      >
+        <Box sx={{ flexGrow: 1 }}>{children}</Box>
       </Box>
       <Footer />
     </Box>
