@@ -1,8 +1,9 @@
 import { ArrowRightOutlined, Whatshot } from "@mui/icons-material"
 import { Grid, Typography, styled } from "@mui/material"
-import ProductListRow from "components/ProductListRow"
 import SlideSwiper from "components/Banner"
+import ProductListRow from "components/ProductListRow"
 import { dataProducts } from "components/data/apiProducts"
+import { Helmet } from "react-helmet"
 import { Link } from "react-router-dom"
 import { companyList } from "utils/CompanyList"
 
@@ -17,6 +18,11 @@ const DropDown = styled(Grid)`
 const HomePage = () => {
   return (
     <>
+      <Helmet>
+        <title>Phone Pro | Home</title>
+        <meta name="description" content="Description of HomePage ..." />
+      </Helmet>
+
       <SlideSwiper />
       <Grid
         container
@@ -76,9 +82,21 @@ const HomePage = () => {
         icon={<Whatshot color="error" />}
         products={dataProducts}
       />
-      <ProductListRow title="Sản phẩm mới" icon={<Whatshot color="error" />} />
-      <ProductListRow title="Trả góp 0%" icon={<Whatshot color="error" />} />
-      <ProductListRow title="Giảm giá sốc" icon={<Whatshot color="error" />} />
+      <ProductListRow
+        title="Sản phẩm mới"
+        icon={<Whatshot color="error" />}
+        products={dataProducts}
+      />
+      <ProductListRow
+        title="Trả góp 0%"
+        icon={<Whatshot color="error" />}
+        products={dataProducts}
+      />
+      <ProductListRow
+        title="Giảm giá sốc"
+        icon={<Whatshot color="error" />}
+        products={dataProducts}
+      />
     </>
   )
 }
