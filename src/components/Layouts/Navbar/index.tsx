@@ -46,14 +46,15 @@ const Navbar = () => {
 
   return (
     <Box
-      position="sticky"
+      component="nav"
       gridArea="nav"
       display={{ xs: "none", md: "flex" }}
       justifyContent="center"
       bgcolor="white"
-      top={0}
       boxShadow="0 2px 10px 0 rgba(0,0,0,0.15)"
       zIndex={999}
+      position="sticky"
+      top={0}
     >
       <List
         sx={{

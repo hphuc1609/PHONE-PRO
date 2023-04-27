@@ -8,7 +8,7 @@ import { primaryDark } from "styles/config"
 interface Props {
   title: string
   icon: React.ReactNode
-  products?: ICustomAPIResponse[]
+  products: ICustomAPIResponse[]
 }
 
 const ProductListRow = ({ title, icon, products }: Props) => {
@@ -71,7 +71,7 @@ const ProductListRow = ({ title, icon, products }: Props) => {
 
         <Grid item xs={12}>
           <Grid container borderColor="#e8e8e8" width="100%">
-            {products?.map((item, index) => (
+            {products.map((item, index) => (
               <Grid
                 key={index}
                 item
@@ -99,6 +99,7 @@ const ProductListRow = ({ title, icon, products }: Props) => {
                       style={{ margin: "0 auto", display: "flex" }}
                     />
                   </Box>
+
                   <Box mt={2}>
                     <Typography
                       textOverflow="ellipsis"
@@ -107,9 +108,10 @@ const ProductListRow = ({ title, icon, products }: Props) => {
                     >
                       {item.productName}
                     </Typography>
-                    <Typography fontWeight={500}>
-                      {item.productPrice + " đ"}
+                    <Typography fontWeight={500} color="error">
+                      {item.productPrice + " ₫"}
                     </Typography>
+
                     <Box display="flex" alignItems="center" mt={0.5}>
                       {Array(item.productStar)
                         .fill(0)
