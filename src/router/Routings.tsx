@@ -1,11 +1,14 @@
 import Page404 from "components/pages/404"
 import { Route, Routes } from "react-router-dom"
-import { routes } from "./routes"
+import { directedRoutes, guardedRoutes } from "./routes"
 
-const Routing = () => {
+const Routings = () => {
   return (
     <Routes>
-      {routes?.map((route) => (
+      {guardedRoutes.map((route) => (
+        <Route key={route.path} path={route.path} element={route.element} />
+      ))}
+      {directedRoutes.map((route) => (
         <Route key={route.path} path={route.path} element={route.element} />
       ))}
 
@@ -14,4 +17,4 @@ const Routing = () => {
   )
 }
 
-export default Routing
+export default Routings

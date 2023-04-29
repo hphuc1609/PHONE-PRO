@@ -2,10 +2,18 @@ import ContactPage from "components/pages/Contact"
 import GuaranteePage from "components/pages/Guarantee"
 import HomePage from "components/pages/Home"
 import IntroPage from "components/pages/Introduce"
+import Login from "components/pages/Login"
 import NewsPage from "components/pages/News"
-import { PathRouteProps } from "react-router-dom"
+import type { PathRouteProps } from "react-router-dom"
 
-export const routes: Array<PathRouteProps> = [
+export const guardedRoutes: Array<PathRouteProps> = [
+  {
+    path: "/login",
+    element: <Login />,
+  },
+]
+
+export const directedRoutes: Array<PathRouteProps> = [
   {
     path: "/",
     element: <HomePage />,

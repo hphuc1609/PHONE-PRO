@@ -21,8 +21,10 @@ const Layout = ({ children }: Props) => {
         p={{ xs: "16px 10px", md: 5 }}
         bgcolor={mainBackground}
         minHeight="100%"
+        display="flex"
+        flexDirection="column"
       >
-        <Box sx={{ flexGrow: 1 }}>{children}</Box>
+        <Box sx={{ flexGrow: 1, marginY: "auto" }}>{children}</Box>
       </Box>
       <Footer />
     </Box>
