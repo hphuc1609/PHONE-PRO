@@ -7,7 +7,8 @@ interface Props {
   name: string
   label: string
   control: Control<FieldValues>
-  errors: FieldErrors<FieldValues>
+  error: FieldErrors<FieldValues>
+  className?: string
   TextFieldProps?: TextFieldProps
 }
 
@@ -15,7 +16,8 @@ const FormInputText = ({
   name,
   label,
   control,
-  errors,
+  error,
+  className,
   TextFieldProps,
 }: Props) => (
   <Controller
@@ -24,13 +26,14 @@ const FormInputText = ({
     render={({ field: { onChange, value } }) => (
       <TextField
         fullWidth
-        error={errors[name] !== undefined}
-        helperText={errors[name] ? `${errors[name]?.message}` : undefined}
+        error={error[name] !== undefined}
+        helperText={error[name] ? `${error[name]?.message}` : undefined}
         label={label}
         variant="outlined"
         onChange={onChange}
         name={name}
         value={value || ""}
+        className={className}
         {...TextFieldProps}
       />
     )}
