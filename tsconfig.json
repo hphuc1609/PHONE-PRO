@@ -16,7 +16,8 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "baseUrl": "./src",
-    "types": ["node", "vite/client"]
+    "types": ["node", "vite/client"],
+    "strictNullChecks": false
   },
   "include": ["./src"]
 }

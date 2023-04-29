@@ -1,5 +1,4 @@
-import { ThemeProvider } from "@emotion/react"
-import { CssBaseline } from "@mui/material"
+import { CssBaseline, ThemeProvider } from "@mui/material"
 import ReactDOM from "react-dom"
 import { ToastContainer } from "react-toastify"
 import theme from "styles/theme"

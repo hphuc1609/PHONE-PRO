@@ -5,43 +5,33 @@ import { Helmet } from "react-helmet"
 const newsList = [
   {
     name: "Đánh giá smartphone chip S660, RAM 8 GB, giá 6,99 triệu tại Việt Nam",
-    photoLink:
-      "https://cdn.tgdd.vn/Files/2021/10/13/1406215/oppo-a95-1-800x450.jpg",
+    photoLink: "../assets/images/news/news_1.jpg",
     category: "Doanh nghiệp",
-    date: "1 ngày trước",
-    path: "",
+    path: "https://doanhnghiepvn.vn/cong-nghe/danh-gia-smartphone-chip-s660-ram-8-gb-gia-6-99-trieu-tai-viet-nam/2018112603315443",
   },
   {
     name: "Khám phá smartphone màn hình gập được đầu tiên của Samsung",
-    photoLink:
-      "https://cdn.tgdd.vn/Files/2021/10/13/1406215/oppo-a95-1-800x450.jpg",
+    photoLink: "../assets/images/news/news_2.jpg",
     category: "Thanh niên",
-    date: "6 giờ",
-    path: "",
+    path: "https://thanhnien.vn/kham-pha-smartphone-man-hinh-gap-duoc-dau-tien-cua-samsung-185807113.htm",
   },
   {
     name: "Doanh số iPhone XS và iPhone XR thảm hại, Apple sản xuất lại iPhone X",
-    photoLink:
-      "https://cdn.tgdd.vn/Files/2021/10/13/1406215/oppo-a95-1-800x450.jpg",
+    photoLink: "../assets/images/news/news_3.jpg",
     category: "VOV",
-    date: "6 giờ",
-    path: "",
+    path: "https://vov.vn/cong-nghe/doanh-so-iphone-xs-va-iphone-xr-tham-hai-apple-san-xuat-lai-iphone-x-843717.vov",
   },
   {
     name: "Chiếc điện thoại thông minh này của LG sẽ có tới 16 Camera",
-    photoLink:
-      "https://cdn.tgdd.vn/Files/2021/10/13/1406215/oppo-a95-1-800x450.jpg",
+    photoLink: "../assets/images/news/news_4.jpg",
     category: "VietQ",
-    date: "13 giờ",
-    path: "",
+    path: "https://vietq.vn/chiec-dien-thoai-thong-minh-nay-cua-lg-se-co-toi-16-camera-d151674.html",
   },
   {
     name: "Những tiêu chí bạn không nên bỏ qua khi mua smartphone 2018",
-    photoLink:
-      "https://cdn.tgdd.vn/Files/2021/10/13/1406215/oppo-a95-1-800x450.jpg",
+    photoLink: "../assets/images/news/news_5.jpg",
     category: "Zing",
-    date: "9 giờ",
-    path: "",
+    path: "https://zingnews.vn/nhung-tieu-chi-ban-khong-nen-bo-qua-khi-mua-smartphone-2018-post894509.html",
   },
 ]
 

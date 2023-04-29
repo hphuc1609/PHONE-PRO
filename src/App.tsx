@@ -1,12 +1,12 @@
 import Layout from "components/Layouts"
 import { BrowserRouter } from "react-router-dom"
-import Routing from "router/routing"
+import Routings from "router/Routings"
 
 const App = () => {
   return (
     <BrowserRouter>
       <Layout>
-        <Routing />
+        <Routings />
       </Layout>
     </BrowserRouter>
   )

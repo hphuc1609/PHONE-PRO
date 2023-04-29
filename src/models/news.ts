@@ -3,5 +3,4 @@ export interface INewsItem {
   photoLink: string
   path: string
   category: string
-  date: string
 }
