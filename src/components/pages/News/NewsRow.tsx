@@ -1,5 +1,6 @@
 import { Box, Grid, Typography } from "@mui/material"
 import type { INewsItem } from "models/news"
+import { borderColor } from "styles/config"
 
 interface Props {
   detail: INewsItem
@@ -13,7 +14,7 @@ const NewsRow = ({ detail }: Props) => {
   var date = generateRandomDate().toLocaleDateString("en-US")
 
   return (
-    <Grid container border="1px solid #cccc">
+    <Grid container border={`1px solid ${borderColor}`}>
       <Grid item xs={3}>
         <Box component="a" href={detail.path}>
           <img
