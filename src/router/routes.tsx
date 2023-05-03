@@ -13,7 +13,7 @@ export const guardedRoutes: Array<PathRouteProps> = [
   },
 ]
 
-export const directedRoutes: Array<PathRouteProps> = [
+export const publicRoutes: Array<PathRouteProps> = [
   {
     path: "/",
     element: <HomePage />,
