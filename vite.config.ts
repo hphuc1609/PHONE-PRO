@@ -13,6 +13,7 @@ export default defineConfig({
       router: path.resolve(__dirname, "src/router"),
       utils: path.resolve(__dirname, "src/utils"),
       services: path.resolve(__dirname, "src/services"),
+      configs: path.resolve(__dirname, "src/configs"),
     },
   },
 })
