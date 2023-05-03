@@ -5,7 +5,7 @@ const IntroPage = () => {
   return (
     <>
       <Helmet>
-        <title>Phone Pro | Giới thiệu</title>
+        <title>Phone Pro - Giới thiệu</title>
         <meta name="description" content="Description of Introduce Page ..." />
       </Helmet>
 
