@@ -11,7 +11,7 @@ const NewsRow = ({ detail }: Props) => {
     return new Date(+new Date() - Math.floor(Math.random() * 10000000000))
   }
 
-  var date = generateRandomDate().toLocaleDateString("en-US")
+  const date = generateRandomDate().toLocaleDateString("en-US")
 
   return (
     <Grid container border={`1px solid ${borderColor}`}>

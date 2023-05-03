@@ -39,7 +39,7 @@ const NewsPage = () => {
   return (
     <>
       <Helmet>
-        <title>Phone Pro | Tin tức</title>
+        <title>Phone Pro - Tin tức</title>
         <meta name="description" content="Description of News Page ..." />
       </Helmet>
 
