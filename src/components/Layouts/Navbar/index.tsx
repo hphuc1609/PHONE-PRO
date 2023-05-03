@@ -1,13 +1,8 @@
 import { Build, Call, Home, Info, Newspaper } from "@mui/icons-material"
-import {
-  Box,
-  List,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material"
+import { Box, List } from "@mui/material"
 import type { INavItem } from "models/navigation"
-import { useNavigate } from "react-router-dom"
+import { useLocation } from "react-router-dom"
+import NavListItem from "./NavListItem"
 
 const navItems: INavItem[] = [
   {
@@ -38,11 +33,9 @@ const navItems: INavItem[] = [
 ]
 
 const Navbar = () => {
-  const navigate = useNavigate()
+  const location = useLocation()
 
-  const handleClickItem = (link: string) => {
-    navigate(link)
-  }
+  const checkActiveNavLink = (link: string) => link === location.pathname
 
   return (
     <Box
@@ -66,14 +59,11 @@ const Navbar = () => {
         }}
       >
         {navItems.map((item) => (
-          <ListItemButton
+          <NavListItem
             key={item.name}
-            sx={{ flex: "unset", minWidth: 150, textAlign: "center" }}
-            onClick={() => handleClickItem(item.link)}
-          >
-            <ListItemIcon sx={{ minWidth: "unset" }}>{item.icon}</ListItemIcon>
-            <ListItemText primary={item.name} />
-          </ListItemButton>
+            item={item}
+            isActive={checkActiveNavLink(item.link)}
+          />
         ))}
       </List>
     </Box>

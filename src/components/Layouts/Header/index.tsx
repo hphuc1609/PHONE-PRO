@@ -1,19 +1,17 @@
 import { AppBar, Box, Toolbar, Typography } from "@mui/material"
-import { useState } from "react"
 import { Link } from "react-router-dom"
 import { appBarHeight } from "styles/config"
-import SearchSuggest from "../Search"
+import SearchSuggestion from "../Search"
 import UserMenu from "./UserMenu"
 
 const Header = () => {
-  const [searchQuery, setSearchQuery] = useState("")
-
   return (
     <AppBar position="static">
       <Toolbar
         sx={{
           height: { xs: "4rem", md: appBarHeight },
           margin: { xs: "0 auto", md: "0" },
+          justifyContent: "space-between",
         }}
       >
         <Link
@@ -35,8 +33,8 @@ const Header = () => {
               Phone
             </Typography>
             <img
-              src="../assets/logo-pro-white.png"
-              alt=""
+              src="../assets/Logo-pro-white.png"
+              alt="Logo"
               height={40}
               width={80}
               style={{
@@ -47,9 +45,7 @@ const Header = () => {
             />
           </Box>
         </Link>
-        <Box display={{ xs: "none", md: "flex" }} flexGrow={1}>
-          <SearchSuggest setSearchQuery={setSearchQuery} />
-        </Box>
+        <SearchSuggestion />
 
         <UserMenu />
       </Toolbar>
