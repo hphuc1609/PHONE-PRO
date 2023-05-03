@@ -1,11 +1,30 @@
-import { ArrowRightOutlined, Whatshot } from "@mui/icons-material"
+import {
+  ArrowRightOutlined,
+  Discount,
+  MonetizationOn,
+  NewReleases,
+  Whatshot,
+} from "@mui/icons-material"
 import { Grid, Typography, styled } from "@mui/material"
 import SlideSwiper from "components/Banner"
-import ProductListRow from "components/ProductListRow"
-import { dataProducts } from "components/data/apiProducts"
+import ProductListRow from "components/common/ProductListRow"
+import ProductListTitle from "components/common/ProductListRow/ProductListTitle"
+import { toastConfig } from "configs/toast"
+import type { ICustomAPIResponse } from "models/product"
+import { useEffect, useState } from "react"
 import { Helmet } from "react-helmet"
 import { Link } from "react-router-dom"
+import { toast } from "react-toastify"
+import SwiperCore, { Navigation } from "swiper"
+import { Swiper, SwiperSlide } from "swiper/react"
 import { companyList } from "utils/CompanyList"
+import { realtimeDB } from "utils/firebaseConfig"
+import { swiperConfig } from "configs/swiper"
+
+import "swiper/css"
+import "swiper/css/navigation"
+import "./style.css"
+SwiperCore.use([Navigation])
 
 const DropDown = styled(Grid)`
   display: flex;
@@ -16,10 +35,31 @@ const DropDown = styled(Grid)`
 `
 
 const HomePage = () => {
+  const [productList, setProductList] = useState<ICustomAPIResponse[]>([])
+
+  useEffect(() => {
+    realtimeDB
+      .ref("products")
+      .once("value", (snapshot) => {
+        if (snapshot.exists()) {
+          const data = snapshot.val()
+          setProductList(data)
+        } else {
+          toast.error("No data available!", toastConfig)
+        }
+      })
+      .catch((error) => {
+        toast.error(`Failed to get api because ${error}!`, toastConfig)
+      })
+      .finally(() => {
+        toast.clearWaitingQueue()
+      })
+  }, [])
+
   return (
     <>
       <Helmet>
-        <title>Phone Pro | Home</title>
+        <title>Phone Pro - Trang chủ</title>
         <meta name="description" content="Description of HomePage ..." />
       </Helmet>
 
@@ -46,7 +86,7 @@ const HomePage = () => {
             }}
           >
             <Link to={`company=${item.path}`} style={{ display: "block" }}>
-              <img src={item.image} alt={item.name} height={33} width={150} />
+              <img src={item.image} alt={item.name} height={30} width={130} />
             </Link>
           </Grid>
         ))}
@@ -77,26 +117,93 @@ const HomePage = () => {
         </DropDown>
       </Grid>
 
-      <ProductListRow
-        title="Sản phẩm nổi bật"
-        icon={<Whatshot color="error" />}
-        products={dataProducts}
-      />
-      <ProductListRow
-        title="Sản phẩm mới"
-        icon={<Whatshot color="error" />}
-        products={dataProducts}
-      />
-      <ProductListRow
-        title="Trả góp 0%"
-        icon={<Whatshot color="error" />}
-        products={dataProducts}
-      />
-      <ProductListRow
-        title="Giảm giá sốc"
-        icon={<Whatshot color="error" />}
-        products={dataProducts}
-      />
+      {/* Render product list api */}
+      <Grid container rowGap={5}>
+        <Grid container item rowSpacing={2}>
+          <Grid item xs={12}>
+            <ProductListTitle
+              title="Sản phẩm nổi bật"
+              icon={<Whatshot color="error" />}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Swiper {...swiperConfig}>
+              {productList?.map(
+                (state) =>
+                  state.productPromotion?.promotionName.toLowerCase() ===
+                    "" && (
+                    <SwiperSlide key={state.productID}>
+                      <ProductListRow data={state} />
+                    </SwiperSlide>
+                  )
+              )}
+            </Swiper>
+          </Grid>
+        </Grid>
+        <Grid container rowSpacing={2}>
+          <Grid item xs={12}>
+            <ProductListTitle
+              title="Sản phẩm mới"
+              icon={<NewReleases color="secondary" />}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Swiper {...swiperConfig}>
+              {productList?.map(
+                (state) =>
+                  state.productPromotion?.promotionName.toLowerCase() ===
+                    "new" && (
+                    <SwiperSlide key={state.productID}>
+                      <ProductListRow data={state} />
+                    </SwiperSlide>
+                  )
+              )}
+            </Swiper>
+          </Grid>
+        </Grid>
+        <Grid container rowSpacing={2}>
+          <Grid item xs={12}>
+            <ProductListTitle
+              title="Trả góp 0%"
+              icon={<MonetizationOn color="warning" />}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Swiper {...swiperConfig}>
+              {productList?.map(
+                (state) =>
+                  state.productPromotion?.promotionName.toLowerCase() ===
+                    "trả góp" && (
+                    <SwiperSlide key={state.productID}>
+                      <ProductListRow data={state} />
+                    </SwiperSlide>
+                  )
+              )}
+            </Swiper>
+          </Grid>
+        </Grid>
+        <Grid container rowSpacing={2}>
+          <Grid item xs={12}>
+            <ProductListTitle
+              title="Giảm giá sốc"
+              icon={<Discount color="error" />}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Swiper {...swiperConfig} loopedSlides={2}>
+              {productList?.map(
+                (state) =>
+                  state.productPromotion?.promotionName.toLowerCase() ===
+                    "sale" && (
+                    <SwiperSlide key={state.productID}>
+                      <ProductListRow data={state} />
+                    </SwiperSlide>
+                  )
+              )}
+            </Swiper>
+          </Grid>
+        </Grid>
+      </Grid>
     </>
   )
 }
