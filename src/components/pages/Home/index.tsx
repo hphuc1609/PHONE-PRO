@@ -7,23 +7,24 @@ import {
 } from "@mui/icons-material"
 import { Grid, Typography, styled } from "@mui/material"
 import SlideSwiper from "components/Banner"
-import ProductListRow from "components/common/ProductListRow"
-import ProductListTitle from "components/common/ProductListRow/ProductListTitle"
+import ProductListRow from "components/common/ProductList/ProductListRow"
+import ProductListTitle from "components/common/ProductList/ProductListTitle"
+import { swiperConfig } from "configs/swiper"
 import { toastConfig } from "configs/toast"
-import type { ICustomAPIResponse } from "models/product"
+import { ICustomAPIResponse } from "models/product"
 import { useEffect, useState } from "react"
 import { Helmet } from "react-helmet"
 import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
 import SwiperCore, { Navigation } from "swiper"
 import { Swiper, SwiperSlide } from "swiper/react"
-import { companyList } from "utils/CompanyList"
+import { companies } from "utils/company"
 import { realtimeDB } from "utils/firebaseConfig"
-import { swiperConfig } from "configs/swiper"
 
 import "swiper/css"
 import "swiper/css/navigation"
 import "./style.css"
+
 SwiperCore.use([Navigation])
 
 const DropDown = styled(Grid)`
@@ -37,6 +38,9 @@ const DropDown = styled(Grid)`
 const HomePage = () => {
   const [productList, setProductList] = useState<ICustomAPIResponse[]>([])
 
+  // const toTableOptions = (tables: string[]): IAutocompleteOption[] =>
+  //   tables.map((table) => ({ label: table, value: table }));
+
   useEffect(() => {
     realtimeDB
       .ref("products")
@@ -47,9 +51,6 @@ const HomePage = () => {
         } else {
           toast.error("No data available!", toastConfig)
         }
-      })
-      .catch((error) => {
-        toast.error(`Failed to get api because ${error}!`, toastConfig)
       })
       .finally(() => {
         toast.clearWaitingQueue()
@@ -71,11 +72,11 @@ const HomePage = () => {
         display={{ xs: "none", md: "flex" }}
         justifyContent="center"
       >
-        {companyList.map((item, index) => (
+        {companies.map((item) => (
           <Grid
             item
             xs={0}
-            key={index}
+            key={item.path}
             sx={{
               "&.MuiGrid-root": {
                 transition: "all ease 0.3s ",
@@ -117,7 +118,7 @@ const HomePage = () => {
         </DropDown>
       </Grid>
 
-      {/* Render product list api */}
+      {/* Render api product list  */}
       <Grid container rowGap={5}>
         <Grid container item rowSpacing={2}>
           <Grid item xs={12}>
@@ -129,11 +130,10 @@ const HomePage = () => {
           <Grid item xs={12}>
             <Swiper {...swiperConfig}>
               {productList?.map(
-                (state) =>
-                  state.productPromotion?.promotionName.toLowerCase() ===
-                    "" && (
-                    <SwiperSlide key={state.productID}>
-                      <ProductListRow data={state} />
+                (item) =>
+                  item.promotion.name.toLowerCase() === "" && (
+                    <SwiperSlide key={item.productId}>
+                      <ProductListRow data={item} />
                     </SwiperSlide>
                   )
               )}
@@ -150,11 +150,10 @@ const HomePage = () => {
           <Grid item xs={12}>
             <Swiper {...swiperConfig}>
               {productList?.map(
-                (state) =>
-                  state.productPromotion?.promotionName.toLowerCase() ===
-                    "new" && (
-                    <SwiperSlide key={state.productID}>
-                      <ProductListRow data={state} />
+                (item) =>
+                  item.promotion.name.toLowerCase() === "new" && (
+                    <SwiperSlide key={item.productId}>
+                      <ProductListRow data={item} />
                     </SwiperSlide>
                   )
               )}
@@ -171,11 +170,10 @@ const HomePage = () => {
           <Grid item xs={12}>
             <Swiper {...swiperConfig}>
               {productList?.map(
-                (state) =>
-                  state.productPromotion?.promotionName.toLowerCase() ===
-                    "trả góp" && (
-                    <SwiperSlide key={state.productID}>
-                      <ProductListRow data={state} />
+                (item) =>
+                  item.promotion.name.toLowerCase() === "trả góp" && (
+                    <SwiperSlide key={item.productId}>
+                      <ProductListRow data={item} />
                     </SwiperSlide>
                   )
               )}
@@ -192,11 +190,10 @@ const HomePage = () => {
           <Grid item xs={12}>
             <Swiper {...swiperConfig} loopedSlides={2}>
               {productList?.map(
-                (state) =>
-                  state.productPromotion?.promotionName.toLowerCase() ===
-                    "sale" && (
-                    <SwiperSlide key={state.productID}>
-                      <ProductListRow data={state} />
+                (item) =>
+                  item.promotion.name.toLowerCase() === "sale" && (
+                    <SwiperSlide key={item.productId}>
+                      <ProductListRow data={item} />
                     </SwiperSlide>
                   )
               )}

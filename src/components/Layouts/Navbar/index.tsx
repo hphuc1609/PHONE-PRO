@@ -34,7 +34,6 @@ const navItems: INavItem[] = [
 
 const Navbar = () => {
   const location = useLocation()
-
   const checkActiveNavLink = (link: string) => link === location.pathname
 
   return (
@@ -46,8 +45,7 @@ const Navbar = () => {
       bgcolor="white"
       boxShadow="0 2px 10px 0 rgba(0,0,0,0.15)"
       zIndex={999}
-      position="sticky"
-      top={0}
+      position="relative"
     >
       <List
         sx={{

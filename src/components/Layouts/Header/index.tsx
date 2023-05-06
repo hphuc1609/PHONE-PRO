@@ -1,12 +1,13 @@
 import { AppBar, Box, Toolbar, Typography } from "@mui/material"
 import { Link } from "react-router-dom"
 import { appBarHeight } from "styles/config"
+import ShoppingCart from "../Cart"
 import SearchSuggestion from "../Search"
 import UserMenu from "./UserMenu"
 
 const Header = () => {
   return (
-    <AppBar position="static">
+    <AppBar position="relative" elevation={0}>
       <Toolbar
         sx={{
           height: { xs: "4rem", md: appBarHeight },
@@ -47,7 +48,10 @@ const Header = () => {
         </Link>
         <SearchSuggestion />
 
-        <UserMenu />
+        <Box display={{ xs: "none", md: "flex" }}>
+          <UserMenu />
+          <ShoppingCart />
+        </Box>
       </Toolbar>
     </AppBar>
   )
