@@ -1,9 +1,9 @@
 import firebase from "firebase"
 
-export const config = {
+const firebaseApp = {
   apiKey: import.meta.env.VITE_API_KEY,
   authDomain: import.meta.env.VITE_AUTH_DOMAIN,
-  databaseURL: "https://doanweb-26f13-default-rtdb.firebaseio.com",
+  databaseURL: import.meta.env.VITE_DATABASE_URL,
   projectId: import.meta.env.VITE_PROJECT_ID,
   storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
   messagingSenderId: import.meta.env.VITE_MESSAGE_ID,
@@ -12,7 +12,7 @@ export const config = {
 }
 
 if (!firebase.apps.length) {
-  firebase.initializeApp(config)
+  firebase.initializeApp(firebaseApp)
 }
 
 export const realtimeDB = firebase.database()
