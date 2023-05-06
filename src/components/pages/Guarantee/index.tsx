@@ -15,7 +15,7 @@ const GuaranteePage = () => {
   return (
     <>
       <Helmet>
-        <title>Phone Pro | Trung tâm bảo hành</title>
+        <title>Phone Pro - Trung tâm bảo hành</title>
         <meta name="description" content="Description of Guarantee Page ..." />
       </Helmet>
 
