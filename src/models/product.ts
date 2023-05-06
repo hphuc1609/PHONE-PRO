@@ -1,20 +1,20 @@
 export interface ICustomAPIResponse {
-  productID: string
-  productName: string
-  productCompany: string
-  productPhotoImage: string
-  productPrice: string
-  productStar: number
-  productRateCount: number
-  productPromotion: IProductPromotion
-  productSpec: IProductSpecifications
+  productId: string
+  title: string
+  company: string
+  photoImage: string
+  price: number
+  star: number
+  rateCount: number
+  promotion: IPromotion
+  specifications: ISpecifications
 }
 
-export interface IProductSpecifications {
+export interface ISpecifications {
   screen: string
   os: string
-  camara: string
-  camaraFront: string
+  camera: string
+  cameraFront: string
   cpu: string
   ram: string
   rom: string
@@ -22,7 +22,7 @@ export interface IProductSpecifications {
   battery: string
 }
 
-export interface IProductPromotion {
-  promotionName: string
-  promotionValue: string
+export interface IPromotion {
+  name: string
+  value: string
 }
