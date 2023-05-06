@@ -16,7 +16,7 @@ const ContactPage = () => {
   return (
     <>
       <Helmet>
-        <title>Phone Pro | Liên hệ</title>
+        <title>Phone Pro - Liên hệ chúng tôi</title>
         <meta name="description" content="Description of Contact Page ..." />
       </Helmet>
 
@@ -29,7 +29,7 @@ const ContactPage = () => {
           <Box width="100%" height={500}>
             <GoogleMap
               bootstrapURLKeys={{
-                key: import.meta.env.REACT_APP_MAP_KEY || "",
+                key: import.meta.env.VITE_API_KEY || "",
               }}
               defaultCenter={googleMapProps.center}
               defaultZoom={googleMapProps.zoom}
