@@ -3,7 +3,7 @@ import { toast } from "react-toastify"
 
 export const toastConfig: ToastOptions = {
   position: toast.POSITION.BOTTOM_RIGHT,
-  theme: "colored",
+  theme: "light",
   pauseOnHover: false,
   draggable: false,
   autoClose: 2500,

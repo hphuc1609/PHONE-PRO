@@ -1,6 +1,8 @@
 import firebase from "firebase"
+import withFirebaseAuth from "react-with-firebase-auth"
+import "firebase/auth"
 
-const firebaseApp = {
+const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
   authDomain: import.meta.env.VITE_AUTH_DOMAIN,
   databaseURL: import.meta.env.VITE_DATABASE_URL,
@@ -11,8 +13,10 @@ const firebaseApp = {
   measurementId: import.meta.env.VITE_MESUREMENT_ID,
 }
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseApp)
-}
-
+export const firebaseApp = firebase.initializeApp(firebaseConfig)
 export const realtimeDB = firebase.database()
+
+const firebaseAppAuth = firebaseApp.auth()
+export const createComponentWithAuth = withFirebaseAuth({
+  firebaseAppAuth,
+})
