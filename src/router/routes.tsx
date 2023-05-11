@@ -1,9 +1,9 @@
-import ContactPage from "components/pages/Contact"
-import GuaranteePage from "components/pages/Guarantee"
-import HomePage from "components/pages/Home"
-import IntroPage from "components/pages/Introduce"
-import Login from "components/pages/Login"
-import NewsPage from "components/pages/News"
+import ContactPage from "pages/Contact"
+import GuaranteePage from "pages/Guarantee"
+import HomePage from "pages/Home"
+import IntroPage from "pages/Introduce"
+import Login from "pages/Login"
+import NewsPage from "pages/News"
 import type { PathRouteProps } from "react-router-dom"
 
 export const guardedRoutes: Array<PathRouteProps> = [

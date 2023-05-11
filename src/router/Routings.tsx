@@ -1,7 +1,8 @@
-import Page404 from "components/pages/404"
+import Page404 from "pages/404"
+import HomePage from "pages/Home"
+import Product from "pages/Product"
 import { Route, Routes } from "react-router-dom"
-import { publicRoutes, guardedRoutes } from "./routes"
-import Product from "components/pages/Product"
+import { guardedRoutes, publicRoutes } from "./routes"
 
 const Routings = () => {
   return (
@@ -14,6 +15,7 @@ const Routings = () => {
       ))}
 
       <Route path="/detail/:id" element={<Product />} />
+      <Route path="/brand/:id" element={<HomePage />} />
       <Route path="*" element={<Page404 />} />
     </Routes>
   )
