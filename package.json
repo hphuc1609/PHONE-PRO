@@ -6,9 +6,11 @@
   "engines": {
     "node": ">=14.5.0"
   },
+  "author": "Phuc Luu",
   "scripts": {
     "dev": "vite",
     "build": "yarn type-check && vite build",
+    "build:uat": "yarn type-check && vite build -m uat && yarn preview",
     "preview": "vite preview",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix  && yarn format",
@@ -33,6 +35,7 @@
     "react-router-dom": "^6.10.0",
     "react-toastify": "^9.1.2",
     "react-use-cart": "^1.13.0",
+    "react-with-firebase-auth": "^1.4.1",
     "swiper": "^9.2.2",
     "yup": "^1.0.2"
   },

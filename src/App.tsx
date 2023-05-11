@@ -1,8 +1,8 @@
+import Layout from "components/Layouts"
 import { BrowserRouter } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
-import Routings from "router/Routings"
 import "react-toastify/dist/ReactToastify.css"
-import Layout from "components/Layouts"
+import Routings from "router/Routings"
 
 const App = () => {
   return (
