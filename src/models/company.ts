@@ -1,5 +1,5 @@
 export interface ICompanyItem {
-  name: string
+  label: string
+  value: string
   image: string
-  path: string
 }

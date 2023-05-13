@@ -4,5 +4,5 @@ export const swiperConfig: SwiperOptions = {
   navigation: true,
   slidesPerView: 5,
   spaceBetween: 16,
-  speed: 1000,
+  speed: 800,
 }
