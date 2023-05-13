@@ -8,51 +8,31 @@ import "swiper/swiper.css"
 SwiperCore.use([Autoplay, Pagination])
 
 const slideShow = [
-  {
-    image: "../assets/images/banner/banner0.gif",
-  },
-  {
-    image: "../assets/images/banner/banner1.png",
-  },
-  {
-    image: "../assets/images/banner/banner2.png",
-  },
-  {
-    image: "../assets/images/banner/banner3.png",
-  },
-  {
-    image: "../assets/images/banner/banner4.png",
-  },
-  {
-    image: "../assets/images/banner/banner5.png",
-  },
-  {
-    image: "../assets/images/banner/banner6.png",
-  },
-  {
-    image: "../assets/images/banner/banner7.png",
-  },
-  {
-    image: "../assets/images/banner/banner8.png",
-  },
-  {
-    image: "../assets/images/banner/banner9.png",
-  },
+  "../assets/images/banner/banner0.gif",
+  "../assets/images/banner/banner1.png",
+  "../assets/images/banner/banner2.png",
+  "../assets/images/banner/banner3.png",
+  "../assets/images/banner/banner4.png",
+  "../assets/images/banner/banner5.png",
+  "../assets/images/banner/banner6.png",
+  "../assets/images/banner/banner7.png",
+  "../assets/images/banner/banner8.png",
+  "../assets/images/banner/banner9.png",
 ]
 
 const SlideSwiper = () => {
   return (
     <Swiper
-      slidesPerView={1}
+      slidesPerView="auto"
       pagination={{ clickable: true }}
-      autoplay={{ delay: 2000, disableOnInteraction: false }}
+      autoplay={{ disableOnInteraction: false }}
       loop={true}
       grabCursor={true}
     >
       {slideShow.map((item, index) => (
         <SwiperSlide key={index}>
           <Box height={{ xs: 220, md: 400 }}>
-            <img src={item.image} alt="..." width="100%" height="100%" />
+            <img src={item} alt="..." width="100%" height="100%" />
           </Box>
         </SwiperSlide>
       ))}
