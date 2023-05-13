@@ -1,7 +1,6 @@
 import { Search } from "@mui/icons-material"
 import {
   Autocomplete,
-  Divider,
   InputBase,
   ListItem,
   ListItemIcon,
@@ -10,10 +9,10 @@ import {
   Typography,
 } from "@mui/material"
 import { makeStyles } from "@mui/styles"
+import NumberFormat from "components/common/NumberFormat"
 import { ICustomAPIResponse } from "models/product"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { borderColor } from "styles/config"
 import { realtimeDB } from "utils/firebaseConfig"
 
 const useStyles = makeStyles(() => ({
@@ -76,37 +75,32 @@ const SearchSuggestion = () => {
       loadingText="Không tìm thấy sản phẩm"
       options={productList}
       renderOption={(props, option: ICustomAPIResponse) => (
-        <>
-          <ListItem
-            component="span"
-            dense
-            {...props}
-            sx={{
-              columnGap: 1,
-              borderBottom: `1px solid #e8e8e8`,
-              "&:last-child": { border: "none" },
-            }}
-          >
-            <ListItemIcon sx={{ width: 50, height: 80, py: 1 }}>
-              <img
-                src={option.photoImage}
-                alt="..."
-                width="100%"
-                height="100%"
-                style={{ objectFit: "cover" }}
-              />
-            </ListItemIcon>
-            <ListItemText primary={option.title} sx={{ cursor: "pointer" }} />
-            <Typography variant="body2" color="error" fontWeight={500}>
-              {option.price}
-              <span style={{ fontSize: 10, position: "relative", top: -5 }}>
-                ₫
-              </span>
-            </Typography>
-          </ListItem>
-        </>
+        <ListItem
+          {...props}
+          component="span"
+          dense
+          sx={{
+            columnGap: 1,
+            borderBottom: `1px solid #e8e8e8`,
+            "&:last-child": { border: "none" },
+          }}
+        >
+          <ListItemIcon sx={{ width: 50, height: 80, py: 1 }}>
+            <img
+              src={option.photoImage}
+              alt="..."
+              width="100%"
+              height="100%"
+              style={{ objectFit: "cover" }}
+            />
+          </ListItemIcon>
+          <ListItemText primary={option.title} sx={{ cursor: "pointer" }} />
+          <Typography variant="body2" color="error" fontWeight={500}>
+            <NumberFormat value={option.price} />
+          </Typography>
+        </ListItem>
       )}
-      getOptionLabel={(options) => options.productName || ""}
+      getOptionLabel={(options) => options.title}
       onChange={(e, value) => value !== undefined && handleOnChange(value)}
       renderInput={(params) => {
         return (
