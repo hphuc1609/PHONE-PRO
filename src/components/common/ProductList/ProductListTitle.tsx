@@ -1,15 +1,34 @@
 import { ChevronRightOutlined } from "@mui/icons-material"
 import { Box, Button, Icon, Typography } from "@mui/material"
+import { makeStyles } from "@mui/styles"
 import React from "react"
 import { primaryDark } from "styles/config"
 
 interface Props {
   title: string
-  icon: React.ReactNode
+  icon?: React.ReactNode
   disable?: boolean
 }
 
+const useStyles = makeStyles(() => ({
+  heading: {
+    background: primaryDark,
+    color: "white",
+    borderTopRightRadius: 100,
+    borderBottomRightRadius: 100,
+    fontWeight: 500,
+    textShadow: "0.5px 0.5px 1px #e8e8e8",
+    display: "flex",
+    alignItems: "center",
+    padding: "5px 4px 5px 12px",
+    textTransform: "capitalize",
+    width: "fit-content",
+  },
+}))
+
 const ProductListTitle = ({ title, icon, disable = false }: Props) => {
+  const classes = useStyles()
+
   // const handleShowMore = () => {}
 
   return (
@@ -17,7 +36,7 @@ const ProductListTitle = ({ title, icon, disable = false }: Props) => {
       <Box
         bgcolor="#e8e8e8"
         width="100%"
-        mt={5}
+        mt={8}
         sx={{
           borderTop: `2px solid ${primaryDark}`,
         }}
@@ -25,23 +44,7 @@ const ProductListTitle = ({ title, icon, disable = false }: Props) => {
         alignItems="center"
         justifyContent="space-between"
       >
-        <Typography
-          bgcolor={primaryDark}
-          color="white"
-          py={0.5}
-          paddingLeft={2}
-          paddingRight={0.5}
-          sx={{
-            borderTopRightRadius: 100,
-            borderBottomRightRadius: 100,
-            fontWeight: 500,
-            textShadow: "0.5px 0.5px 1px #e8e8e8",
-            display: "flex",
-            alignItems: "center",
-          }}
-          textTransform="uppercase"
-          width="fit-content"
-        >
+        <Typography variant="h6" className={classes.heading}>
           {title}
           <Icon
             sx={{

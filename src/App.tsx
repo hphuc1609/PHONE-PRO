@@ -7,7 +7,7 @@ import Routings from "router/Routings"
 const App = () => {
   return (
     <BrowserRouter>
-      <ToastContainer limit={1} pauseOnFocusLoss={false} />
+      <ToastContainer pauseOnFocusLoss={false} />
       <Layout>
         <Routings />
       </Layout>

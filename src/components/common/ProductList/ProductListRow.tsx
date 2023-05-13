@@ -1,10 +1,12 @@
 import StarIcon from "@mui/icons-material/Star"
 import { Box, Button, Typography } from "@mui/material"
+import { toastConfig } from "configs/toast"
 import { ICustomAPIResponse } from "models/product"
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { toast } from "react-toastify"
 import { useCart } from "react-use-cart"
 import { borderColor } from "styles/config"
+import NumberFormat from "../NumberFormat"
 
 interface Props {
   data: ICustomAPIResponse
@@ -15,11 +17,6 @@ const ProductListRow = ({ data }: Props) => {
   const [isHovered, setIsHovered] = useState(false)
   const newData = { ...data, id: data.productId }
 
-  const convertToPrice = new Intl.NumberFormat("vi-VN", {
-    style: "currency",
-    currency: "VND",
-  }).format(data.price)
-
   const handleMouseEnter = () => {
     setIsHovered(true)
   }
@@ -27,19 +24,17 @@ const ProductListRow = ({ data }: Props) => {
     setIsHovered(false)
   }
 
-  const handleClick = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    })
+  const handleAddToCart = () => {
+    addItem(newData)
+    toast.success(`Đã thêm ${data.title} vào giỏ hàng`, toastConfig)
   }
 
   return (
     <Box border={1} borderColor={borderColor} p={2}>
-      <Link
-        to={`/detail/${data.productId}`}
+      <Box
+        component="a"
+        href={`/detail/${data.productId}`}
         style={{ textDecoration: "none", color: "inherit" }}
-        onClick={handleClick}
       >
         <Box height={{ xs: 150, md: 210 }} p={1}>
           <img
@@ -57,8 +52,7 @@ const ProductListRow = ({ data }: Props) => {
             onMouseLeave={handleMouseLeave}
           />
         </Box>
-
-        <Box mt={2}>
+        <Box mt={2} display="grid" rowGap={0.3}>
           <Typography
             textOverflow="ellipsis"
             whiteSpace="nowrap"
@@ -67,9 +61,8 @@ const ProductListRow = ({ data }: Props) => {
             {data.title}
           </Typography>
           <Typography fontWeight={500} color="error">
-            {convertToPrice}
+            <NumberFormat value={data.price} />
           </Typography>
-
           <Box display="flex" alignItems="center" mt={0.5}>
             {Array(data.star)
               .fill(0)
@@ -117,12 +110,11 @@ const ProductListRow = ({ data }: Props) => {
             {data.promotion.name}
           </Typography>
         )}
-      </Link>
-
+      </Box>
       <Button
         variant="outlined"
         sx={{ mt: 2 }}
-        onClick={() => addItem(newData)}
+        onClick={handleAddToCart}
         disabled={inCart(data.productId) ? true : false}
       >
         {inCart(data.productId) ? "Đã thêm vào giỏ" : "Thêm vào giỏ hàng"}
