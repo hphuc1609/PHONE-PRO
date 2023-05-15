@@ -8,6 +8,8 @@ const Footer = () => {
       bgcolor="#f0f0f0"
       display="flex"
       justifyContent="center"
+      zIndex={10}
+      position="relative"
     >
       <Typography color="inherit" mr={0.5} display="flex">
         Copyright © 2023
