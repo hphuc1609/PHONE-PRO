@@ -1,49 +1,38 @@
 import { AccountCircle, Logout, Person } from "@mui/icons-material"
-import { Box, IconButton, Menu, MenuItem, Typography } from "@mui/material"
+import { Box, Divider, Menu, MenuItem, Typography } from "@mui/material"
 import ListItemIcon from "@mui/material/ListItemIcon"
+import { createComponentWithAuth } from "Firebase/firebaseConfig"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { WrappedComponentProps } from "react-with-firebase-auth"
 
-const menuItems = [
-  {
-    label: "Người dùng",
-    icon: <Person fontSize="small" />,
-    link: "/user",
-  },
-  {
-    label: "Đăng xuất",
-    icon: <Logout fontSize="small" />,
-    link: "/logout",
-  },
-]
-
-const UserMenu = () => {
+const UserMenu = ({ signOut, user }: WrappedComponentProps) => {
   const navigate = useNavigate()
   const [openMenu, setOpenMenu] = useState<null | HTMLElement>(null)
 
   const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
     setOpenMenu(event.currentTarget)
   }
-  const handleCloseMenu = (link: string) => {
+  const handleCloseMenu = () => {
     setOpenMenu(null)
-    navigate(link)
   }
 
   return (
     <Box display="flex" alignItems="center" mr={2}>
-      <IconButton
-        aria-label="user"
+      <Box
+        sx={{ display: "flex", columnGap: 1, cursor: "pointer" }}
         onClick={handleOpenMenu}
-        color="inherit"
-        sx={{ p: 1 }}
       >
         <AccountCircle />
-      </IconButton>
-      <Typography sx={{ cursor: "default" }}>Tài khoản</Typography>
+        <Typography>Tài khoản</Typography>
+      </Box>
+
       <Menu
         id="account-menu"
+        open={Boolean(openMenu)}
         anchorEl={openMenu}
         onClose={handleCloseMenu}
+        autoFocus={false}
         keepMounted
         anchorOrigin={{
           vertical: "bottom",
@@ -53,17 +42,30 @@ const UserMenu = () => {
           vertical: "top",
           horizontal: "right",
         }}
-        open={Boolean(openMenu)}
       >
-        {menuItems.map((menu) => (
-          <MenuItem key={menu.label} onClick={() => handleCloseMenu(menu.link)}>
-            <ListItemIcon>{menu.icon}</ListItemIcon>
-            <Typography>{menu.label}</Typography>
-          </MenuItem>
-        ))}
+        <Typography color="primary" sx={{ p: "5px 16px" }}>
+          {user?.email}
+        </Typography>
+        <Divider />
+        <MenuItem
+          onClick={() => {
+            handleCloseMenu(), navigate("/user")
+          }}
+        >
+          <ListItemIcon>
+            <Person fontSize="small" />
+          </ListItemIcon>
+          <Typography>Người dùng</Typography>
+        </MenuItem>
+        <MenuItem onClick={signOut}>
+          <ListItemIcon>
+            <Logout fontSize="small" />
+          </ListItemIcon>
+          <Typography>Đăng xuất</Typography>
+        </MenuItem>
       </Menu>
     </Box>
   )
 }
 
-export default UserMenu
+export default createComponentWithAuth(UserMenu)

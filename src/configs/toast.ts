@@ -6,7 +6,7 @@ export const toastConfig: ToastOptions = {
   theme: "colored",
   pauseOnHover: false,
   draggable: false,
-  autoClose: 2500,
+  autoClose: 2800,
   progress: 0,
   hideProgressBar: true,
 }

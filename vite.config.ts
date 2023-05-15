@@ -15,6 +15,7 @@ export default defineConfig({
       services: path.resolve(__dirname, "src/services"),
       configs: path.resolve(__dirname, "src/configs"),
       data: path.resolve(__dirname, "src/data"),
+      Firebase: path.resolve(__dirname, "src/Firebase"),
     },
   },
 })

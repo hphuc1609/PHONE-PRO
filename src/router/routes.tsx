@@ -4,12 +4,17 @@ import HomePage from "pages/Home"
 import IntroPage from "pages/Introduce"
 import Login from "pages/Login"
 import NewsPage from "pages/News"
+import Register from "pages/Register"
 import type { PathRouteProps } from "react-router-dom"
 
 export const guardedRoutes: Array<PathRouteProps> = [
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
   },
 ]
 

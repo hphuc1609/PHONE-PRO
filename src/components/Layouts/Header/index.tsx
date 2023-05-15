@@ -1,11 +1,22 @@
-import { AppBar, Box, Toolbar, Typography } from "@mui/material"
-import { Link } from "react-router-dom"
-import { appBarHeight } from "styles/config"
+import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material"
+import { Link, useNavigate } from "react-router-dom"
+import { WrappedComponentProps } from "react-with-firebase-auth"
+import { appBarHeight, primaryDark } from "styles/config"
+import { createComponentWithAuth } from "Firebase/firebaseConfig"
 import ShoppingCart from "../Cart"
 import SearchSuggestion from "../Search"
 import UserMenu from "./UserMenu"
 
-const Header = () => {
+const Header = ({ user }: WrappedComponentProps) => {
+  const navigate = useNavigate()
+
+  const onLogin = () => {
+    navigate("/login", { replace: true })
+  }
+  const onRegister = () => {
+    navigate("/register", { replace: true })
+  }
+
   return (
     <AppBar position="relative" elevation={0}>
       <Toolbar
@@ -48,13 +59,29 @@ const Header = () => {
         </Link>
         <SearchSuggestion />
 
-        <Box display={{ xs: "none", md: "flex" }}>
-          <UserMenu />
-          <ShoppingCart />
-        </Box>
+        {user ? (
+          <Box display={{ xs: "none", md: "flex" }}>
+            <UserMenu />
+            <ShoppingCart />
+          </Box>
+        ) : (
+          <Box display={{ xs: "none", md: "flex" }} columnGap={1}>
+            <Button color="inherit" onClick={onLogin}>
+              Đăng nhập
+            </Button>
+            <Button
+              variant="contained"
+              disableElevation
+              sx={{ bgcolor: primaryDark, borderRadius: 100 }}
+              onClick={onRegister}
+            >
+              Đăng ký
+            </Button>
+          </Box>
+        )}
       </Toolbar>
     </AppBar>
   )
 }
 
-export default Header
+export default createComponentWithAuth(Header)
