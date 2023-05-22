@@ -10,10 +10,10 @@ import {
 } from "@mui/material"
 import { makeStyles } from "@mui/styles"
 import NumberFormat from "components/common/NumberFormat"
+import { realtimeDB } from "Firebase/firebaseConfig"
 import { ICustomAPIResponse } from "models/product"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { realtimeDB } from "utils/firebaseConfig"
 
 const useStyles = makeStyles(() => ({
   input: {
@@ -67,6 +67,7 @@ const SearchSuggestion = () => {
 
   return (
     <Autocomplete
+      value=""
       id="search"
       freeSolo
       selectOnFocus
@@ -100,7 +101,7 @@ const SearchSuggestion = () => {
           </Typography>
         </ListItem>
       )}
-      getOptionLabel={(options) => options.title}
+      getOptionLabel={(options) => options.title || ""}
       onChange={(e, value) => value !== undefined && handleOnChange(value)}
       renderInput={(params) => {
         return (
