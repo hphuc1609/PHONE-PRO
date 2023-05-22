@@ -15,67 +15,55 @@ const ContactInfo = () => {
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        <Grid container columnGap={1} display="flex" alignItems="center">
-          <Grid item>
-            <Box display="flex" alignItems="center">
-              <LocationOnOutlined />
-              <Typography variant="body1" fontWeight={600} ml={1}>
-                Địa chỉ:
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid item>
-            <Typography variant="body1">
-              Dương Thị Mười, Tân Thới Hiệp, Quận 12
+        <Box gap={1} display="flex" alignItems="center">
+          <Box display="flex" alignItems="center">
+            <LocationOnOutlined />
+            <Typography variant="body1" fontWeight={600} ml={1}>
+              Địa chỉ:
             </Typography>
-          </Grid>
-        </Grid>
+          </Box>
+          <Typography variant="body1">
+            Dương Thị Mười, Tân Thới Hiệp, Quận 12
+          </Typography>
+        </Box>
       </Grid>
       <Grid item xs={12}>
-        <Grid container columnGap={1} display="flex" alignItems="center">
-          <Grid item xs={0}>
-            <Box display="flex" alignItems="center">
-              <LocalPhoneOutlined />
-              <Typography variant="body1" fontWeight={600} ml={1}>
-                Telephone:
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid item xs={0}>
-            <Typography
-              variant="body1"
-              component="a"
-              href="tel: 0796101169"
-              color="inherit"
-              sx={{ textDecoration: "none" }}
-            >
-              079 610 1169
+        <Box gap={1} display="flex" alignItems="center">
+          <Box display="flex" alignItems="center">
+            <LocalPhoneOutlined />
+            <Typography variant="body1" fontWeight={600} ml={1}>
+              Telephone:
             </Typography>
-          </Grid>
-        </Grid>
+          </Box>
+          <Typography
+            variant="body1"
+            component="a"
+            href="tel: 0796101169"
+            color="inherit"
+            sx={{ textDecoration: "none" }}
+          >
+            123 456 789
+          </Typography>
+        </Box>
       </Grid>
       <Grid item xs={12}>
-        <Grid container columnGap={1} display="flex" alignItems="center">
-          <Grid item xs={0}>
-            <Box display="flex" alignItems="center">
-              <EmailOutlined />
-              <Typography variant="body1" fontWeight={600} ml={1}>
-                Email:
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid item xs={0}>
-            <Typography
-              variant="body1"
-              component="a"
-              href="mailto: phucluu1609@gmail.com"
-              color="inherit"
-              sx={{ textDecoration: "none" }}
-            >
-              phucluu1609@gmail.com
+        <Box gap={1} display="flex" alignItems="center">
+          <Box display="flex" alignItems="center">
+            <EmailOutlined />
+            <Typography variant="body1" fontWeight={600} ml={1}>
+              Email:
             </Typography>
-          </Grid>
-        </Grid>
+          </Box>
+          <Typography
+            variant="body1"
+            component="a"
+            href="mailto: phucluu1609@gmail.com"
+            color="inherit"
+            sx={{ textDecoration: "none" }}
+          >
+            phucluu1609@gmail.com
+          </Typography>
+        </Box>
       </Grid>
 
       <Grid item xs={12}>

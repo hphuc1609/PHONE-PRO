@@ -1,11 +1,11 @@
 import emailjs from "@emailjs/browser"
 import { yupResolver } from "@hookform/resolvers/yup"
+import { CheckCircleOutline } from "@mui/icons-material"
 import { Box, Button, Divider, Grid, Typography } from "@mui/material"
+import AlertDialog from "components/common/Dialog"
 import FormInputText from "components/common/FormInput/FormInputText"
-import { toastConfig } from "configs/toast"
 import { useState } from "react"
 import { FieldValues, useForm } from "react-hook-form"
-import { toast } from "react-toastify"
 import * as yup from "yup"
 
 const config = {
@@ -19,7 +19,7 @@ const FormContact = () => {
 
   const schema = yup.object().shape({
     fullName: yup.string().required("Vui lòng điền vào trường này"),
-    phoneNumber: yup
+    phone: yup
       .string()
       .matches(/^[0-9]{10}$/gm, "Số điện thoại không hợp lệ")
       .required("Vui lòng điền vào trường này"),
@@ -45,22 +45,16 @@ const FormContact = () => {
       from_name: data.fullName,
       subject: data.subject,
       message: data.message,
-      phone: data.phoneNumber,
+      phone: data.phone,
       reply_to: data.email,
     }
-
-    emailjs
-      .send(config.service_id, config.template_id, dataToSend, config.user_id)
-      .then((result) => {
-        toast.success(`${result.text} - Gửi thành công!`, toastConfig)
-        setTimeout
-      })
-      .catch((error) => {
-        toast.error(error.text, toastConfig)
-      })
-      .finally(() => {
-        toast.clearWaitingQueue()
-      })
+    emailjs.send(
+      config.service_id,
+      config.template_id,
+      dataToSend,
+      config.user_id
+    )
+    setOpen(true)
     reset()
   }
 
@@ -81,11 +75,9 @@ const FormContact = () => {
         mt={2}
       >
         <Grid item xs={12}>
-          <Grid container item spacing={2}>
-            <Grid item xs={2}>
-              <Typography>Họ và tên</Typography>
-            </Grid>
-            <Grid item xs={10}>
+          <Box display="flex">
+            <Typography width={100}>Họ và tên</Typography>
+            <Box flex={1}>
               <FormInputText
                 name="fullName"
                 label=""
@@ -95,17 +87,15 @@ const FormContact = () => {
                   size: "small",
                 }}
               />
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
         </Grid>
         <Grid item xs={12}>
-          <Grid container item spacing={2}>
-            <Grid item xs={2}>
-              <Typography>Điện thoại</Typography>
-            </Grid>
-            <Grid item xs={10}>
+          <Box display="flex">
+            <Typography width={100}>Điện thoại</Typography>
+            <Box flex={1}>
               <FormInputText
-                name="phoneNumber"
+                name="phone"
                 label=""
                 control={control}
                 error={errors}
@@ -113,15 +103,13 @@ const FormContact = () => {
                   size: "small",
                 }}
               />
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
         </Grid>
         <Grid item xs={12}>
-          <Grid container item spacing={2}>
-            <Grid item xs={2}>
-              <Typography>Email</Typography>
-            </Grid>
-            <Grid item xs={10}>
+          <Box display="flex">
+            <Typography width={100}>Email</Typography>
+            <Box flex={1}>
               <FormInputText
                 name="email"
                 label=""
@@ -131,15 +119,13 @@ const FormContact = () => {
                   size: "small",
                 }}
               />
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
         </Grid>
         <Grid item xs={12}>
-          <Grid container item spacing={2}>
-            <Grid item xs={2}>
-              <Typography>Tiêu đề</Typography>
-            </Grid>
-            <Grid item xs={10}>
+          <Box display="flex">
+            <Typography width={100}>Tiêu đề</Typography>
+            <Box flex={1}>
               <FormInputText
                 name="subject"
                 label=""
@@ -149,15 +135,13 @@ const FormContact = () => {
                   size: "small",
                 }}
               />
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
         </Grid>
         <Grid item xs={12}>
-          <Grid container item spacing={2}>
-            <Grid item xs={2}>
-              <Typography>Nội dung</Typography>
-            </Grid>
-            <Grid item xs={10}>
+          <Box display="flex">
+            <Typography width={100}>Nội dung</Typography>
+            <Box flex={1}>
               <FormInputText
                 name="message"
                 label=""
@@ -168,8 +152,8 @@ const FormContact = () => {
                   rows: 5,
                 }}
               />
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
         </Grid>
 
         <Grid item xs={12} sx={{ display: "flex", justifyContent: "flex-end" }}>
@@ -178,6 +162,30 @@ const FormContact = () => {
           </Button>
         </Grid>
       </Grid>
+
+      <AlertDialog
+        open={open}
+        content={
+          <>
+            <Typography
+              variant="h5"
+              alignItems="center"
+              display="flex"
+              justifyContent="center"
+              gap={1}
+              gutterBottom
+            >
+              <CheckCircleOutline color="secondary" fontSize="large" />
+              Gửi thành công
+            </Typography>
+            <Typography variant="subtitle1">
+              Cảm ơn quý khách đã gửi thông tin, chúng tôi sẽ phản hồi sớm cho
+              bạn !
+            </Typography>
+          </>
+        }
+        handleClose={() => setOpen(false)}
+      />
     </Box>
   )
 }
