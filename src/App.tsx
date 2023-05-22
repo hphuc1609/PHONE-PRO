@@ -3,6 +3,7 @@ import { BrowserRouter } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import Routings from "router/Routings"
+import "configs/toastStyles.css"
 
 const App = () => {
   return (

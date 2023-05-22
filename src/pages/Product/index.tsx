@@ -1,5 +1,6 @@
-import { Stars } from "@mui/icons-material"
+import { ShoppingBasket } from "@mui/icons-material"
 import { Grid } from "@mui/material"
+import { realtimeDB } from "Firebase/firebaseConfig"
 import Loading from "components/Loading"
 import ProductListRow from "components/common/ProductList/ProductListRow"
 import ProductListTitle from "components/common/ProductList/ProductListTitle"
@@ -11,7 +12,6 @@ import { useLocation } from "react-router-dom"
 import { toast } from "react-toastify"
 import SwiperCore, { Grid as GridSwiper } from "swiper"
 import { Swiper, SwiperSlide } from "swiper/react"
-import { realtimeDB } from "utils/firebaseConfig"
 import Detail from "./ProductDetail"
 
 import "swiper/css"
@@ -32,12 +32,12 @@ const Product = () => {
   )
 
   useEffect(() => {
-    const getMultipleRandom = (arr: string[], num: number) => {
+    const getProductRandom = (arr: string[], num: number) => {
       const shuffled = [...arr].sort(() => 0.5 - Math.random())
       setNewProduct(shuffled.slice(0, num))
     }
 
-    getMultipleRandom(productList, 10)
+    getProductRandom(productList, 10)
   }, [productList])
 
   useEffect(() => {
@@ -71,16 +71,16 @@ const Product = () => {
         <Grid container rowSpacing={2} mt={10}>
           <Grid item xs={12}>
             <ProductListTitle
-              title="Bạn có thể thích ?"
-              icon={<Stars color="warning" />}
+              title="Các sản phẩm khác"
+              icon={<ShoppingBasket color="error" />}
               disable
             />
           </Grid>
           <Grid item xs={12}>
             <Swiper {...swiperConfig} grid={{ rows: 2, fill: "row" }}>
-              {newProduct?.map((item, index) => (
+              {newProduct?.map((product, index) => (
                 <SwiperSlide key={index}>
-                  <ProductListRow data={item} />
+                  <ProductListRow data={product} />
                 </SwiperSlide>
               ))}
             </Swiper>

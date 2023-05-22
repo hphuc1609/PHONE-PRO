@@ -1,9 +1,9 @@
 import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material"
+import { createComponentWithAuth } from "Firebase/firebaseConfig"
+import ShoppingCart from "components/Cart"
 import { Link, useNavigate } from "react-router-dom"
 import { WrappedComponentProps } from "react-with-firebase-auth"
 import { appBarHeight, primaryDark } from "styles/config"
-import { createComponentWithAuth } from "Firebase/firebaseConfig"
-import ShoppingCart from "../Cart"
 import SearchSuggestion from "../Search"
 import UserMenu from "./UserMenu"
 

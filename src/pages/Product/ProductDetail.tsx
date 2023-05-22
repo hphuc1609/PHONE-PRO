@@ -22,10 +22,26 @@ interface Props {
 const Detail = ({ data }: Props) => {
   const { addItem, inCart } = useCart()
 
-  const handleAddToCart = (item: ICustomAPIResponse) => {
-    addItem({ ...item, id: item.productId })
-    toast.success(`Đã thêm ${item.title} vào giỏ hàng`, toastConfig)
+  const handleAddToCart = (product: ICustomAPIResponse) => {
+    addItem({ ...product, id: product.productId })
+    toast.success(`Đã thêm ${product.title} vào giỏ hàng`, toastConfig)
     toast.clearWaitingQueue()
+  }
+
+  const getDetailPromo = (item: ICustomAPIResponse) => {
+    switch (item.promotion.name) {
+      case "Tragop":
+        return `Khách hàng có thể mua trả góp sản phẩm lãi suất ${item.promotion.value}% với thời hạn 6 tháng kể từ khi mua hàng.`
+
+      case "Giamgia":
+        return `Khách hàng sẽ được giảm ${item.promotion.value}₫ khi tới mua trực tiếp tại cửa hàng.`
+
+      case "Moi":
+        return `Khách hàng sẽ được thử máy miễn phí tại cửa hàng. Có thể đổi trả lỗi trong vòng 2 tháng.`
+
+      default:
+        return `Cơ hội trúng khi trả góp Home Credit.`
+    }
   }
 
   return (
@@ -34,7 +50,7 @@ const Detail = ({ data }: Props) => {
         <Grid container spacing={3} key={item.productId}>
           <Grid item xs={12}>
             <Box display="flex" alignItems="center" columnGap={1.5}>
-              <Typography variant="h5" component="h1" fontWeight={500}>
+              <Typography component="h1" fontSize={28}>
                 Điện thoại {item.title}
               </Typography>
               <Box display="flex" columnGap={0.5}>
@@ -50,7 +66,7 @@ const Detail = ({ data }: Props) => {
                     ))}
                 </Box>
                 <Typography variant="body1">
-                  {item.rateCount + " đánh giá"}
+                  {item.rateCount} đánh giá
                 </Typography>
               </Box>
             </Box>
@@ -73,20 +89,56 @@ const Detail = ({ data }: Props) => {
                     <Typography fontSize={25} color="error" fontWeight={600}>
                       <NumberFormat value={item.price} />
                     </Typography>
-                    <Typography fontSize={20} fontWeight={600}>
-                      {item.promotion.name}
-                      {item.promotion.value}
+                    <Typography
+                      fontSize={12}
+                      fontWeight={500}
+                      color="white"
+                      p={0.5}
+                      bgcolor={
+                        (item.promotion.name?.toLowerCase() === "giamgia" &&
+                          "#ea1b23") ||
+                        (item.promotion.name?.toLowerCase() === "moi" &&
+                          "#00a650") ||
+                        (item.promotion.name?.toLowerCase() === "tragop" &&
+                          "#f7941d")
+                      }
+                      sx={
+                        item.promotion.name === "" && {
+                          color: "black",
+                          fontSize: 15,
+                          textDecoration: "line-through",
+                        }
+                      }
+                    >
+                      {(item.promotion.name?.toLowerCase() === "giamgia" &&
+                        "Giảm") ||
+                        (item.promotion.name?.toLowerCase() === "moi" &&
+                          "Mới ra mắt") ||
+                        (item.promotion.name?.toLowerCase() === "tragop" &&
+                          "Trả góp")}
+
+                      <span style={{ marginLeft: 5 }}>
+                        {item.promotion.value}
+                      </span>
+                      {item.promotion.name === "" &&
+                        item.promotion.value !== "" &&
+                        "₫"}
                     </Typography>
                   </Box>
-                  <Box border={1} borderColor={borderColor} px={2} py={1}>
+                  <Box
+                    width="100%"
+                    border={1}
+                    borderColor={borderColor}
+                    px={2}
+                    py={1}
+                  >
                     <Typography fontWeight={500} gutterBottom>
                       Khuyến mãi
                     </Typography>
                     <Box display="flex" alignItems="center" columnGap={1}>
                       <CheckCircle fontSize="small" color="success" />
                       <Typography variant="body2">
-                        Khách hàng sẽ được thử máy miễn phí tại cửa hàng. Có thể
-                        đổi trả lỗi trong vòng 2 tháng.
+                        {getDetailPromo(item)}
                       </Typography>
                     </Box>
                   </Box>

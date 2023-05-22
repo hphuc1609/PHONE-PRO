@@ -17,7 +17,6 @@ const useStyles = makeStyles(() => ({
     borderTopRightRadius: 100,
     borderBottomRightRadius: 100,
     fontWeight: 500,
-    textShadow: "0.5px 0.5px 1px #e8e8e8",
     display: "flex",
     alignItems: "center",
     padding: "5px 4px 5px 12px",
@@ -46,17 +45,19 @@ const ProductListTitle = ({ title, icon, disable = false }: Props) => {
       >
         <Typography variant="h6" className={classes.heading}>
           {title}
-          <Icon
-            sx={{
-              borderRadius: 100,
-              bgcolor: "white",
-              ml: 1,
-              width: 30,
-              height: 30,
-            }}
-          >
-            {icon}
-          </Icon>
+          {icon && (
+            <Icon
+              sx={{
+                borderRadius: 100,
+                bgcolor: "white",
+                ml: 1,
+                width: 30,
+                height: 30,
+              }}
+            >
+              {icon}
+            </Icon>
+          )}
         </Typography>
         {!disable ? (
           <Button color="inherit">
