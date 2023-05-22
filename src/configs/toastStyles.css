@@ -1,0 +1,23 @@
+.Toastify__toast--success {
+  background: #62ac62;
+  color: white;
+}
+
+.Toastify__toast--warning {
+  background: #f99e1e;
+  color: white;
+}
+
+.Toastify__toast--error {
+  background: #e74c3c;
+  color: white;
+}
+
+.Toastify__toast-icon svg {
+  fill: white;
+}
+
+.Toastify__progress-bar {
+  color: #e8e8e8;
+  background-color: #e8e8e8;
+}
