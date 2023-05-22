@@ -1,6 +1,13 @@
-import { Close } from "@mui/icons-material"
+import {
+  Close,
+  HeadsetMic,
+  LocalShipping,
+  Loop,
+  VerifiedUser,
+} from "@mui/icons-material"
 import { Box, Button, Grid, Paper, Typography } from "@mui/material"
 import { makeStyles } from "@mui/styles"
+import { realtimeDB } from "Firebase/firebaseConfig"
 import SlideSwiper from "components/Banner"
 import Loading from "components/Loading"
 import FormInputDropDown from "components/common/FormInput/FormInputDropDown"
@@ -19,28 +26,7 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import { companies } from "utils/company"
 import HomeProduct from "./HomeProduct"
 import "./style.css"
-import { realtimeDB } from "utils/firebaseConfig"
-
-interface ProductBrandProps {
-  data: ICustomAPIResponse[]
-  title: string
-  row: any
-}
-
-const sortPrice = [
-  {
-    label: "Dưới 2 triệu",
-    value: "Dưới 2 triệu",
-  },
-  {
-    label: "Từ 2 - 4 triệu",
-    value: "Từ 2 - 4 triệu",
-  },
-  {
-    label: "Từ 4 - 7 triệu",
-    value: "Từ 4 - 7 triệu",
-  },
-]
+import HomeFilter from "./HomeFilter"
 
 const useStyles = makeStyles(() => ({
   title: {
@@ -53,7 +39,27 @@ const useStyles = makeStyles(() => ({
     backgroundImage: `linear-gradient(to right, #3977ce, ${primaryDark})`,
     transform: "translateY(-1.05em)",
   },
+  ensured: {
+    height: 100,
+    display: "flex",
+    justifyContent: "space-around",
+    borderTop: "1px solid gray",
+    background: "#F1F6F9",
+    margin: "64px -40px -40px",
+    padding: 40,
+  },
+  text: {
+    display: "flex",
+    alignItems: "center",
+    gap: 20,
+  },
 }))
+
+interface ProductBrandProps {
+  data: ICustomAPIResponse[]
+  title: string
+  row: number
+}
 
 const RenderProductBrand = ({ data, title, row }: ProductBrandProps) => {
   const classes = useStyles()
@@ -61,7 +67,6 @@ const RenderProductBrand = ({ data, title, row }: ProductBrandProps) => {
   return (
     <Grid container mt={8} border="2px solid #3977ce">
       <Grid item xs={12}>
-        {/* <ProductListTitle title={title} /> */}
         <Typography className={classes.title} variant="h5">
           {title}
         </Typography>
@@ -80,12 +85,14 @@ const RenderProductBrand = ({ data, title, row }: ProductBrandProps) => {
 }
 
 const HomePage = () => {
+  const classes = useStyles()
   const navigate = useNavigate()
+
   const [productList, setProductList] = useState<ICustomAPIResponse[]>([])
   const [productBrand, setProductBrand] = useState([])
   const [showLoading, setShowLoading] = useState(false)
-  const [isShow, setIsShow] = useState(false)
-  const [title, setTitle] = useState<string>("")
+  const [isShowProduct, setIsShowProduct] = useState(false)
+  const [title, setTitle] = useState("")
 
   // const toTableOptions = (tables: string[]): IAutocompleteOption[] =>
   //   tables.map((table) => ({ label: table, value: table }));
@@ -115,7 +122,7 @@ const HomePage = () => {
       )
       setProductBrand(filteredProduct)
       setTitle(value)
-      setIsShow(true)
+      setIsShowProduct(true)
       navigate(`/brand/${value}`)
     }
 
@@ -188,47 +195,15 @@ const HomePage = () => {
         </Grid>
       </Paper>
 
-      <Grid
-        container
-        columnGap={1}
-        justifyContent="center"
-        mt={5}
-        display={{ xs: "none", md: "flex" }}
-      >
-        <Grid item xs={2}>
-          <FormInputDropDown
-            label="Giá tiền"
-            name="price"
-            options={sortPrice}
-          />
-        </Grid>
-        <Grid item xs={2}>
-          <FormInputDropDown
-            label="Khuyến mãi"
-            name="saleOff"
-            options={sortPrice}
-          />
-        </Grid>
-        <Grid item xs={2}>
-          <FormInputDropDown
-            label="Số lượng sao"
-            name="starCount"
-            options={sortPrice}
-          />
-        </Grid>
-        <Grid item xs={2}>
-          <FormInputDropDown label="Sắp xếp" name="sort" options={sortPrice} />
-        </Grid>
-      </Grid>
-
+      <HomeFilter />
       {/* List product follow title */}
-      {isShow ? (
+      {isShowProduct ? (
         <>
           <Grid container justifyContent="center" mt={2}>
             <Button
               variant="outlined"
               color="inherit"
-              onClick={() => setIsShow(false)}
+              onClick={() => setIsShowProduct(false)}
               sx={{ fontSize: 13 }}
             >
               <Close fontSize="small" />
@@ -244,6 +219,25 @@ const HomePage = () => {
       ) : (
         <HomeProduct productList={productList} />
       )}
+
+      <Box className={classes.ensured}>
+        <Box className={classes.text}>
+          <LocalShipping fontSize="large" color="secondary" />
+          Giao hàng hỏa tốc trong 1 giờ
+        </Box>
+        <Box className={classes.text}>
+          <VerifiedUser fontSize="large" color="secondary" />
+          Hàng chính hãng 100%
+        </Box>
+        <Box className={classes.text}>
+          <HeadsetMic fontSize="large" color="secondary" />
+          Hotline hỗ trợ 1234.5678
+        </Box>
+        <Box className={classes.text}>
+          <Loop fontSize="large" color="secondary" />
+          Thủ tục đổi trả dễ dàng
+        </Box>
+      </Box>
     </>
   )
 }
