@@ -37,7 +37,6 @@ const Layout = ({ children }: Props) => {
         component="main"
         p={{ xs: "16px 10px", md: 5 }}
         bgcolor={mainBackground}
-        minHeight="100%"
       >
         <Box sx={{ flexGrow: 1 }}>{children}</Box>
       </Box>

@@ -44,7 +44,6 @@ const Navbar = () => {
       justifyContent="center"
       bgcolor="white"
       boxShadow="0 2px 10px 0 rgba(0,0,0,0.15)"
-      zIndex={999}
       position="relative"
     >
       <List
