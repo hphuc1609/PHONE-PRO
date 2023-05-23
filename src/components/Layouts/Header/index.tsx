@@ -3,7 +3,7 @@ import { createComponentWithAuth } from "Firebase/firebaseConfig"
 import ShoppingCart from "components/Cart"
 import { Link, useNavigate } from "react-router-dom"
 import { WrappedComponentProps } from "react-with-firebase-auth"
-import { appBarHeight, primaryDark } from "styles/config"
+import { headerHeight, primaryDark } from "styles/config"
 import SearchSuggestion from "../Search"
 import UserMenu from "./UserMenu"
 
@@ -11,24 +11,24 @@ const Header = ({ user }: WrappedComponentProps) => {
   const navigate = useNavigate()
 
   const onLogin = () => {
-    navigate("/login", { replace: true })
+    navigate("/login")
   }
   const onRegister = () => {
-    navigate("/register", { replace: true })
+    navigate("/register")
   }
 
   return (
-    <AppBar position="relative" elevation={0}>
+    <AppBar position="fixed" elevation={0}>
       <Toolbar
         sx={{
-          height: { xs: "4rem", md: appBarHeight },
+          height: { xs: "4rem", md: headerHeight },
           margin: { xs: "0 auto", md: "0" },
           justifyContent: "space-between",
         }}
       >
         <Link
           to="/"
-          title="Trang chủ Smartphone"
+          title="Trang chủ Phone Pro"
           style={{
             textDecoration: "none",
             color: "inherit",

@@ -3,6 +3,7 @@ import { Box, List } from "@mui/material"
 import type { INavItem } from "models/navigation"
 import { useLocation } from "react-router-dom"
 import NavListItem from "./NavListItem"
+import { headerHeight } from "styles/config"
 
 const navItems: INavItem[] = [
   {
@@ -45,6 +46,7 @@ const Navbar = () => {
       bgcolor="white"
       boxShadow="0 2px 10px 0 rgba(0,0,0,0.15)"
       position="relative"
+      pt={headerHeight}
     >
       <List
         sx={{
