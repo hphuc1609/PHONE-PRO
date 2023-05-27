@@ -17,6 +17,15 @@ const UserMenu = ({ signOut, user }: WrappedComponentProps) => {
     setOpenMenu(null)
   }
 
+  const handleLogOut = () => {
+    signOut()
+    setTimeout(() => {
+      navigate("/login")
+    }, 200)
+
+    localStorage.clear()
+  }
+
   return (
     <Box display="flex" alignItems="center" mr={2}>
       <Box
@@ -49,7 +58,7 @@ const UserMenu = ({ signOut, user }: WrappedComponentProps) => {
         <Divider />
         <MenuItem
           onClick={() => {
-            handleCloseMenu(), navigate("/user")
+            handleCloseMenu(), navigate("/profile")
           }}
         >
           <ListItemIcon>
@@ -57,7 +66,7 @@ const UserMenu = ({ signOut, user }: WrappedComponentProps) => {
           </ListItemIcon>
           <Typography>Người dùng</Typography>
         </MenuItem>
-        <MenuItem onClick={signOut}>
+        <MenuItem onClick={handleLogOut}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

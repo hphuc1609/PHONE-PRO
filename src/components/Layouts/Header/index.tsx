@@ -29,6 +29,7 @@ const Header = ({ user }: WrappedComponentProps) => {
         <Link
           to="/"
           title="Trang chủ Phone Pro"
+          onClick={() => window.scrollTo(0, 0)}
           style={{
             textDecoration: "none",
             color: "inherit",
