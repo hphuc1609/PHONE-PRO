@@ -5,6 +5,7 @@ import IntroPage from "pages/Introduce"
 import Login from "pages/Login"
 import NewsPage from "pages/News"
 import Payment from "pages/Payment"
+import Profile from "pages/Profile"
 import Register from "pages/Register"
 import type { PathRouteProps } from "react-router-dom"
 
@@ -43,5 +44,9 @@ export const publicRoutes: Array<PathRouteProps> = [
   {
     path: "/payment",
     element: <Payment />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
   },
 ]
