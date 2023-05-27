@@ -86,9 +86,14 @@ const Detail = ({ data }: Props) => {
               <Grid item xs={4}>
                 <Grid container item rowGap={1.5}>
                   <Box display="flex" alignItems="center" columnGap={2}>
-                    <Typography fontSize={25} color="error" fontWeight={600}>
-                      <NumberFormat value={item.price} />
-                    </Typography>
+                    <NumberFormat
+                      value={item.price}
+                      color="error"
+                      TextProps={{
+                        fontSize: 25,
+                        fontWeight: "bold",
+                      }}
+                    />
                     <Typography
                       fontSize={12}
                       fontWeight={500}

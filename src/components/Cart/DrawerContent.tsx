@@ -1,4 +1,4 @@
-import { Delete, Paid } from "@mui/icons-material"
+import { Delete } from "@mui/icons-material"
 import {
   Box,
   Button,
@@ -9,10 +9,10 @@ import {
 } from "@mui/material"
 import { makeStyles } from "@mui/styles"
 import NumberFormat from "components/common/NumberFormat"
+import { useNavigate } from "react-router-dom"
 import { useCart } from "react-use-cart"
 import { borderColor } from "styles/config"
 import EmptyCart from "./EmptyCart"
-import { useNavigate } from "react-router-dom"
 
 const useStyles = makeStyles(() => ({
   content: {
@@ -151,22 +151,25 @@ const DrawerContent = ({ handleClose }: Props) => {
             </Grid>
             <Grid item xs={6}>
               <Button
-                variant="outlined"
-                color="secondary"
+                variant="contained"
+                color="primary"
                 sx={{ gap: 0.5, padding: 1, alignItems: "flex-start" }}
                 onClick={handleOrderClick}
                 disableElevation
                 fullWidth
               >
-                Thanh toán
-                <Paid fontSize="small" />
+                Đặt hàng
               </Button>
             </Grid>
             <Grid item xs={6}>
               <Button
                 variant="outlined"
-                color="error"
-                sx={{ gap: 0.5, padding: 1, alignItems: "flex-start" }}
+                color="inherit"
+                sx={{
+                  gap: 0.5,
+                  padding: 1,
+                  alignItems: "flex-start",
+                }}
                 onClick={emptyCart}
                 disableElevation
                 fullWidth
