@@ -16,7 +16,7 @@ import { makeStyles } from "@mui/styles"
 const useStyles = makeStyles(() => ({
   text: {
     position: "absolute",
-    bottom: "40%",
+    bottom: "42%",
     left: "auto",
     padding: 3,
     color: "white",
@@ -63,7 +63,7 @@ const ProductListRow = ({ data, user }: Props) => {
 
   return (
     <>
-      <Box border={1} borderColor={borderColor} p={2}>
+      <Box border={1} borderColor={borderColor} px={2} py={3}>
         <Box
           component="a"
           href={`/detail/${data.productId}`}
@@ -93,9 +93,12 @@ const ProductListRow = ({ data, user }: Props) => {
             >
               {data.title}
             </Typography>
-            <Typography fontWeight={500} color="error">
-              <NumberFormat value={data.price} />
-            </Typography>
+            <NumberFormat
+              value={data.price}
+              color="error"
+              TextProps={{ fontSize: 18 }}
+            />
+
             <Box display="flex" alignItems="flex-end" mt={0.5}>
               {Array(data.star)
                 .fill(0)
@@ -121,20 +124,29 @@ const ProductListRow = ({ data, user }: Props) => {
 
           <Typography
             bgcolor={
-              (data.promotion.name === "" && "#1A73E8") ||
+              (data.promotion.name?.toLowerCase() === "giare" && "#1A73E8") ||
               (data.promotion.name?.toLowerCase() === "giamgia" && "#ea1b23") ||
-              (data.promotion.name?.toLowerCase() === "moi" && "#00a650") ||
+              (data.promotion.name?.toLowerCase() === "moiramat" &&
+                "#00a650") ||
               (data.promotion.name?.toLowerCase() === "tragop" && "#f7941d")
             }
             className={classes.text}
           >
-            {(data.promotion.name === "" && "Giá rẻ online") ||
+            {(data.promotion.name?.toLowerCase() === "giare" &&
+              "Giá rẻ online") ||
               (data.promotion.name?.toLowerCase() === "giamgia" && "Giảm") ||
-              (data.promotion.name?.toLowerCase() === "moi" && "Mới ra mắt") ||
+              (data.promotion.name?.toLowerCase() === "moiramat" &&
+                "Mới ra mắt") ||
               (data.promotion.name?.toLowerCase() === "tragop" && "Trả góp")}
-            {data.promotion.name !== "" && (
-              <span style={{ marginLeft: 5 }}>{data.promotion.value}</span>
-            )}
+
+            {data.promotion.name?.toLowerCase() !== "giare" &&
+              (data.promotion.name?.toLowerCase() === "tragop" ? (
+                <span style={{ marginLeft: 5 }}>
+                  {data.promotion.value + "%"}
+                </span>
+              ) : (
+                <span style={{ marginLeft: 5 }}>{data.promotion.value}</span>
+              ))}
           </Typography>
         </Box>
         <Button

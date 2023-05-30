@@ -7,25 +7,40 @@ import {
   WorkspacePremium,
 } from "@mui/icons-material"
 import { Box, Button, Grid, Typography } from "@mui/material"
+import AlertDialog from "components/common/Dialog"
 import NumberFormat from "components/common/NumberFormat"
 import { toastConfig } from "configs/toast"
 import { ICustomAPIResponse } from "models/product"
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import { useCart } from "react-use-cart"
+import { WrappedComponentProps } from "react-with-firebase-auth"
 import { borderColor, primaryDark } from "styles/config"
 import ProductInfo from "./ProductInfo"
 
 interface Props {
   data: ICustomAPIResponse[]
+  user?: WrappedComponentProps
 }
 
-const Detail = ({ data }: Props) => {
+const Detail = ({ data, user }: Props) => {
   const { addItem, inCart } = useCart()
+  const navigate = useNavigate()
+  const [open, setOpen] = useState(false)
+
+  const handleClose = () => {
+    setOpen(false)
+  }
 
   const handleAddToCart = (product: ICustomAPIResponse) => {
-    addItem({ ...product, id: product.productId })
-    toast.success(`Đã thêm ${product.title} vào giỏ hàng`, toastConfig)
-    toast.clearWaitingQueue()
+    if (user) {
+      addItem({ ...product, id: product.productId })
+      toast.success(`Đã thêm ${product.title} vào giỏ hàng`, toastConfig)
+      toast.clearWaitingQueue()
+    } else {
+      setOpen(true)
+    }
   }
 
   const getDetailPromo = (item: ICustomAPIResponse) => {
@@ -36,7 +51,7 @@ const Detail = ({ data }: Props) => {
       case "Giamgia":
         return `Khách hàng sẽ được giảm ${item.promotion.value}₫ khi tới mua trực tiếp tại cửa hàng.`
 
-      case "Moi":
+      case "Moiramat":
         return `Khách hàng sẽ được thử máy miễn phí tại cửa hàng. Có thể đổi trả lỗi trong vòng 2 tháng.`
 
       default:
@@ -54,7 +69,7 @@ const Detail = ({ data }: Props) => {
                 Điện thoại {item.title}
               </Typography>
               <Box display="flex" columnGap={0.5}>
-                <Box alignItems="center" display="flex">
+                <Box alignItems="flex-start" display="flex">
                   {Array(item.star)
                     .fill(0)
                     .map((_, index) => (
@@ -86,49 +101,79 @@ const Detail = ({ data }: Props) => {
               <Grid item xs={4}>
                 <Grid container item rowGap={1.5}>
                   <Box display="flex" alignItems="center" columnGap={2}>
-                    <NumberFormat
-                      value={item.price}
-                      color="error"
-                      TextProps={{
-                        fontSize: 25,
-                        fontWeight: "bold",
-                      }}
-                    />
-                    <Typography
-                      fontSize={12}
-                      fontWeight={500}
-                      color="white"
-                      p={0.5}
-                      bgcolor={
-                        (item.promotion.name?.toLowerCase() === "giamgia" &&
-                          "#ea1b23") ||
-                        (item.promotion.name?.toLowerCase() === "moi" &&
-                          "#00a650") ||
-                        (item.promotion.name?.toLowerCase() === "tragop" &&
-                          "#f7941d")
-                      }
-                      sx={
-                        item.promotion.name === "" && {
-                          color: "black",
-                          fontSize: 15,
-                          textDecoration: "line-through",
-                        }
-                      }
-                    >
-                      {(item.promotion.name?.toLowerCase() === "giamgia" &&
-                        "Giảm") ||
-                        (item.promotion.name?.toLowerCase() === "moi" &&
-                          "Mới ra mắt") ||
-                        (item.promotion.name?.toLowerCase() === "tragop" &&
-                          "Trả góp")}
+                    {item.promotion.name !== "giare" ? (
+                      <>
+                        <NumberFormat
+                          value={item.price}
+                          color="error"
+                          TextProps={{
+                            fontSize: 25,
+                            fontWeight: "bold",
+                          }}
+                        />
+                        <Typography
+                          fontSize={12}
+                          fontWeight={500}
+                          color="white"
+                          p={0.5}
+                          bgcolor={
+                            (item.promotion.name?.toLowerCase() === "giamgia" &&
+                              "#ea1b23") ||
+                            (item.promotion.name?.toLowerCase() ===
+                              "moiramat" &&
+                              "#00a650") ||
+                            (item.promotion.name?.toLowerCase() === "tragop" &&
+                              "#f7941d")
+                          }
+                        >
+                          {(item.promotion.name?.toLowerCase() === "giamgia" &&
+                            "Giảm") ||
+                            (item.promotion.name?.toLowerCase() ===
+                              "moiramat" &&
+                              "Mới ra mắt") ||
+                            (item.promotion.name?.toLowerCase() === "tragop" &&
+                              "Trả góp")}
 
-                      <span style={{ marginLeft: 5 }}>
-                        {item.promotion.value}
-                      </span>
-                      {item.promotion.name === "" &&
-                        item.promotion.value !== "" &&
-                        "₫"}
-                    </Typography>
+                          {item.promotion.name?.toLowerCase() === "tragop" ? (
+                            <span style={{ marginLeft: 5 }}>
+                              {item.promotion.value + "%"}
+                            </span>
+                          ) : (
+                            <span style={{ marginLeft: 5 }}>
+                              {item.promotion.value}
+                            </span>
+                          )}
+                        </Typography>
+                      </>
+                    ) : (
+                      <>
+                        {item.promotion.value !== "" && (
+                          <Typography
+                            fontSize={25}
+                            fontWeight="bold"
+                            color="#ea1b23"
+                          >
+                            {item.promotion.value !== "" &&
+                              item.promotion.value + "₫"}
+                          </Typography>
+                        )}
+                        <NumberFormat
+                          value={item.price}
+                          TextProps={
+                            (item.promotion.value === "" && {
+                              color: "#ea1b23",
+                              fontSize: 25,
+                              fontWeight: "bold",
+                            }) ||
+                            (item.promotion.value !== "" && {
+                              sx: {
+                                textDecoration: "line-through",
+                              },
+                            })
+                          }
+                        />
+                      </>
+                    )}
                   </Box>
                   <Box
                     width="100%"
@@ -229,7 +274,6 @@ const Detail = ({ data }: Props) => {
                   </Grid>
                 </Grid>
               </Grid>
-
               <Grid item xs={4}>
                 <ProductInfo item={item.specifications} />
               </Grid>
@@ -237,6 +281,17 @@ const Detail = ({ data }: Props) => {
           </Grid>
         </Grid>
       ))}
+
+      <AlertDialog
+        open={open}
+        handleClose={handleClose}
+        content="Bạn cần đăng nhập để mua hàng"
+        leftButton="Đóng"
+        onClickLeftButton={handleClose}
+        rightButton="Đăng nhập"
+        onClickRightButton={() => navigate("/login")}
+        fullWidthButton
+      />
     </>
   )
 }
