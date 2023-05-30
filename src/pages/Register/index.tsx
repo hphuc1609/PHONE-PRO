@@ -45,7 +45,6 @@ const Register = ({
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false)
 
   const schema = yup.object().shape({
-    fullName: yup.string().required("Vui lòng điền trường này"),
     email: yup
       .string()
       .required("Vui lòng nhập email")
@@ -63,12 +62,6 @@ const Register = ({
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: {
-      fullName: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    },
   })
 
   const toogleShowPassword = () => {
@@ -87,22 +80,35 @@ const Register = ({
     }
   }
 
-  const onSubmit = (data: FieldValues) => {
+  const signUp = (email: string, password: string) => {
+    try {
+      const res: any = createUserWithEmailAndPassword(email, password)
+
+      res.then((userCredential: any) => {
+        if (userCredential.user) {
+          toast.success("Đăng ký thành công", toastConfig)
+          navigate("/")
+        } else {
+          toast.error(
+            "Tài khoản đã tồn tại, vui lòng đăng ký lại !",
+            toastConfig
+          )
+        }
+      })
+    } catch (error: any) {
+      toast.error(error.message, toastConfig)
+    }
+  }
+
+  const handleRegister = (data: FieldValues) => {
     const email = data.email
     const password = data.password
 
-    createUserWithEmailAndPassword(email, password).then((res: any) => {
-      if (res.additionalUserInfo?.isNewUser === true) {
-        navigate("/")
-        toast.success("Đăng ký thành công!", toastConfig)
-      } else {
-        toast.error("Tài khoản đã tồn tại, vui lòng đăng ký lại!", toastConfig)
-      }
-    })
+    signUp(email, password)
   }
 
   return (
-    <Box height="100vh" display="flex" alignItems="center">
+    <Box display="flex" alignItems="center">
       <Container maxWidth="xs">
         <Paper elevation={3} component="form" noValidate sx={{ p: 3 }}>
           <Grid container spacing={2}>
@@ -187,7 +193,7 @@ const Register = ({
                 type="submit"
                 variant="contained"
                 color="secondary"
-                onClick={handleSubmit(onSubmit)}
+                onClick={handleSubmit(handleRegister)}
                 sx={{
                   p: "8px",
                   color: "white",
