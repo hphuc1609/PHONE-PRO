@@ -1,6 +1,6 @@
-import { ISpecification } from "models/specification"
+import { IMenuOptions } from "models/options"
 
-export const specifications: ISpecification[] = [
+export const specifications: IMenuOptions[] = [
   {
     label: "Màn hình",
     value: "Màn hình",
