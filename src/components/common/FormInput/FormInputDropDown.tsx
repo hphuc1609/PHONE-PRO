@@ -1,12 +1,26 @@
-import { FormControlLabel, MenuItem, TextField } from "@mui/material"
+import { MenuItem, TextField } from "@mui/material"
+
+interface OptionsProps {
+  label: string
+  value: string
+}
 
 interface Props {
   label: string
   name: string
-  options: any[]
+  options: OptionsProps[]
+  value?: string
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const FormInputDropDown = ({ label, name, options, ...TextProps }: Props) => {
+const FormInputDropDown = ({
+  label,
+  name,
+  value,
+  onChange,
+  options,
+  ...TextProps
+}: Props) => {
   const generateSelectOptions = () =>
     options.map((option) => (
       <MenuItem key={option.value} value={option.value}>
@@ -21,6 +35,8 @@ const FormInputDropDown = ({ label, name, options, ...TextProps }: Props) => {
       name={name}
       label={label}
       size="small"
+      value={value || ""}
+      onChange={onChange}
       fullWidth
       {...TextProps}
     >
