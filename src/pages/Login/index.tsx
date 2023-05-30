@@ -40,7 +40,7 @@ const Login = ({ signInWithEmailAndPassword }: WrappedComponentProps) => {
   const classes = useStyles()
   const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false)
-  const [isShrink, setIsShrink] = useState(false)
+  // const [isShrink, setIsShrink] = useState(false)
 
   const schema = yup.object().shape({
     email: yup
@@ -59,14 +59,14 @@ const Login = ({ signInWithEmailAndPassword }: WrappedComponentProps) => {
     resolver: yupResolver(schema),
   })
 
-  const watchFieldPassword = watch("password")
-  useEffect(() => {
-    if (watchFieldPassword !== "") {
-      setIsShrink(true)
-    } else {
-      setIsShrink(false)
-    }
-  }, [watchFieldPassword])
+  // const watchFieldPassword = watch("password")
+  // useEffect(() => {
+  //   if (watchFieldPassword !== "") {
+  //     setIsShrink(true)
+  //   } else {
+  //     setIsShrink(false)
+  //   }
+  // }, [watchFieldPassword])
 
   const toogleShowPassword = () => {
     if (showPassword) {
@@ -76,21 +76,31 @@ const Login = ({ signInWithEmailAndPassword }: WrappedComponentProps) => {
     }
   }
 
+  const signIn = (email: string, password: string) => {
+    try {
+      const res: any = signInWithEmailAndPassword(email, password)
+
+      res.then((userCredential: any) => {
+        if (userCredential.user) {
+          toast.success("Đăng nhập thành công", toastConfig)
+          navigate("/")
+        } else {
+          toast.error(
+            "Email hoặc mật khẩu không đúng, vui lòng thử lại !",
+            toastConfig
+          )
+        }
+      })
+    } catch (error: any) {
+      toast.error(error.message, toastConfig)
+    }
+  }
+
   const onSubmit = (data: FieldValues) => {
     const email = data.email
     const password = data.password
 
-    signInWithEmailAndPassword(email, password).then((res: any) => {
-      if (res?.additionalUserInfo?.isNewUser === false) {
-        navigate("/")
-        toast.success("Đăng nhập thành công!", toastConfig)
-      } else {
-        toast.error(
-          " Email hoặc password không chính xác. Vui lòng thử lại!",
-          toastConfig
-        )
-      }
-    })
+    signIn(email, password)
   }
 
   return (
@@ -129,7 +139,7 @@ const Login = ({ signInWithEmailAndPassword }: WrappedComponentProps) => {
                 error={errors}
                 TextFieldProps={{
                   type: showPassword ? "text" : "password",
-                  InputLabelProps: { shrink: isShrink },
+                  // InputLabelProps: { shrink: isShrink },
                   InputProps: {
                     endAdornment: (
                       <InputAdornment position="end">
