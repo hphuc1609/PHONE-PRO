@@ -1,22 +1,26 @@
 import { Grid } from "@mui/material"
 import FormInputDropDown from "components/common/FormInput/FormInputDropDown"
+import { priceOptions, promoOptions, starCountOptions } from "utils/options"
 
-const sortPrice = [
-  {
-    label: "Dưới 2 triệu",
-    value: "Dưới 2 triệu",
-  },
-  {
-    label: "Từ 2 - 4 triệu",
-    value: "Từ 2 - 4 triệu",
-  },
-  {
-    label: "Từ 4 - 7 triệu",
-    value: "Từ 4 - 7 triệu",
-  },
-]
+interface Props {
+  filterPrice: string
+  handleFilterPrice: (event: React.ChangeEvent<HTMLInputElement>) => void
 
-const HomeFilter = () => {
+  filterPromo: string
+  handleFilterPromo: (event: React.ChangeEvent<HTMLInputElement>) => void
+
+  filterStar: string
+  handleFilterStar: (event: React.ChangeEvent<HTMLInputElement>) => void
+}
+
+const HomeFilter = ({
+  filterPrice,
+  filterPromo,
+  filterStar,
+  handleFilterPrice,
+  handleFilterPromo,
+  handleFilterStar,
+}: Props) => {
   return (
     <Grid
       container
@@ -26,25 +30,35 @@ const HomeFilter = () => {
       display={{ xs: "none", md: "flex" }}
     >
       <Grid item xs={2}>
-        <FormInputDropDown label="Giá tiền" name="price" options={sortPrice} />
+        <FormInputDropDown
+          label="Giá tiền"
+          name="price"
+          value={filterPrice}
+          onChange={handleFilterPrice}
+          options={priceOptions}
+        />
       </Grid>
       <Grid item xs={2}>
         <FormInputDropDown
           label="Khuyến mãi"
           name="saleOff"
-          options={sortPrice}
+          value={filterPromo}
+          onChange={handleFilterPromo}
+          options={promoOptions}
         />
       </Grid>
       <Grid item xs={2}>
         <FormInputDropDown
           label="Số lượng sao"
           name="starCount"
-          options={sortPrice}
+          value={filterStar}
+          onChange={handleFilterStar}
+          options={starCountOptions}
         />
       </Grid>
-      <Grid item xs={2}>
-        <FormInputDropDown label="Sắp xếp" name="sort" options={sortPrice} />
-      </Grid>
+      {/* <Grid item xs={2}>
+        <FormInputDropDown label="Sắp xếp" name="sort" options={priceOptions} />
+      </Grid> */}
     </Grid>
   )
 }

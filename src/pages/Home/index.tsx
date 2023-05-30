@@ -5,40 +5,25 @@ import {
   Loop,
   VerifiedUser,
 } from "@mui/icons-material"
-import { Box, Button, Grid, Paper, Typography } from "@mui/material"
+import { Box, Button, Grid, Typography } from "@mui/material"
 import { makeStyles } from "@mui/styles"
 import { realtimeDB } from "Firebase/firebaseConfig"
 import SlideSwiper from "components/Banner"
 import Loading from "components/Loading"
-import FormInputDropDown from "components/common/FormInput/FormInputDropDown"
-import ProductListRow from "components/common/ProductList/ProductListRow"
-import { swiperConfig } from "configs/swiper"
+import RenderProduct from "components/common/RenderProduct"
 import { toastConfig } from "configs/toast"
 import { ICustomAPIResponse } from "models/product"
 import { useEffect, useState } from "react"
 import { Helmet } from "react-helmet"
-import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
-import { primaryDark } from "styles/config"
 import "swiper/css"
 import "swiper/css/navigation"
-import { Swiper, SwiperSlide } from "swiper/react"
-import { companies } from "utils/company"
-import HomeProduct from "./HomeProduct"
-import "./style.css"
 import HomeFilter from "./HomeFilter"
+import HomeProduct from "./HomeProduct"
+import MenuList from "./MenuList"
+import "./style.css"
 
 const useStyles = makeStyles(() => ({
-  title: {
-    fontWeight: 600,
-    textTransform: "capitalize",
-    padding: 8,
-    borderRadius: 100,
-    textAlign: "center",
-    color: "white",
-    backgroundImage: `linear-gradient(to right, #3977ce, ${primaryDark})`,
-    transform: "translateY(-1.05em)",
-  },
   ensured: {
     height: 100,
     display: "flex",
@@ -55,38 +40,8 @@ const useStyles = makeStyles(() => ({
   },
 }))
 
-interface ProductBrandProps {
-  data: ICustomAPIResponse[]
-  title: string
-  row: number
-}
-
-const RenderProductBrand = ({ data, title, row }: ProductBrandProps) => {
-  const classes = useStyles()
-
-  return (
-    <Grid container mt={8} border="2px solid #3977ce">
-      <Grid item xs={12}>
-        <Typography className={classes.title} variant="h5">
-          {title}
-        </Typography>
-      </Grid>
-      <Grid item xs={12} px={1} pb={3}>
-        <Swiper {...swiperConfig} grid={{ rows: row, fill: "row" }}>
-          {data.map((item) => (
-            <SwiperSlide key={item.productId}>
-              <ProductListRow data={item} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </Grid>
-    </Grid>
-  )
-}
-
 const HomePage = () => {
   const classes = useStyles()
-  const navigate = useNavigate()
 
   const [productList, setProductList] = useState<ICustomAPIResponse[]>([])
   const [productBrand, setProductBrand] = useState([])
@@ -94,8 +49,51 @@ const HomePage = () => {
   const [isShowProduct, setIsShowProduct] = useState(false)
   const [title, setTitle] = useState("")
 
-  // const toTableOptions = (tables: string[]): IAutocompleteOption[] =>
-  //   tables.map((table) => ({ label: table, value: table }));
+  // Filter price, promotion,
+  const [filterPrice, setFilterPrice] = useState("")
+  const [filterPromo, setFilterPromo] = useState("")
+  const [filterStar, setFilterStar] = useState("")
+
+  const filteredProductsPrice = productList?.filter((product) => {
+    switch (filterPrice) {
+      case "Dưới 2 triệu":
+        return product.price < 2000000
+      case "Từ 2 - 4 triệu":
+        return product.price >= 2000000 && product.price < 4000000
+      case "Từ 4 - 7 triệu":
+        return product.price >= 4000000 && product.price < 7000000
+      default:
+        return true
+    }
+  })
+
+  const filteredProductsPromotion = productList?.filter((product) => {
+    switch (filterPromo) {
+      case "Giảm giá":
+        return product.promotion.name?.toLowerCase() === "giamgia"
+      case "Mới ra mắt":
+        return product.promotion.name?.toLowerCase() === "moiramat"
+      case "Trả góp":
+        return product.promotion.name?.toLowerCase() === "tragop"
+      case "Giá rẻ online":
+        return product.promotion.name?.toLowerCase() === "giare"
+      default:
+        return true
+    }
+  })
+
+  const filteredProductsStar = productList?.filter((product) => {
+    switch (filterStar) {
+      case "Trên 2 sao":
+        return product.star > 2
+      case "Trên 3 sao":
+        return product.star > 3
+      case "Trên 4 sao":
+        return product.star > 4
+      default:
+        return true
+    }
+  })
 
   useEffect(() => {
     setShowLoading(true)
@@ -115,22 +113,29 @@ const HomePage = () => {
       })
   }, [])
 
-  const ShowProductFromBrand = (value: string) => {
-    if (value) {
-      const filteredProduct = productList.filter(
-        (product) => product.company === value
-      )
-      setProductBrand(filteredProduct)
-      setTitle(value)
-      setIsShowProduct(true)
-      navigate(`/brand/${value}`)
-    }
-
-    window.scroll({
-      top: 1000,
-      behavior: "smooth",
-    })
+  const handleFilterPrice = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFilterPrice(event.target.value)
+    setIsShowProduct(true)
   }
+  const handleFilterPromo = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFilterPromo(event.target.value)
+    setIsShowProduct(true)
+  }
+  const handleFilterStar = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFilterStar(event.target.value)
+    setIsShowProduct(true)
+  }
+
+  const handleClearFilter = () => {
+    setIsShowProduct(false)
+    setProductBrand([])
+    setFilterPrice("")
+    setFilterPromo("")
+    setFilterStar("")
+  }
+
+  // const toTableOptions = (tables: string[]): IAutocompleteOption[] =>
+  //   tables.map((table) => ({ label: table, value: table }));
 
   return (
     <>
@@ -140,6 +145,8 @@ const HomePage = () => {
       </Helmet>
 
       <Loading open={showLoading} />
+
+      {/* Banner */}
       <SlideSwiper />
       <Box width="100%" mt={2}>
         <img
@@ -151,75 +158,76 @@ const HomePage = () => {
         />
       </Box>
 
-      <Paper variant="outlined" sx={{ mt: 5 }}>
-        <Typography
-          variant="h5"
-          textTransform="capitalize"
-          fontWeight={600}
-          px={3}
-          pt={2}
-        >
-          Danh mục sản phẩm
-        </Typography>
-        <Grid
-          container
-          py={3}
-          display={{ xs: "none", md: "flex" }}
-          justifyContent="center"
-        >
-          {/* Render menu list brands company */}
-          {companies.map((item) => (
-            <Grid
-              item
-              xs={0}
-              key={item.value}
-              sx={{
-                "&.MuiGrid-root": {
-                  transition: "all ease 0.3s ",
-                  "&:hover": {
-                    transform: "scale(1.1)",
-                  },
-                },
-              }}
-            >
-              <Button onClick={() => ShowProductFromBrand(item.value)}>
-                <img
-                  src={item.image}
-                  alt={item.label}
-                  height={30}
-                  width={130}
-                />
-              </Button>
-            </Grid>
-          ))}
-        </Grid>
-      </Paper>
+      {/* Company Menu */}
+      <MenuList
+        products={productList}
+        setTitle={setTitle}
+        setProductBrand={setProductBrand}
+        setIsShowProduct={setIsShowProduct}
+      />
 
-      <HomeFilter />
-      {/* List product follow title */}
+      {/* Filter Options */}
+      <HomeFilter
+        filterPrice={filterPrice}
+        handleFilterPrice={handleFilterPrice}
+        filterPromo={filterPromo}
+        handleFilterPromo={handleFilterPromo}
+        filterStar={filterStar}
+        handleFilterStar={handleFilterStar}
+      />
+
+      {/* Show list product follow company filter */}
       {isShowProduct ? (
         <>
           <Grid container justifyContent="center" mt={2}>
             <Button
               variant="outlined"
-              color="inherit"
-              onClick={() => setIsShowProduct(false)}
-              sx={{ fontSize: 13 }}
+              color="warning"
+              onClick={handleClearFilter}
+              sx={{ display: "flex", alignItems: "flex-start" }}
             >
               <Close fontSize="small" />
-              Xóa lọc
+              <Typography variant="subtitle2">Xóa lọc</Typography>
             </Button>
           </Grid>
-          <RenderProductBrand
-            data={productBrand}
-            title={`Điện thoại ${title}`}
-            row={productBrand.length}
-          />
+
+          {productBrand.length !== 0 && (
+            <RenderProduct
+              data={productBrand}
+              title={`Điện thoại ${title}`}
+              row={productBrand?.length}
+            />
+          )}
+
+          {filterPrice && (
+            <RenderProduct
+              data={filteredProductsPrice}
+              title={`Sản phẩm ${filterPrice}`}
+              row={filteredProductsPrice?.length}
+            />
+          )}
+
+          {filterPromo && (
+            <RenderProduct
+              data={filteredProductsPromotion}
+              title={`Sản phẩm ${filterPromo}`}
+              row={filteredProductsPromotion?.length}
+            />
+          )}
+
+          {filterStar && (
+            <RenderProduct
+              data={filteredProductsStar}
+              title={`Sản phẩm ${filterStar}`}
+              row={filteredProductsStar?.length}
+            />
+          )}
         </>
       ) : (
         <HomeProduct productList={productList} />
       )}
 
+      {/* Footer */}
       <Box className={classes.ensured}>
         <Box className={classes.text}>
           <LocalShipping fontSize="large" color="secondary" />

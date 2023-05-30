@@ -33,7 +33,7 @@ const HomeProduct = ({ productList }: Props) => {
             <Swiper {...swiperConfig}>
               {productList.map(
                 (item) =>
-                  item.promotion.name?.toLowerCase() === "" && (
+                  item.promotion.name?.toLowerCase() === "giare" && (
                     <SwiperSlide key={item.productId}>
                       <ProductListRow data={item} />
                     </SwiperSlide>
@@ -53,7 +53,7 @@ const HomeProduct = ({ productList }: Props) => {
             <Swiper {...swiperConfig}>
               {productList.map(
                 (item) =>
-                  item.promotion.name?.toLowerCase() === "moi" && (
+                  item.promotion.name?.toLowerCase() === "moiramat" && (
                     <SwiperSlide key={item.productId}>
                       <ProductListRow data={item} />
                     </SwiperSlide>
