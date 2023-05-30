@@ -13,7 +13,11 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_MESUREMENT_ID,
 }
 
-const firebaseApp = firebase.initializeApp(firebaseConfig)
+let firebaseApp
+if (!firebase.apps.length) {
+  firebaseApp = firebase.initializeApp(firebaseConfig)
+}
+
 const firebaseAppAuth = firebaseApp.auth()
 
 export const realtimeDB = firebase.database()
