@@ -1,10 +1,4 @@
-import {
-  Close,
-  HeadsetMic,
-  LocalShipping,
-  Loop,
-  VerifiedUser,
-} from "@mui/icons-material"
+import { Close } from "@mui/icons-material"
 import { Box, Button, Grid, Typography } from "@mui/material"
 import { makeStyles } from "@mui/styles"
 import { realtimeDB } from "Firebase/firebaseConfig"
@@ -23,26 +17,7 @@ import HomeProduct from "./HomeProduct"
 import MenuList from "./MenuList"
 import "./style.css"
 
-const useStyles = makeStyles(() => ({
-  ensured: {
-    height: 100,
-    display: "flex",
-    justifyContent: "space-around",
-    borderTop: "1px solid gray",
-    background: "#F1F6F9",
-    margin: "64px -40px -40px",
-    padding: 40,
-  },
-  text: {
-    display: "flex",
-    alignItems: "center",
-    gap: 20,
-  },
-}))
-
 const HomePage = () => {
-  const classes = useStyles()
-
   const [productList, setProductList] = useState<ICustomAPIResponse[]>([])
   const [productBrand, setProductBrand] = useState([])
   const [showLoading, setShowLoading] = useState(false)
@@ -226,26 +201,6 @@ const HomePage = () => {
       ) : (
         <HomeProduct productList={productList} />
       )}
-
-      {/* Footer */}
-      <Box className={classes.ensured}>
-        <Box className={classes.text}>
-          <LocalShipping fontSize="large" color="secondary" />
-          Giao hàng hỏa tốc trong 1 giờ
-        </Box>
-        <Box className={classes.text}>
-          <VerifiedUser fontSize="large" color="secondary" />
-          Hàng chính hãng 100%
-        </Box>
-        <Box className={classes.text}>
-          <HeadsetMic fontSize="large" color="secondary" />
-          Hotline hỗ trợ 1234.5678
-        </Box>
-        <Box className={classes.text}>
-          <Loop fontSize="large" color="secondary" />
-          Thủ tục đổi trả dễ dàng
-        </Box>
-      </Box>
     </>
   )
 }
