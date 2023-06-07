@@ -21,7 +21,7 @@ import ProductInfo from "./ProductInfo"
 
 interface Props {
   data: ICustomAPIResponse[]
-  user?: WrappedComponentProps
+  user: WrappedComponentProps["user"]
 }
 
 const Detail = ({ data, user }: Props) => {

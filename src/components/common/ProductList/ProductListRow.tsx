@@ -29,7 +29,7 @@ const useStyles = makeStyles(() => ({
 
 interface Props {
   data: ICustomAPIResponse
-  user?: WrappedComponentProps
+  user: WrappedComponentProps["user"]
 }
 
 const ProductListRow = ({ data, user }: Props) => {
