@@ -22,7 +22,8 @@ const Header = ({ user }: WrappedComponentProps) => {
       <Toolbar
         sx={{
           height: { xs: "4rem", md: headerHeight },
-          margin: { xs: "0 auto", md: "0" },
+          width: { xs: "100%", xl: 1500 },
+          margin: "auto",
           justifyContent: "space-between",
         }}
       >

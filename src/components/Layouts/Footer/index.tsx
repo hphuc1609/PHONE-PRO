@@ -10,14 +10,13 @@ const Footer = () => {
       justifyContent="center"
       position="relative"
     >
-      <Typography color="inherit" mr={0.5} display="flex">
+      <Typography color="inherit" display="flex">
         Copyright © 2023
         <Typography
           component="a"
           href="/"
           color="primary"
           fontWeight={600}
-          ml={0.5}
           sx={{ textDecoration: "none" }}
         >
           PhonePro

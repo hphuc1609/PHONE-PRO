@@ -4,9 +4,10 @@ import {
   FormLabel,
   Radio,
   RadioGroup,
+  Typography,
 } from "@mui/material"
 import { ReactNode } from "react"
-import type { Control, FieldValues } from "react-hook-form"
+import type { Control, FieldValues, FieldErrors } from "react-hook-form"
 import { Controller } from "react-hook-form"
 
 interface Option {
@@ -18,10 +19,11 @@ interface Props {
   name: string
   title: string
   control: Control<FieldValues>
+  error: FieldErrors<FieldValues>
   options: Option[]
 }
 
-const FormInputRadio = ({ name, title, control, options }: Props) => (
+const FormInputRadio = ({ name, title, control, error, options }: Props) => (
   <FormControl sx={{ width: "100%" }}>
     <FormLabel color="secondary" sx={{ mb: 2 }}>
       {title}
@@ -37,11 +39,17 @@ const FormInputRadio = ({ name, title, control, options }: Props) => (
               value={option.value}
               control={<Radio color="secondary" />}
               label={option.label}
+              sx={{ "& .MuiFormControlLabel-label": { width: "100%" } }}
             />
           ))}
         </RadioGroup>
       )}
     />
+    {error[name] && (
+      <Typography variant="body2" color="error" mt={1}>
+        {`${error[name]?.message}`}
+      </Typography>
+    )}
   </FormControl>
 )
 

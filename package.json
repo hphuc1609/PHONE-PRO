@@ -34,6 +34,7 @@
     "react-helmet": "^6.1.0",
     "react-hook-form": "^7.43.9",
     "react-router-dom": "^6.10.0",
+    "react-to-print": "^2.14.12",
     "react-toastify": "^9.1.2",
     "react-use-cart": "^1.13.0",
     "react-with-firebase-auth": "^1.4.1",
