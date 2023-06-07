@@ -12,9 +12,13 @@ import {
 import FormInputRadio from "components/common/FormInput/FormInputRadio"
 import FormInputText from "components/common/FormInput/FormInputText"
 import NumberFormat from "components/common/NumberFormat"
+import { toastConfig } from "configs/toast"
+import { Dispatch, SetStateAction } from "react"
 import { FieldValues, useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 import { useCart } from "react-use-cart"
+import { WrappedComponentProps } from "react-with-firebase-auth"
 import * as yup from "yup"
 
 interface RenderPaymentsProps {
@@ -27,21 +31,19 @@ const RenderPayments = ({ content, image }: RenderPaymentsProps) => {
     <Box
       display="flex"
       alignItems="center"
-      gap={2}
-      p={1}
-      border="1px solid #cccc"
+      gap={1}
+      border="1px solid"
+      borderColor="green"
       borderRadius={2}
-      width={350}
+      p={1}
     >
-      <Box width={40} height={40}>
-        <img
-          src={image}
-          alt="..."
-          width="100%"
-          height="100%"
-          style={{ objectFit: "cover" }}
-        />
-      </Box>
+      <img
+        src={image}
+        alt="..."
+        width={40}
+        height={40}
+        style={{ objectFit: "cover" }}
+      />
       <Typography>{content}</Typography>
     </Box>
   )
@@ -49,7 +51,7 @@ const RenderPayments = ({ content, image }: RenderPaymentsProps) => {
 
 const paymentOptions = [
   {
-    value: "payCash",
+    value: "cash",
     label: (
       <RenderPayments
         content="Thanh toán khi nhận hàng"
@@ -58,17 +60,22 @@ const paymentOptions = [
     ),
   },
   {
-    value: "vnPayment",
-    label: <RenderPayments content="Ví VNPAY" image={"../assets/Vnpay.png"} />,
+    value: "vnpay",
+    label: (
+      <RenderPayments
+        content="Thanh toán qua VNPAY"
+        image={"../assets/Vnpay.png"}
+      />
+    ),
   },
 ]
 
 interface Props {
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>
-  user: any
+  setOrderCode: Dispatch<SetStateAction<string>>
+  user: WrappedComponentProps["user"]
 }
 
-const PaymentForm = ({ setOpen, user }: Props) => {
+const PaymentForm = ({ setOrderCode, user }: Props) => {
   const navigate = useNavigate()
   const { cartTotal, emptyCart, totalItems } = useCart()
 
@@ -79,6 +86,7 @@ const PaymentForm = ({ setOpen, user }: Props) => {
       .matches(/^[0-9]{10}$/gm, "Số điện thoại không hợp lệ")
       .required("Vui lòng điền vào trường này"),
     address: yup.string().required("Vui lòng điền vào trường này"),
+    payment: yup.string().required("Vui lòng chọn phương thức thanh toán"),
   })
 
   const {
@@ -91,16 +99,13 @@ const PaymentForm = ({ setOpen, user }: Props) => {
 
   const handleCancelPayment = () => {
     navigate("/")
-    emptyCart()
-
     window.scrollTo(0, 0)
   }
 
   const handlePayment = (data: FieldValues) => {
-    // console.log(data)
     const totalPrice = cartTotal
     const newTotalPrice = totalPrice * 2
-    console.log(!newTotalPrice)
+
     if (!newTotalPrice) {
       localStorage.setItem("TotalPrice", JSON.stringify(totalPrice))
     } else {
@@ -110,43 +115,54 @@ const PaymentForm = ({ setOpen, user }: Props) => {
     if (totalItems) {
       if (totalItems > 1) {
         const newTotalItems = totalItems + totalItems
-        console.log(newTotalItems)
         localStorage.setItem("TotalCart", JSON.stringify(newTotalItems))
       }
     } else {
       const newTotalItems = totalItems
-      console.log(newTotalItems)
       localStorage.setItem("TotalCart", JSON.stringify(newTotalItems))
     }
 
     if (user) {
-      alert("Thanh toán thành công")
+      // Tạo mã ngẫu nhiên
+      const randomNumber = Math.floor(Math.random() * 10000)
+      const code = `#${randomNumber}`
+      setOrderCode(code)
+
+      toast.success("Thanh toán thành công", toastConfig)
       emptyCart()
 
-      // const payment = new OnePayInternational({
-      //   paymentGateway: import.meta.env.VITE_VNPAY_URL,
-      //   merchant: "TESTONEPAY",
-      //   accessCode: import.meta.env.VITE_VNPAY_CODE,
-      //   secureSecret: import.meta.env.VITE_VNPAY_SECRET,
-      // })
-
-      // const payload: any = {
-      //   amount: cartTotal,
-      //   customerId: data.phone,
-      //   currency: "VND",
-      // }
-      // const paymentUrl = payment.buildCheckoutUrl(payload)
-
-      // // Redirect user to the VNPay payment page
-      // window.location.href = (await paymentUrl).href
-      navigate("/")
-    } else {
-      setOpen(true)
+      if (data.payment === "vnpay") {
+        // const vnpayUrl = import.meta.env.VITE_VNPAY_URL
+        // const merchant = import.meta.env.VITE_VNPAY_MERCHANT // Mã merchant tại VNPay
+        // const code = import.meta.env.VITE_VNPAY_CODE // Mã website tại VNPay
+        // const returnUrl = "http://127.0.0.1:5173/" // URL để VNPay redirect sau khi thanh toán thành công
+        // const amount = cartTotal // Số tiền thanh toán
+        // const orderInfo = "Thanh toán qua VNPay"
+        // const version = "2.1.0"
+        // const payload: any = {
+        //   vnp_Amount: amount,
+        //   vnp_OrderInfo: orderInfo,
+        //   vnp_ReturnUrl: returnUrl,
+        //   vnp_TmnCode: code,
+        //   vnp_Version: version,
+        //   vnp_Merchant: merchant,
+        // }
+        // const vnpUrl = new URL(vnpayUrl)
+        // Object.keys(payload).forEach((key) =>
+        //   vnpUrl.searchParams.append(key, payload[key])
+        // )
+        // window.location.href = vnpUrl.toString()
+      }
     }
   }
 
   return (
-    <Container component={Paper} maxWidth="xs" elevation={5} sx={{ p: 5 }}>
+    <Container
+      component={Paper}
+      maxWidth="sm"
+      elevation={5}
+      sx={{ p: 5, boxShadow: "3" }}
+    >
       <Typography
         variant="h5"
         textAlign="center"
@@ -198,16 +214,21 @@ const PaymentForm = ({ setOpen, user }: Props) => {
         <Grid item xs={12}>
           <FormInputRadio
             name="payment"
-            title="Hình thức thanh toán"
-            options={paymentOptions}
+            title="Phương thức thanh toán"
             control={control}
+            error={errors}
+            options={paymentOptions}
           />
         </Grid>
       </Grid>
 
       <Box display="flex" alignItems="center" gap={1} mt={5} mb={1}>
-        <Typography fontWeight="bold">Tổng cộng:</Typography>
-        <NumberFormat value={cartTotal} locale="it-IT" />
+        <Typography fontWeight="bold">Tổng tiền:</Typography>
+        <NumberFormat
+          value={cartTotal}
+          locale="it-IT"
+          TextProps={{ fontWeight: "bold" }}
+        />
       </Box>
       <Divider />
 
@@ -219,17 +240,17 @@ const PaymentForm = ({ setOpen, user }: Props) => {
           fullWidth
           onClick={handleCancelPayment}
         >
-          Hủy thanh toán
+          Hủy đặt hàng
         </Button>
         <Button
           type="submit"
           variant="contained"
           color="secondary"
+          onClick={handleSubmit(handlePayment)}
           disableElevation
           fullWidth
-          onClick={handleSubmit(handlePayment)}
         >
-          Thanh toán
+          Đặt hàng
         </Button>
       </Box>
     </Container>
