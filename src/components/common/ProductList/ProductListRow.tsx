@@ -29,7 +29,7 @@ const useStyles = makeStyles(() => ({
 
 interface Props {
   data: ICustomAPIResponse
-  user: WrappedComponentProps["user"]
+  user?: WrappedComponentProps["user"]
 }
 
 const ProductListRow = ({ data, user }: Props) => {
@@ -54,6 +54,7 @@ const ProductListRow = ({ data, user }: Props) => {
   const handleAddToCart = () => {
     if (user) {
       const newData = { ...data, id: data.productId }
+
       addItem(newData)
       toast.success(`Đã thêm ${data.title} vào giỏ hàng`, toastConfig)
     } else {
@@ -66,8 +67,11 @@ const ProductListRow = ({ data, user }: Props) => {
       <Box border={1} borderColor={borderColor} px={2} py={3}>
         <Box
           component="a"
-          href={`/detail/${data.productId}`}
-          style={{ textDecoration: "none", color: "inherit" }}
+          href={`/product/details/${data.productId}`}
+          sx={{
+            textDecoration: "none",
+            color: "inherit",
+          }}
         >
           <Box height={{ xs: 150, md: 200 }}>
             <img
@@ -99,7 +103,7 @@ const ProductListRow = ({ data, user }: Props) => {
               TextProps={{ fontSize: 18 }}
             />
 
-            <Box display="flex" alignItems="flex-end" mt={0.5}>
+            <Box display="flex" alignItems="flex-end">
               {Array(data.star)
                 .fill(0)
                 .map((_, index) => (
@@ -151,9 +155,9 @@ const ProductListRow = ({ data, user }: Props) => {
         </Box>
         <Button
           variant="outlined"
-          sx={{ mt: 2 }}
           onClick={handleAddToCart}
           disabled={inCart(data.productId) ? true : false}
+          sx={{ mt: 2 }}
         >
           {inCart(data.productId) ? "Đã thêm vào giỏ" : "Thêm vào giỏ hàng"}
         </Button>

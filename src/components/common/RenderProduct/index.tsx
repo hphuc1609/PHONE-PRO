@@ -8,7 +8,6 @@ import { Swiper, SwiperSlide } from "swiper/react"
 
 const useStyles = makeStyles(() => ({
   title: {
-    fontWeight: 600,
     textTransform: "capitalize",
     padding: 8,
     borderRadius: 100,
@@ -35,7 +34,7 @@ const RenderProduct = ({ data, title, row }: ProductBrandProps) => {
           {title}
         </Typography>
       </Grid>
-      <Grid item xs={12} px={1} pb={3}>
+      <Grid item xs={12} px={2} pb={3}>
         <Swiper {...swiperConfig} grid={{ rows: row, fill: "row" }}>
           {data.map((item) => (
             <SwiperSlide key={item.productId}>

@@ -19,16 +19,16 @@ import "swiper/css/grid"
 
 SwiperCore.use([GridSwiper])
 
-const Product = () => {
+const ProductDetail = () => {
   const location = useLocation()
 
   const [showLoading, setShowLoading] = useState(false)
   const [productList, setProductList] = useState([])
   const [newProduct, setNewProduct] = useState([])
 
-  const splitproductId = location.pathname.split("/")[2]
+  const paramsId = location.pathname.split("/")[3]
   const filteredProduct = productList?.filter(
-    (product) => product.productId === splitproductId
+    (product) => product.productId === paramsId
   )
 
   useEffect(() => {
@@ -91,4 +91,4 @@ const Product = () => {
   )
 }
 
-export default Product
+export default ProductDetail

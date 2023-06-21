@@ -21,12 +21,12 @@ import ProductInfo from "./ProductInfo"
 
 interface Props {
   data: ICustomAPIResponse[]
-  user: WrappedComponentProps["user"]
+  user?: WrappedComponentProps["user"]
 }
 
 const Detail = ({ data, user }: Props) => {
-  const { addItem, inCart } = useCart()
   const navigate = useNavigate()
+  const { addItem, inCart } = useCart()
   const [open, setOpen] = useState(false)
 
   const handleClose = () => {
@@ -55,7 +55,7 @@ const Detail = ({ data, user }: Props) => {
         return `Khách hàng sẽ được thử máy miễn phí tại cửa hàng. Có thể đổi trả lỗi trong vòng 2 tháng.`
 
       default:
-        return `Cơ hội trúng khi trả góp Home Credit.`
+        return `Cơ hội trúng giải thưởng khi trả góp Home Credit.`
     }
   }
 
