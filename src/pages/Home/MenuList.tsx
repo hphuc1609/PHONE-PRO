@@ -22,7 +22,7 @@ const MenuList = ({
   const ShowProductFromBrand = (value: string) => {
     if (value) {
       const filteredProduct = products?.filter(
-        (product) => product.company === value
+        (product) => product.company?.toLowerCase() === value.toLowerCase()
       )
 
       setProductBrand(filteredProduct)
@@ -33,7 +33,7 @@ const MenuList = ({
     }
 
     window.scroll({
-      top: 1000,
+      top: 500,
       behavior: "smooth",
     })
   }

@@ -15,7 +15,21 @@ const Layout = ({ children }: Props) => {
   const location = useLocation()
 
   const [showScrollTop, setShowScrollTop] = useState<boolean>(false)
-  const pathName = location.pathname.toString().split("/")[1]
+  const [pathName, setPathName] = useState("")
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      setPathName(location.pathname)
+    }
+
+    if (location.pathname === "/profile") {
+      setPathName(location.pathname)
+    }
+
+    return () => {
+      setPathName("")
+    }
+  }, [location])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,7 +54,8 @@ const Layout = ({ children }: Props) => {
       <Navbar />
       <Box
         component="main"
-        p={{ xs: "16px 10px", md: 5 }}
+        py={{ xs: 2, md: 5 }}
+        px={{ xs: 1, md: 8 }}
         width={{ xl: "1500px" }}
         margin="auto"
         bgcolor={mainBackground}
@@ -48,7 +63,7 @@ const Layout = ({ children }: Props) => {
         <Box sx={{ flexGrow: 1 }}>{children}</Box>
       </Box>
 
-      {!pathName && <SupportServices />}
+      {pathName && <SupportServices />}
       <Footer />
 
       {showScrollTop && <ScrollToTop />}

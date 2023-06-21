@@ -4,29 +4,38 @@ import { useNavigate } from "react-router-dom"
 
 interface Props {
   item: INavItem
-  isActive?: boolean
+  isActive: boolean
+  openMenu: boolean
+  setOpenMenu: (value: boolean) => void
 }
 
-const NavListItem = ({ item, isActive }: Props) => {
+const NavListItem = ({ item, isActive, openMenu, setOpenMenu }: Props) => {
   const navigate = useNavigate()
 
-  const handleClickItem = (link: string) => {
-    navigate(link)
+  const handleClickItem = (data: INavItem) => {
+    if (data.name === "Sản phẩm") {
+      setOpenMenu(!openMenu)
+    } else {
+      navigate(data.link)
+      setOpenMenu(false)
+    }
   }
 
   return (
-    <ListItemButton
-      sx={{
-        flex: "unset",
-        minWidth: 150,
-        textAlign: "center",
-        bgcolor: isActive ? "#e8e8e8" : "transparent",
-      }}
-      onClick={() => handleClickItem(item.link)}
-    >
-      <ListItemIcon sx={{ minWidth: "unset" }}>{item.icon}</ListItemIcon>
-      <ListItemText primary={item.name} />
-    </ListItemButton>
+    <>
+      <ListItemButton
+        sx={{
+          flex: "unset",
+          minWidth: 150,
+          textAlign: "center",
+          bgcolor: isActive ? "#e8e8e8" : "transparent",
+        }}
+        onClick={() => handleClickItem(item)}
+      >
+        <ListItemIcon sx={{ minWidth: "unset" }}>{item.icon}</ListItemIcon>
+        <ListItemText primary={item.name} />
+      </ListItemButton>
+    </>
   )
 }
 

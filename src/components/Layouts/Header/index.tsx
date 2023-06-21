@@ -12,9 +12,11 @@ const Header = ({ user }: WrappedComponentProps) => {
 
   const onLogin = () => {
     navigate("/login")
+    window.scrollTo(0, 0)
   }
   const onRegister = () => {
     navigate("/register")
+    window.scrollTo(0, 0)
   }
 
   return (
@@ -47,7 +49,7 @@ const Header = ({ user }: WrappedComponentProps) => {
               Phone
             </Typography>
             <img
-              src="../assets/Logo-pro-white.png"
+              src="../../assets/Logo-pro-white.png"
               alt="Logo"
               height={40}
               width={80}

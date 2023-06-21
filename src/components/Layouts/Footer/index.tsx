@@ -8,7 +8,6 @@ const Footer = () => {
       bgcolor="#f0f0f0"
       display="flex"
       justifyContent="center"
-      position="relative"
     >
       <Typography color="inherit" display="flex">
         Copyright © 2023
@@ -17,7 +16,7 @@ const Footer = () => {
           href="/"
           color="primary"
           fontWeight={600}
-          sx={{ textDecoration: "none" }}
+          sx={{ textDecoration: "none", ml: 0.5 }}
         >
           PhonePro
         </Typography>
