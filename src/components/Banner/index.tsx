@@ -23,7 +23,8 @@ const slideShow = [
 const SlideSwiper = () => {
   return (
     <Swiper
-      slidesPerView="auto"
+      slidesPerView={2}
+      spaceBetween={200}
       pagination={{ clickable: true }}
       autoplay={{ disableOnInteraction: false }}
       loop={true}
@@ -31,8 +32,14 @@ const SlideSwiper = () => {
     >
       {slideShow.map((item, index) => (
         <SwiperSlide key={index}>
-          <Box height={{ xs: 220, md: 400 }}>
-            <img src={item} alt="..." width="100%" height="100%" />
+          <Box height={{ xs: 200, md: 260 }} margin="auto">
+            <img
+              src={item}
+              alt="..."
+              width="fit-content"
+              height="100%"
+              style={{ margin: "0 auto", display: "flex" }}
+            />
           </Box>
         </SwiperSlide>
       ))}
