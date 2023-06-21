@@ -21,9 +21,17 @@ interface Props {
   control: Control<FieldValues>
   error: FieldErrors<FieldValues>
   options: Option[]
+  RadioProps?: object
 }
 
-const FormInputRadio = ({ name, title, control, error, options }: Props) => (
+const FormInputRadio = ({
+  name,
+  title,
+  control,
+  error,
+  options,
+  RadioProps,
+}: Props) => (
   <FormControl sx={{ width: "100%" }}>
     <FormLabel color="secondary" sx={{ mb: 2 }}>
       {title}
@@ -32,7 +40,7 @@ const FormInputRadio = ({ name, title, control, error, options }: Props) => (
       name={name}
       control={control}
       render={({ field }) => (
-        <RadioGroup {...field} sx={{ gap: 2 }}>
+        <RadioGroup {...field} {...RadioProps} sx={{ gap: 2 }}>
           {options.map((option) => (
             <FormControlLabel
               key={option.value}
