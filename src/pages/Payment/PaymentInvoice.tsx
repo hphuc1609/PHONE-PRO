@@ -1,10 +1,11 @@
-import { ExpandLess, ExpandMore, Mail, MailOutline } from "@mui/icons-material"
+import { ExpandLess, ExpandMore, MailOutline } from "@mui/icons-material"
 import {
   Box,
   Button,
   Collapse,
   Container,
   Divider,
+  Grid,
   List,
   ListItem,
   ListItemButton,
@@ -14,8 +15,10 @@ import {
   Typography,
 } from "@mui/material"
 import { makeStyles } from "@mui/styles"
-import { Dispatch, SetStateAction, useState } from "react"
+import NumberFormat from "components/common/NumberFormat"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { WrappedComponentProps } from "react-with-firebase-auth"
 
 const useStyles = makeStyles((theme: Theme) => ({
   text: {
@@ -41,6 +44,7 @@ interface InvoiceProps {
   handlePrint: () => void
   showButton: boolean
   setIsShow: Dispatch<SetStateAction<boolean>>
+  user: WrappedComponentProps["user"]
 }
 
 const Invoice = ({
@@ -48,10 +52,33 @@ const Invoice = ({
   handlePrint,
   showButton,
   setIsShow,
+  user,
 }: InvoiceProps) => {
   const classes = useStyles()
   const navigate = useNavigate()
+
   const [open, setOpen] = useState(true)
+  const [fullName, setFullName] = useState<string>()
+  const [phone, setPhone] = useState<string>()
+  const [address, setAddress] = useState<string>()
+  const [detail, setDetail] = useState<any>()
+  const [totalPrice, setTotalPrice] = useState<number>(0)
+
+  useEffect(() => {
+    setFullName(localStorage.getItem("FullName"))
+    setPhone(localStorage.getItem("Phone"))
+    setAddress(localStorage.getItem("Address"))
+    setDetail(JSON.parse(localStorage.getItem("Items")))
+    setTotalPrice(JSON.parse(localStorage.getItem("Total")))
+
+    return () => {
+      setFullName("")
+      setPhone("")
+      setAddress("")
+      setDetail([])
+      setTotalPrice(0)
+    }
+  }, [])
 
   const handleClickPrint = () => {
     setIsShow(false)
@@ -59,7 +86,6 @@ const Invoice = ({
     setTimeout(() => {
       handlePrint()
     }, 200)
-
     setTimeout(() => {
       setIsShow(true)
     }, 1300)
@@ -73,6 +99,7 @@ const Invoice = ({
           fontWeight={500}
           variant="h6"
           color="GrayText"
+          gutterBottom
         >
           Cảm ơn bạn vì đã lựa chọn chúng tôi !
         </Typography>
@@ -102,7 +129,13 @@ const Invoice = ({
         <Divider />
         <List>
           <ListItem className={classes.text}>Mã đơn hàng {orderCode}</ListItem>
-          <ListItem className={classes.text}>Thông tin người nhận</ListItem>
+          <ListItem className={classes.text}>
+            Người nhận: {fullName || user?.displayName}
+          </ListItem>
+          <ListItem className={classes.text}>Số điện thoại: {phone}</ListItem>
+          <ListItem className={classes.text}>Địa chỉ: {address}</ListItem>
+
+          {/* Đơn hàng */}
           <ListItemButton sx={{ py: 0 }} onClick={() => setOpen(!open)}>
             <ListItemText sx={{ color: "GrayText" }} primary="Đơn hàng" />
             {open ? <ExpandLess /> : <ExpandMore />}
@@ -117,31 +150,49 @@ const Invoice = ({
                 bgcolor: "#f5f5f5",
               }}
             >
-              <ListItem divider>
-                <ListItemText
-                  sx={{ textAlign: "center" }}
-                  primary="Dien thoai thong minh "
-                />
-                <ListItemText primary="hello" />
-                <ListItemText sx={{ textAlign: "end" }} primary="hello" />
-              </ListItem>
+              <Grid container>
+                {detail?.map((item: any) => (
+                  <Grid item xs={12}>
+                    <ListItem key={item.id} divider>
+                      <ListItemText
+                        sx={{ textAlign: "center" }}
+                        primary={item.title}
+                      />
+                      <ListItemText
+                        primary={`x${item.quantity}`}
+                        sx={{ textAlign: "end" }}
+                      />
+                      <ListItemText
+                        sx={{ textAlign: "end" }}
+                        primary={<NumberFormat value={item.price} />}
+                      />
+                    </ListItem>
+                  </Grid>
+                ))}
+              </Grid>
             </List>
           </Collapse>
 
           <ListItem className={classes.text}>
             <ListItemText primary="Tổng tiền" />
-            <ListItemText sx={{ textAlign: "end" }} primary="$13" />
+            <ListItemText
+              sx={{ textAlign: "end" }}
+              primary={<NumberFormat value={totalPrice} />}
+            />
           </ListItem>
           <ListItem className={classes.text}>
             <ListItemText primary="Thanh toán" />
-            <ListItemText sx={{ textAlign: "end" }} primary="$13" />
+            <ListItemText
+              sx={{ textAlign: "end" }}
+              primary={<NumberFormat value={totalPrice} />}
+            />
           </ListItem>
         </List>
 
         <Typography>Phương thức thanh toán</Typography>
         <Divider />
         <Box display="flex" alignItems="center">
-          <img src="../assets/PayCash.png" alt="" width={40} />
+          <img src="../assets/PayCash.png" alt="" width={35} />
           <Typography fontWeight={300} color="GrayText">
             Thanh toán khi nhận hàng
           </Typography>
@@ -149,7 +200,7 @@ const Invoice = ({
         <Box display="flex" alignItems="center" columnGap={1}>
           <MailOutline color="action" />
           <Typography variant="body2" color="GrayText" fontWeight={300}>
-            Chúng tôi sẽ gửi tin nhắn xác nhận qua email: supalnglo@gmail.com
+            Chúng tôi sẽ gửi tin nhắn xác nhận qua email: {user?.email}
           </Typography>
         </Box>
 
