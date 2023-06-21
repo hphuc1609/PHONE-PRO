@@ -5,7 +5,10 @@ import { useNavigate } from "react-router-dom"
 const Page404 = () => {
   const navigate = useNavigate()
 
-  const handleBackToHome = () => navigate("/")
+  const handleBackToHome = () => {
+    navigate("/")
+    window.scrollTo(0, 0)
+  }
 
   return (
     <>
