@@ -1,11 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup"
-import {
-  EditOutlined,
-  HeadsetMic,
-  LocalShipping,
-  Loop,
-  VerifiedUser,
-} from "@mui/icons-material"
+import { EditOutlined } from "@mui/icons-material"
 import {
   Box,
   Button,
@@ -18,14 +12,14 @@ import { makeStyles } from "@mui/styles"
 import { createComponentWithAuth } from "Firebase/firebaseConfig"
 import AlertDialog from "components/common/Dialog"
 import NumberFormat from "components/common/NumberFormat"
+import { toastConfig } from "configs/toast"
 import firebase from "firebase"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { FieldValues, useForm } from "react-hook-form"
+import { toast } from "react-toastify"
 import { WrappedComponentProps } from "react-with-firebase-auth"
 import * as yup from "yup"
 import ModalProfileForm from "./ModalWithForm"
-import { toast } from "react-toastify"
-import { toastConfig } from "configs/toast"
 
 const useStyles = makeStyles(() => ({
   row: {
@@ -36,30 +30,24 @@ const useStyles = makeStyles(() => ({
   title: {
     fontWeight: 500,
   },
-
-  ensured: {
-    height: 100,
-    display: "flex",
-    justifyContent: "space-around",
-    borderTop: "1px solid gray",
-    background: "#F1F6F9",
-    margin: "64px -40px -40px",
-    padding: 40,
-  },
-  text: {
-    display: "flex",
-    alignItems: "center",
-    gap: 20,
-  },
 }))
 
 const Profile = ({ user }: WrappedComponentProps) => {
   const classes = useStyles()
-  const [open, setOpen] = useState(false)
 
-  const getTotalItems = localStorage.getItem("TotalCart")
-  const getTotalPrice = localStorage.getItem("TotalPrice")
-  const totalPriceTemp = JSON.parse(getTotalPrice)
+  const [open, setOpen] = useState(false)
+  const [totalPrice, setTotalPrice] = useState<number>(0)
+  const [totalCart, setTotalCart] = useState<number>(0)
+
+  useEffect(() => {
+    setTotalPrice(JSON.parse(localStorage.getItem("Total")))
+    setTotalCart(JSON.parse(localStorage.getItem("MyCart")))
+
+    return () => {
+      setTotalPrice(0)
+      setTotalCart(0)
+    }
+  }, [])
 
   const schema = yup.object().shape({
     newPassword: yup.string().required("Vui lòng điền vào trường này"),
@@ -137,39 +125,20 @@ const Profile = ({ user }: WrappedComponentProps) => {
 
           <Box className={classes.row} mt={2}>
             <Typography className={classes.title}>Tổng tiền đã mua:</Typography>
-            <NumberFormat TextProps={{ ml: 1 }} value={totalPriceTemp} />
+            <NumberFormat TextProps={{ ml: 1 }} value={totalPrice} />
           </Box>
           <Box className={classes.row}>
             <Typography className={classes.title}>
               Số lượng sản phẩm đã mua:
             </Typography>
-            <Typography ml={1}>{getTotalItems || 0}</Typography>
+            <Typography ml={1}>{totalCart || 0}</Typography>
           </Box>
         </Paper>
       </Container>
 
-      <Box className={classes.ensured}>
-        <Box className={classes.text}>
-          <LocalShipping fontSize="large" color="secondary" />
-          Giao hàng hỏa tốc trong 1 giờ
-        </Box>
-        <Box className={classes.text}>
-          <VerifiedUser fontSize="large" color="secondary" />
-          Hàng chính hãng 100%
-        </Box>
-        <Box className={classes.text}>
-          <HeadsetMic fontSize="large" color="secondary" />
-          Hotline hỗ trợ 1234.5678
-        </Box>
-        <Box className={classes.text}>
-          <Loop fontSize="large" color="secondary" />
-          Thủ tục đổi trả dễ dàng
-        </Box>
-      </Box>
-
       <AlertDialog
         open={open}
-        title="Cập nhật mật khẩu"
+        title="Thay đổi mật khẩu"
         content={<ModalProfileForm control={control} error={errors} />}
         handleClose={handleClose}
         leftButton="Đóng"
