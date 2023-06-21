@@ -14,7 +14,7 @@ import { makeStyles } from "@mui/styles"
 import FormInputText from "components/common/FormInput/FormInputText"
 import { toastConfig } from "configs/toast"
 import { createComponentWithAuth } from "Firebase/firebaseConfig"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { FieldValues, useForm } from "react-hook-form"
 import { Link, useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
@@ -54,19 +54,9 @@ const Login = ({ signInWithEmailAndPassword }: WrappedComponentProps) => {
     handleSubmit,
     control,
     formState: { errors },
-    watch,
   } = useForm({
     resolver: yupResolver(schema),
   })
-
-  // const watchFieldPassword = watch("password")
-  // useEffect(() => {
-  //   if (watchFieldPassword !== "") {
-  //     setIsShrink(true)
-  //   } else {
-  //     setIsShrink(false)
-  //   }
-  // }, [watchFieldPassword])
 
   const toogleShowPassword = () => {
     if (showPassword) {
@@ -97,8 +87,7 @@ const Login = ({ signInWithEmailAndPassword }: WrappedComponentProps) => {
   }
 
   const onSubmit = (data: FieldValues) => {
-    const email = data.email
-    const password = data.password
+    const { email, password } = data
 
     signIn(email, password)
   }
@@ -122,12 +111,11 @@ const Login = ({ signInWithEmailAndPassword }: WrappedComponentProps) => {
             <Grid item xs={12}>
               <FormInputText
                 name="email"
-                label="Tài khoản"
+                label="Email"
                 control={control}
                 error={errors}
                 TextFieldProps={{
                   autoFocus: true,
-                  placeholder: "Nhập vào email",
                 }}
               />
             </Grid>
@@ -139,7 +127,6 @@ const Login = ({ signInWithEmailAndPassword }: WrappedComponentProps) => {
                 error={errors}
                 TextFieldProps={{
                   type: showPassword ? "text" : "password",
-                  // InputLabelProps: { shrink: isShrink },
                   InputProps: {
                     endAdornment: (
                       <InputAdornment position="end">
@@ -167,11 +154,25 @@ const Login = ({ signInWithEmailAndPassword }: WrappedComponentProps) => {
               >
                 Đăng nhập
               </Button>
+
+              <Link
+                to="/forgot-password"
+                style={{
+                  color: "blue",
+                  textDecoration: "none",
+                }}
+              >
+                Quên mật khẩu?
+              </Link>
               <Typography mt={2}>
-                Chưa có tài khoản?{" "}
+                Bạn chưa có tài khoản?
                 <Link
                   to="/register"
-                  style={{ color: "blue", textDecoration: "none" }}
+                  style={{
+                    color: "blue",
+                    textDecoration: "none",
+                    marginLeft: 5,
+                  }}
                 >
                   Đăng ký ngay
                 </Link>
