@@ -16,7 +16,7 @@ import EmptyCart from "./EmptyCart"
 
 const useStyles = makeStyles(() => ({
   content: {
-    maxHeight: 350,
+    height: 400,
     overflowY: "scroll",
     padding: 10,
     "&::-webkit-scrollbar": {
@@ -60,6 +60,7 @@ const DrawerContent = ({ handleClose }: Props) => {
   const handleOrderClick = () => {
     navigate("/payment")
     handleClose()
+    window.scrollTo(0, 0)
   }
 
   return (
