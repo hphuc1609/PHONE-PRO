@@ -3,6 +3,7 @@ import GuaranteePage from "pages/Guarantee"
 import HomePage from "pages/Home"
 import IntroPage from "pages/Introduce"
 import Login from "pages/Login"
+import ForgotPassword from "pages/Login/ForgotPassword"
 import NewsPage from "pages/News"
 import Payment from "pages/Payment"
 import Profile from "pages/Profile"
@@ -17,6 +18,10 @@ export const guardedRoutes: Array<PathRouteProps> = [
   {
     path: "/register",
     element: <Register />,
+  },
+  {
+    path: "/forgot-password",
+    element: <ForgotPassword />,
   },
 ]
 
