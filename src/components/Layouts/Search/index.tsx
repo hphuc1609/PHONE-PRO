@@ -62,7 +62,9 @@ const SearchSuggestion = () => {
   }, [])
 
   const handleOnChange = (value: ICustomAPIResponse) => {
-    navigate(`/detail/${value.productId}`)
+    if (value.productId) {
+      navigate(`/product/details/${value.productId}`)
+    }
   }
 
   return (
