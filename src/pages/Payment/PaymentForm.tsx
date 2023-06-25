@@ -51,15 +51,15 @@ const paymentOptions = [
       />
     ),
   },
-  {
-    value: "vnpay",
-    label: (
-      <RenderPayments
-        content="Thanh toán qua VNPAY"
-        image={"../assets/Vnpay.png"}
-      />
-    ),
-  },
+  // {
+  //   value: "vnpay",
+  //   label: (
+  //     <RenderPayments
+  //       content="Thanh toán qua VNPAY"
+  //       image={"../assets/Vnpay.png"}
+  //     />
+  //   ),
+  // },
 ]
 
 interface Props {
