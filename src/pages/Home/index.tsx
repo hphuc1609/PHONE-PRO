@@ -16,8 +16,27 @@ import HomeFilter from "./HomeFilter"
 import HomeProduct from "./HomeProduct"
 import MenuList from "./MenuList"
 import "./style.css"
+import { primaryDark } from "styles/config"
+
+const useStyles = makeStyles(() => ({
+  title: {
+    textTransform: "capitalize",
+    padding: 8,
+    borderRadius: 100,
+    textAlign: "center",
+    color: "white",
+    backgroundImage: `linear-gradient(to right, #3977ce, ${primaryDark})`,
+    transform: "translateY(-1.05em)",
+  },
+  root: {
+    border: "2px solid #3977ce",
+    marginTop: 64,
+  },
+}))
 
 const HomePage = () => {
+  const classes = useStyles()
+
   const [productList, setProductList] = useState<ICustomAPIResponse[]>([])
   const [productBrand, setProductBrand] = useState([])
   const [showLoading, setShowLoading] = useState(false)
@@ -171,6 +190,7 @@ const HomePage = () => {
               data={productBrand}
               title={`Điện thoại ${title}`}
               row={productBrand?.length}
+              className={classes}
             />
           )}
 
@@ -179,6 +199,7 @@ const HomePage = () => {
               data={filteredProductsPrice}
               title={`Sản phẩm ${filterPrice}`}
               row={filteredProductsPrice?.length}
+              className={classes}
             />
           )}
 
@@ -187,6 +208,7 @@ const HomePage = () => {
               data={filteredProductsPromotion}
               title={`Sản phẩm ${filterPromo}`}
               row={filteredProductsPromotion?.length}
+              className={classes}
             />
           )}
 
@@ -195,6 +217,7 @@ const HomePage = () => {
               data={filteredProductsStar}
               title={`Sản phẩm ${filterStar}`}
               row={filteredProductsStar?.length}
+              className={classes}
             />
           )}
         </>
