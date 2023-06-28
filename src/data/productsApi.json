@@ -1275,7 +1275,7 @@
       "productId": "App10",
       "title": "iPhone 14 Pro 128GB",
       "company": "Apple",
-      "photoImage": "https://cdn.tgdd.vn/Products/Images/42/251191/iphone-14-pro-xanh-duong-thumb-600x600.jpg",
+      "photoImage": "https://cdn2.cellphones.com.vn/x358,webp,q100/media/catalog/product/t/_/t_m_12.png",
       "price": 25290000,
       "star": 4,
       "rateCount": 20,
@@ -1347,7 +1347,7 @@
       "productId": "Sam4",
       "title": "Samsung Galaxy Z Fold3 5G 256GB",
       "company": "Samsung",
-      "photoImage": "https://cdn.tgdd.vn/Products/Images/42/247773/samsung-galaxy-z-fold3-5g-den-600x600-600x600.jpg",
+      "photoImage": "https://cdn.hoanghamobile.com/i/preview/Uploads/2021/08/11/bac2.png",
       "price": 37990000,
       "star": 4,
       "rateCount": 0,
@@ -1364,7 +1364,7 @@
         "ram": "12 GB",
         "rom": "256 GB",
         "microUSB": "Type-C",
-        "battery": "4400 mAh"
+        "battery": "4400 mAh, 25 W"
       }
     },
     {
@@ -1374,7 +1374,7 @@
       "photoImage": "https://cdn.hoanghamobile.com/i/preview/Uploads/2021/08/11/den-f.png",
       "price": 41990000,
       "star": 5,
-      "rateCount": 3,
+      "rateCount": 110,
       "promotion": {
         "name": "giamgia",
         "value": "1.000.000"
@@ -1388,7 +1388,7 @@
         "ram": "12 GB",
         "rom": "512 GB",
         "microUSB": "Type-C",
-        "battery": "4400 mAh"
+        "battery": "4400 mAh, 25 W"
       }
     },
 
@@ -1396,9 +1396,9 @@
       "productId": "Sam6",
       "title": "Samsung Galaxy A52 5G",
       "company": "Samsung",
-      "photoImage": "https://cdn.tgdd.vn/Products/Images/42/247773/samsung-galaxy-z-fold3-5g-den-600x600-600x600.jpg",
+      "photoImage": "https://drakemall-files-new.s3.eu-central-1.amazonaws.com/Samsung%20-ckph8lvk0006q01t7ito04fmp.png",
       "price": 10990000,
-      "star": 4,
+      "star": 0,
       "rateCount": 0,
       "promotion": {
         "name": "tragop",
@@ -1418,57 +1418,33 @@
     },
     {
       "productId": "Sam7",
-      "title": "Samsung Galaxy A52 5G",
+      "title": "Samsung Galaxy Note 10",
       "company": "Samsung",
-      "photoImage": "https://cdn.tgdd.vn/Products/Images/42/247773/samsung-galaxy-z-fold3-5g-den-600x600-600x600.jpg",
+      "photoImage": "https://truesmart.com.vn/wp-content/uploads/samsung-galaxy-note-10-256gb-chinh-hang-cu-p7663.png",
       "price": 11990000,
       "star": 5,
-      "rateCount": 3,
+      "rateCount": 10,
       "promotion": {
         "name": "giamgia",
-        "value": "1.000.000"
+        "value": "700.000"
       },
       "specifications": {
-        "screen": "Super AMOLED, 6.5', Full HD+",
-        "os": "Android 11",
-        "camera": "4 camera 64 MP",
-        "cameraFront": "32 MP",
-        "cpu": "Snapdragon 778G 5G",
+        "screen": "Dynamic AMOLED 2X, 6.3', Full HD+",
+        "os": "Android 9.0 (Pie)",
+        "camera": "3 camera 12 MP",
+        "cameraFront": "10 MP",
+        "cpu": "Exynos 9825 8 nhân",
         "ram": "8 GB",
         "rom": "256 GB",
         "microUSB": "Type-C",
-        "battery": "4500 mAh, có sạc nhanh"
+        "battery": "3500 mAh"
       }
     },
     {
       "productId": "Sam8",
-      "title": "Samsung Galaxy A52 5G",
+      "title": "Samsung Galaxy Note 10 Plus",
       "company": "Samsung",
-      "photoImage": "https://cdn.tgdd.vn/Products/Images/42/247773/samsung-galaxy-z-fold3-5g-den-600x600-600x600.jpg",
-      "price": 12990000,
-      "star": 4,
-      "rateCount": 0,
-      "promotion": {
-        "name": "tragop",
-        "value": "0"
-      },
-      "specifications": {
-        "screen": "Super AMOLED, 6.5', Full HD+",
-        "os": "Android 11",
-        "camera": "4 camera 64 MP",
-        "cameraFront": "32 MP",
-        "cpu": "Snapdragon 778G 5G",
-        "ram": "8 GB",
-        "rom": "512 GB",
-        "microUSB": "Type-C",
-        "battery": "4500 mAh, có sạc nhanh"
-      }
-    },
-    {
-      "productId": "Sam9",
-      "title": "Samsung Galaxy A52 5G",
-      "company": "Samsung",
-      "photoImage": "https://cdn.tgdd.vn/Products/Images/42/247773/samsung-galaxy-z-fold3-5g-den-600x600-600x600.jpg",
+      "photoImage": "https://cdn2.cellphones.com.vn/x358,webp,q100/media/catalog/product/n/o/note_10_plus_xanh-removebg-preview.png",
       "price": 13990000,
       "star": 5,
       "rateCount": 3,
@@ -1477,15 +1453,39 @@
         "value": "1.000.000"
       },
       "specifications": {
-        "screen": "Super AMOLED, 6.5', Full HD+",
-        "os": "Android 11",
-        "camera": "4 camera 64 MP",
-        "cameraFront": "32 MP",
-        "cpu": "Snapdragon 778G 5G",
-        "ram": "8 GB",
-        "rom": "1 TB",
+        "screen": "Dynamic AMOLED 2X, 6.8', Quad HD+",
+        "os": "Android 9.0 (Pie)",
+        "camera": "4 camera 12 MP",
+        "cameraFront": "10 MP",
+        "cpu": "Exynos 9825 8 nhân",
+        "ram": "12 GB",
+        "rom": "256 GB",
         "microUSB": "Type-C",
-        "battery": "4500 mAh, có sạc nhanh"
+        "battery": "4300 mAh"
+      }
+    },
+    {
+      "productId": "Sam9",
+      "title": "Samsung Galaxy S22 Ultra",
+      "company": "Samsung",
+      "photoImage": "https://cdn2.cellphones.com.vn/x358,webp,q100/media/catalog/product/s/m/sm-s908_galaxys22ultra_front_burgundy_211119.jpg",
+      "price": 23990000,
+      "star": 5,
+      "rateCount": 10,
+      "promotion": {
+        "name": "giare",
+        "value": "22.990.000"
+      },
+      "specifications": {
+        "screen": "Dynamic AMOLED 2X, 6.8', Quad HD+",
+        "os": "Android 11",
+        "camera": "4 camera 108 MP",
+        "cameraFront": "40 MP",
+        "cpu": "Exynos 2200",
+        "ram": "12 GB",
+        "rom": "256 GB",
+        "microUSB": "Type-C",
+        "battery": "5000 mAh"
       }
     },
     {
@@ -1495,10 +1495,10 @@
       "photoImage": "https://image.oppo.com/content/dam/oppo/product-asset-library/find/fussi/2116x1668.png",
       "price": 21990000,
       "star": 4,
-      "rateCount": 10,
+      "rateCount": 8,
       "promotion": {
         "name": "giamgia",
-        "value": "500.000"
+        "value": "700.000"
       },
       "specifications": {
         "screen": "AMOLED, 6.7', QHD+",
@@ -1509,7 +1509,7 @@
         "ram": "12 GB",
         "rom": "256 GB",
         "usbType": "USB Type-C",
-        "battery": "4500 mAh, fast charging"
+        "battery": "4500 mAh"
       }
     },
     {
@@ -1518,11 +1518,11 @@
       "company": "Oppo",
       "photoImage": "https://hanoimobile.vn/uploads/reno6-z-bl.png",
       "price": 9990000,
-      "star": 4,
-      "rateCount": 8,
+      "star": 0,
+      "rateCount": 0,
       "promotion": {
-        "name": "giamgia",
-        "value": "300.000"
+        "name": "tragop",
+        "value": "0"
       },
       "specifications": {
         "screen": "AMOLED, 6.4', Full HD+",
@@ -1533,7 +1533,7 @@
         "ram": "8 GB",
         "rom": "128 GB",
         "usbType": "USB Type-C",
-        "battery": "4300 mAh, fast charging"
+        "battery": "4300 mAh"
       }
     },
     {
@@ -1542,11 +1542,11 @@
       "company": "Oppo",
       "photoImage": "https://phuvuongmobile.com/upload/product/image-removebg-preview-4-6043.png",
       "price": 5490000,
-      "star": 4,
-      "rateCount": 6,
+      "star": 0,
+      "rateCount": 0,
       "promotion": {
-        "name": "moiramat",
-        "value": ""
+        "name": "tragop",
+        "value": "0"
       },
       "specifications": {
         "screen": "AMOLED, 6.43', Full HD+",
@@ -1557,7 +1557,7 @@
         "ram": "6 GB",
         "rom": "128 GB",
         "usbType": "USB Type-C",
-        "battery": "5000 mAh, fast charging"
+        "battery": "5000 mAh"
       }
     }
   ]
