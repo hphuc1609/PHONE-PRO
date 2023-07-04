@@ -7,7 +7,7 @@ import {
   TableRow,
 } from "@mui/material"
 import { StyledTableCell, StyledTableRow } from "components/common/StyledTable"
-import { storeApi } from "data/storeApi"
+import { guarantee } from "utils/guarantee"
 
 const TableDetail = () => {
   const handleClick = (value: string) => {
@@ -27,7 +27,7 @@ const TableDetail = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {storeApi.map((row, index) => (
+            {guarantee.map((row, index) => (
               <StyledTableRow key={index}>
                 <StyledTableCell align="center">{index + 1}</StyledTableCell>
                 <StyledTableCell
