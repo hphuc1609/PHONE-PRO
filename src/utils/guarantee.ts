@@ -1,4 +1,4 @@
-export const storeApi = [
+export const guarantee = [
   [
     "10F2, Hồ Trung Thành, P7 – Tp. Cà Mau, Tỉnh Cà Mau",
     "(0780) 2212 158",

@@ -26,3 +26,13 @@ export interface IPromotion {
   name: string
   value: string
 }
+
+export interface IComment {
+  id: number
+  userId: string
+  username: string
+  content: string
+  createDate: string
+  parentId: string | null
+  productId: string
+}

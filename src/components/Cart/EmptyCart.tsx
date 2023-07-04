@@ -10,7 +10,7 @@ const EmptyCart = () => {
       flexDirection="column"
     >
       <img
-        src="../assets/Cart-empty.png"
+        src="../../assets/Cart-empty.png"
         alt="img..."
         width="100%"
         height={200}
