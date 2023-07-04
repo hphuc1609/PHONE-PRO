@@ -73,15 +73,18 @@ const Profile = ({ user }: WrappedComponentProps) => {
 
   const handleUpdatePassword = async (data: FieldValues) => {
     const user = firebase.auth().currentUser
+
     user
       .updatePassword(data.newPassword)
       .then(() => {
-        toast.success("Cập nhật mật khẩu thành công!", toastConfig)
+        toast.success("Cập nhật mật khẩu thành công", toastConfig)
         setOpen(false)
         reset()
       })
       .catch((error) => {
-        toast.error("Mật khẩu ít nhất có 6 kí tự", toastConfig)
+        if (error.code === "auth/requires-recent-login") {
+          toast.error("Bạn cần đăng nhập lại để cập nhật mật khẩu", toastConfig)
+        }
       })
   }
 
