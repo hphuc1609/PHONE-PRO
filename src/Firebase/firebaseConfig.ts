@@ -21,6 +21,7 @@ if (!firebase.apps.length) {
 export const firebaseAppAuth = firebaseApp.auth()
 
 export const realtimeDB = firebase.database()
+export const firestoreDB = firebase.firestore()
 export const createComponentWithAuth = withFirebaseAuth({
   firebaseAppAuth,
 })
