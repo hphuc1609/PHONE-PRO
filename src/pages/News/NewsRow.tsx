@@ -1,5 +1,6 @@
 import { Box, Grid, Typography } from "@mui/material"
 import type { INewsItem } from "models/news"
+import { Link } from "react-router-dom"
 import { borderColor } from "styles/config"
 
 interface Props {
@@ -11,30 +12,36 @@ const NewsRow = ({ detail }: Props) => {
     return new Date(+new Date() - Math.floor(Math.random() * 10000000000))
   }
 
-  const date = generateRandomDate().toLocaleDateString("en-US")
+  const date = generateRandomDate().toLocaleDateString()
 
   return (
-    <Grid container border={`1px solid ${borderColor}`}>
+    <Grid
+      container
+      columnGap={2}
+      border={`1px solid ${borderColor}`}
+      position="relative"
+    >
       <Grid item xs={3}>
-        <Box component="a" href={detail.path}>
-          <img
-            src={detail.photoLink}
-            alt="..."
-            style={{ maxWidth: "100%", maxHeight: "100%" }}
-          />
-        </Box>
+        <Link to={detail.path} target="_blank">
+          <img src={detail.photoLink} alt="..." width="100%" height="100%" />
+        </Link>
       </Grid>
-      <Grid item ml={2}>
-        <Typography
-          component="a"
-          href={detail.path}
-          variant="h6"
-          sx={{ textDecoration: "none" }}
-          color="inherit"
-          gutterBottom
+      <Grid item xs={8}>
+        <Link
+          to={detail.path}
+          target="_blank"
+          style={{
+            textDecoration: "none",
+            color: "black",
+            fontWeight: 400,
+            fontSize: "1.4rem",
+            marginBottom: "0.5rem",
+            marginTop: "0.5rem",
+            display: "block",
+          }}
         >
           {detail.name}
-        </Typography>
+        </Link>
         <Box display="flex">
           <Typography variant="body2" color="gray">
             {detail.category}
@@ -44,6 +51,20 @@ const NewsRow = ({ detail }: Props) => {
           </Typography>
         </Box>
       </Grid>
+      <Typography
+        component="a"
+        variant="body1"
+        color="gray"
+        height="fit-content"
+        position="absolute"
+        bottom={10}
+        right={20}
+        sx={{ textDecoration: "none" }}
+        href={detail.path}
+        target="_blank"
+      >
+        Xem thêm
+      </Typography>
     </Grid>
   )
 }

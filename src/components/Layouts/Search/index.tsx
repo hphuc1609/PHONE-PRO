@@ -77,7 +77,7 @@ const SearchSuggestion = () => {
       loading={true}
       loadingText="Không tìm thấy sản phẩm"
       options={productList}
-      renderOption={(props, option: ICustomAPIResponse) => (
+      renderOption={(props, option) => (
         <ListItem
           {...props}
           component="span"
