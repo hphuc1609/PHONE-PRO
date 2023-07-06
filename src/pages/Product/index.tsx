@@ -16,6 +16,7 @@ import Detail from "./ProductDetail"
 
 import "swiper/css"
 import "swiper/css/grid"
+import CommentBox from "components/CommentBox"
 
 SwiperCore.use([GridSwiper])
 
@@ -27,7 +28,8 @@ const ProductDetail = () => {
   const [newProduct, setNewProduct] = useState([])
 
   const paramsId = location.pathname.split("/")[3]
-  const filteredProduct = productList?.filter(
+
+  const filteredProduct = productList.filter(
     (product) => product.productId === paramsId
   )
 
@@ -67,25 +69,29 @@ const ProductDetail = () => {
       <Loading open={showLoading} />
 
       <Detail data={filteredProduct} />
+
       {!showLoading && (
-        <Grid container rowSpacing={2} mt={10}>
-          <Grid item xs={12}>
-            <ProductListTitle
-              title="Các sản phẩm khác"
-              icon={<ShoppingBasket color="error" />}
-              disable
-            />
+        <>
+          <CommentBox />
+          <Grid container rowSpacing={2} mt={10}>
+            <Grid item xs={12}>
+              <ProductListTitle
+                title="Các sản phẩm khác"
+                icon={<ShoppingBasket color="error" />}
+                disable
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Swiper {...swiperConfig} grid={{ rows: 2, fill: "row" }}>
+                {newProduct?.map((product, index) => (
+                  <SwiperSlide key={index}>
+                    <ProductListRow data={product} />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </Grid>
           </Grid>
-          <Grid item xs={12}>
-            <Swiper {...swiperConfig} grid={{ rows: 2, fill: "row" }}>
-              {newProduct?.map((product, index) => (
-                <SwiperSlide key={index}>
-                  <ProductListRow data={product} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </Grid>
-        </Grid>
+        </>
       )}
     </>
   )

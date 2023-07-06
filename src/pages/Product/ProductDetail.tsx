@@ -18,6 +18,7 @@ import { useCart } from "react-use-cart"
 import { WrappedComponentProps } from "react-with-firebase-auth"
 import { borderColor, primaryDark } from "styles/config"
 import ProductInfo from "./ProductInfo"
+import { createComponentWithAuth } from "Firebase/firebaseConfig"
 
 interface Props {
   data: ICustomAPIResponse[]
@@ -34,7 +35,7 @@ const Detail = ({ data, user }: Props) => {
   }
 
   const handleAddToCart = (product: ICustomAPIResponse) => {
-    if (user) {
+    if (user !== undefined) {
       addItem({ ...product, id: product.productId })
       toast.success(`Đã thêm ${product.title} vào giỏ hàng`, toastConfig)
       toast.clearWaitingQueue()
@@ -296,4 +297,4 @@ const Detail = ({ data, user }: Props) => {
   )
 }
 
-export default Detail
+export default createComponentWithAuth(Detail)

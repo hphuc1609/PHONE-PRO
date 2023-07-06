@@ -29,7 +29,7 @@ const ProductPage = () => {
 
   const [showLoading, setShowLoading] = useState(false)
   const [productList, setProductList] = useState<ICustomAPIResponse[]>([])
-  const [currentPage, setCurrentPage] = useState(1)
+  // const [currentPage, setCurrentPage] = useState(1)
 
   useEffect(() => {
     setShowLoading(true)
@@ -50,25 +50,25 @@ const ProductPage = () => {
 
   const handleBackHome = () => {
     navigate("/")
+    window.scrollTo(0, 0)
   }
 
-  const filteredProduct = productList?.filter(
-    (product) => product.company?.toLowerCase() === params[3]
+  const filteredProduct = productList.filter(
+    (product) => product.company.toLowerCase() === params[3]
   )
 
   // const productsPerPage = 5
   // const totalProducts = filteredProduct.length
   // const totalPages = Math.ceil(totalProducts / productsPerPage)
 
-  const handlePageChange = (
-    event: React.ChangeEvent<unknown>,
-    value: number
-  ) => {
-    setCurrentPage(value)
-  }
-  // const [autoplayEnabled, setAutoplayEnabled] = useState(true)
+  // const handlePageChange = (
+  //   event: React.ChangeEvent<unknown>,
+  //   value: number
+  // ) => {
+  //   setCurrentPage(value)
+  // }
 
-  const productLength = filteredProduct.length
+  // const [autoplayEnabled, setAutoplayEnabled] = useState(true)
 
   return (
     <div>
@@ -89,7 +89,7 @@ const ProductPage = () => {
           <RenderProduct
             data={filteredProduct}
             title={`Điện thoại ${params[3]}`}
-            row={filteredProduct.length}
+            row={filteredProduct.length || 10}
             className={classes}
           />
         </Grid>
