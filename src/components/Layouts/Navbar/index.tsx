@@ -24,11 +24,11 @@ const navItems: INavItem[] = [
     icon: <Menu />,
     children: menuChildren,
   },
-  {
-    name: "Tin tức",
-    icon: <Newspaper />,
-    link: "/news",
-  },
+  // {
+  //   name: "Tin tức",
+  //   icon: <Newspaper />,
+  //   link: "/news",
+  // },
   {
     name: "Bảo hành",
     icon: <Build />,

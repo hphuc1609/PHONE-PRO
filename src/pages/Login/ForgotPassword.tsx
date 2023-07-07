@@ -88,8 +88,8 @@ const ForgotPassword = () => {
                 Quên mật khẩu
               </Typography>
               <Typography mb={2}>
-                Vui lòng nhập email của bạn, chúng tôi sẽ gửi cho bạn một email
-                để đặt lại mật khẩu của bạn !
+                Vui lòng nhập email đăng ký của bạn, chúng tôi sẽ gửi cho bạn
+                một email để đặt lại mật khẩu của bạn !
               </Typography>
             </Box>
 
