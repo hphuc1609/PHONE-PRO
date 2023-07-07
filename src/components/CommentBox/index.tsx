@@ -149,22 +149,28 @@ const CommentBox = ({ user }: WrappedComponentProps) => {
           </Grid>
 
           <Grid item xs={12}>
-            {filterdComments?.map(
-              (comment: IComment) =>
-                comment.parentId === null && (
-                  <Comment
-                    key={comment.id}
-                    openReply={openReply}
-                    replyRef={replyRef}
-                    comment={comment}
-                    replies={getReplies(comment.id)}
-                    autoFocus={autoFocus}
-                    handleDeleteComment={handleDeleteComment}
-                    handleAddComment={handleAddComment}
-                    handleOpenReply={handleOpenReply}
-                  />
-                )
-            )}
+            {filterdComments
+              ?.sort(
+                (a, b) =>
+                  new Date(b.createDate).getTime() -
+                  new Date(a.createDate).getTime()
+              )
+              .map(
+                (comment) =>
+                  comment.parentId === null && (
+                    <Comment
+                      key={comment.id}
+                      openReply={openReply}
+                      replyRef={replyRef}
+                      comment={comment}
+                      replies={getReplies(comment.id)}
+                      autoFocus={autoFocus}
+                      handleDeleteComment={handleDeleteComment}
+                      handleAddComment={handleAddComment}
+                      handleOpenReply={handleOpenReply}
+                    />
+                  )
+              )}
           </Grid>
         </Grid>
       </Box>

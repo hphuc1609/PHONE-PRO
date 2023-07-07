@@ -36,6 +36,8 @@ const InputTextEmoji = ({
   const renderEmoji = () => {
     if (selectedEmoji) {
       return String.fromCodePoint(parseInt(selectedEmoji, 16))
+        .split(" ")
+        .join("")
     }
   }
 
