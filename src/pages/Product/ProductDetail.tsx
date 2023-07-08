@@ -35,7 +35,7 @@ const Detail = ({ data, user }: Props) => {
   }
 
   const handleAddToCart = (product: ICustomAPIResponse) => {
-    if (user !== undefined) {
+    if (user) {
       addItem({ ...product, id: product.productId })
       toast.success(`Đã thêm ${product.title} vào giỏ hàng`, toastConfig)
       toast.clearWaitingQueue()

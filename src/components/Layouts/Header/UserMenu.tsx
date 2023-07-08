@@ -18,11 +18,12 @@ const UserMenu = ({ signOut, user }: WrappedComponentProps) => {
   }
 
   const handleLogOut = () => {
-    signOut()
     setTimeout(() => {
       navigate("/login")
+      window.scrollTo(0, 0)
     }, 200)
 
+    signOut()
     localStorage.clear()
   }
 
