@@ -47,12 +47,12 @@ const Comment = ({
   return (
     <Box mt={2} display="flex" gap={2}>
       <Avatar sx={{ bgcolor: primaryDark }}>
-        {comment.username?.slice(0, 1)}
+        {comment.username?.slice(0, 1).toLocaleUpperCase()}
       </Avatar>
       <Box width="100%" display="flex" flexDirection="column">
         <Box display="flex" alignItems="center" mb={1}>
           <Typography variant="body1" fontWeight={500}>
-            {comment.username?.split("@")[0].toLocaleUpperCase()}
+            {comment.username?.split("@")[0]}
           </Typography>
           <Typography variant="body2" color="GrayText" ml={1}>
             {createDate}
