@@ -21,7 +21,7 @@ const useStyles = makeStyles(() => ({
   },
 }))
 
-const ProductPage = () => {
+const ProductBrandPage = () => {
   const classes = useStyles()
   const navigate = useNavigate()
   const location = useLocation()
@@ -106,4 +106,4 @@ const ProductPage = () => {
   )
 }
 
-export default ProductPage
+export default ProductBrandPage

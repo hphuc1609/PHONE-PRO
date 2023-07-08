@@ -1,9 +1,9 @@
 import Page404 from "pages/404"
 import HomePage from "pages/Home"
-import ProductDetail from "pages/Product"
+import Product from "pages/Product"
 import { Route, Routes } from "react-router-dom"
 import { guardedRoutes, publicRoutes } from "./routes"
-import ProductPage from "pages/ProductBrandPage"
+import ProductBrandPage from "pages/ProductBrandPage"
 
 const Routings = () => {
   return (
@@ -15,8 +15,8 @@ const Routings = () => {
         <Route key={route.path} path={route.path} element={route.element} />
       ))}
 
-      <Route path="/product/details/:id" element={<ProductDetail />} />
-      <Route path="/product/brand/:id" element={<ProductPage />} />
+      <Route path="/product/details/:id" element={<Product />} />
+      <Route path="/product/brand/:id" element={<ProductBrandPage />} />
       <Route path="/brand/:id" element={<HomePage />} />
       <Route path="*" element={<Page404 />} />
     </Routes>

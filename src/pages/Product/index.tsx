@@ -20,7 +20,7 @@ import CommentBox from "components/CommentBox"
 
 SwiperCore.use([GridSwiper])
 
-const ProductDetail = () => {
+const Product = () => {
   const location = useLocation()
 
   const [showLoading, setShowLoading] = useState(false)
@@ -97,4 +97,4 @@ const ProductDetail = () => {
   )
 }
 
-export default ProductDetail
+export default Product
