@@ -52,7 +52,7 @@ const Comment = ({
       <Box width="100%" display="flex" flexDirection="column">
         <Box display="flex" alignItems="center" mb={1}>
           <Typography variant="body1" fontWeight={500}>
-            {comment.username?.split("@")[0]}
+            {comment.username?.split("@")[0].toLocaleUpperCase()}
           </Typography>
           <Typography variant="body2" color="GrayText" ml={1}>
             {createDate}

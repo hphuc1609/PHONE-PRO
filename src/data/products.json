@@ -58,7 +58,7 @@
       "rateCount": 188,
       "promotion": {
         "name": "giamgia",
-        "value": "500.000"
+        "value": "500K"
       },
       "specifications": {
         "screen": "LTPS LCD, 6.3', Full HD+",
@@ -82,7 +82,7 @@
       "rateCount": 7,
       "promotion": {
         "name": "giamgia",
-        "value": "250.000"
+        "value": "250K"
       },
       "specifications": {
         "screen": "IPS LCD, 5.8', HD+",
@@ -106,7 +106,7 @@
       "rateCount": 0,
       "promotion": {
         "name": "giamgia",
-        "value": "1.500.000"
+        "value": "1.500K"
       },
       "specifications": {
         "screen": "Super AMOLED, 6', Full HD+",
@@ -178,7 +178,7 @@
       "rateCount": 0,
       "promotion": {
         "name": "giamgia",
-        "value": "500.000"
+        "value": "500K"
       },
       "specifications": {
         "screen": "Super AMOLED, 6.0', HD+",
@@ -500,7 +500,7 @@
         "cpu": "16 nhân 128 bit",
         "ram": "Không giới hạn",
         "rom": "Dùng thoải mái",
-        "microUSB": "Không cần",
+        "microUSB": "Không",
         "battery": "Không cần sạc"
       }
     },
@@ -730,7 +730,7 @@
       "rateCount": 168,
       "promotion": {
         "name": "giamgia",
-        "value": "800.000"
+        "value": "800K"
       },
       "specifications": {
         "screen": "IPS LCD, 6.3', Full HD+",
@@ -754,7 +754,7 @@
       "rateCount": 60,
       "promotion": {
         "name": "giamgia",
-        "value": "500.000"
+        "value": "500K"
       },
       "specifications": {
         "screen": "IPS LCD, 6.22', HD+",
@@ -1138,7 +1138,7 @@
       "rateCount": 16,
       "promotion": {
         "name": "giamgia",
-        "value": "500.000"
+        "value": "500K"
       },
       "specifications": {
         "screen": "LED-backlit IPS LCD, 4.7', Retina HD",
@@ -1172,6 +1172,7 @@
         "cpu": "Apple A12 Bionic 6 nhân",
         "ram": "3 GB",
         "rom": "64 GB",
+        "microUSB": "Không",
         "battery": "2942 mAh, có sạc nhanh"
       }
     },
@@ -1281,7 +1282,7 @@
       "rateCount": 20,
       "promotion": {
         "name": "giamgia",
-        "value": "500.000"
+        "value": "500K"
       },
       "specifications": {
         "screen": "OLED, 6.1', Super Retina XDR",
@@ -1305,7 +1306,7 @@
       "rateCount": 10,
       "promotion": {
         "name": "giamgia",
-        "value": "500.000"
+        "value": "500K"
       },
       "specifications": {
         "screen": "OLED, 6.1', Super Retina XDR",
@@ -1329,7 +1330,7 @@
       "rateCount": 200,
       "promotion": {
         "name": "giamgia",
-        "value": "500.000"
+        "value": "500K"
       },
       "specifications": {
         "screen": "OLED, 6.1', Super Retina XDR",
@@ -1377,7 +1378,7 @@
       "rateCount": 110,
       "promotion": {
         "name": "giamgia",
-        "value": "1.000.000"
+        "value": "1.000K"
       },
       "specifications": {
         "screen": "Dynamic AMOLED 2X, 7.6', 120Hz, HDR10+",
@@ -1426,7 +1427,7 @@
       "rateCount": 10,
       "promotion": {
         "name": "giamgia",
-        "value": "700.000"
+        "value": "700K"
       },
       "specifications": {
         "screen": "Dynamic AMOLED 2X, 6.3', Full HD+",
@@ -1450,7 +1451,7 @@
       "rateCount": 3,
       "promotion": {
         "name": "giamgia",
-        "value": "1.000.000"
+        "value": "1.000K"
       },
       "specifications": {
         "screen": "Dynamic AMOLED 2X, 6.8', Quad HD+",
@@ -1498,7 +1499,7 @@
       "rateCount": 8,
       "promotion": {
         "name": "giamgia",
-        "value": "700.000"
+        "value": "700K"
       },
       "specifications": {
         "screen": "AMOLED, 6.7', QHD+",
@@ -1508,7 +1509,7 @@
         "cpu": "Snapdragon 888",
         "ram": "12 GB",
         "rom": "256 GB",
-        "usbType": "USB Type-C",
+        "microUSB": "USB Type-C",
         "battery": "4500 mAh"
       }
     },
@@ -1532,12 +1533,12 @@
         "cpu": "MediaTek Dimensity 900",
         "ram": "8 GB",
         "rom": "128 GB",
-        "usbType": "USB Type-C",
+        "microUSB": "USB Type-C",
         "battery": "4300 mAh"
       }
     },
     {
-      "productId": "Oppo3",
+      "productId": "Opp4",
       "title": "Oppo A74",
       "company": "Oppo",
       "photoImage": "https://phuvuongmobile.com/upload/product/image-removebg-preview-4-6043.png",
@@ -1556,8 +1557,104 @@
         "cpu": "Snapdragon 662",
         "ram": "6 GB",
         "rom": "128 GB",
-        "usbType": "USB Type-C",
+        "microUSB": "USB Type-C",
         "battery": "5000 mAh"
+      }
+    },
+    {
+      "productId": "Opp5",
+      "title": "OPPO Find N2 Flip 5G",
+      "company": "Oppo",
+      "photoImage": "https://stcv4.hnammobile.com/uploads/products/details/2744050924-oppo-find-n2-flip-chinh-hang.jpg",
+      "price": 19990000,
+      "star": 0,
+      "rateCount": 0,
+      "promotion": {
+        "name": "tragop",
+        "value": "0"
+      },
+      "specifications": {
+        "screen": "AMOLED, 6.43', Full HD+",
+        "os": "Android 13",
+        "camera": "Chính 50 MP & Phụ 8 MP",
+        "cameraFront": "32 MP",
+        "cpu": "MediaTek Dimensity 9000+ 8 nhân",
+        "ram": "8 GB",
+        "rom": "256 GB",
+        "microUSB": "USB Type-C",
+        "battery": "4300 mAh, Sạc 44 W"
+      }
+    },
+    {
+      "productId": "Opp6",
+      "title": "OPPO Reno8 T 5G",
+      "company": "Oppo",
+      "photoImage": "https://cdn.tgdd.vn/Products/Images/42/301642/TimerThumb/oppo-reno8-t-5g-256gb.jpg",
+      "price": 10990000,
+      "star": 0,
+      "rateCount": 0,
+      "promotion": {
+        "name": "giamgia",
+        "value": "100K - 300K"
+      },
+      "specifications": {
+        "screen": "AMOLED, 6.43', Full HD+",
+        "os": "Android 12",
+        "camera": "Chính 108 MP & Phụ 2 MP, 2 MP",
+        "cameraFront": "32 MP",
+        "cpu": "Chip Snapdragon 695 5G",
+        "ram": "6 GB",
+        "rom": "258 GB",
+        "microUSB": "USB Type-C",
+        "battery": " 4800 mAh, Sạc 67 W"
+      }
+    },
+    {
+      "productId": "Opp7",
+      "title": "OPPO Reno8 series",
+      "company": "Oppo",
+      "photoImage": "https://cdn.tgdd.vn/Products/Images/42/260546/oppo-reno8-pro-thumb-xanh-1-600x600.jpg",
+      "price": 17990000,
+      "star": 0,
+      "rateCount": 0,
+      "promotion": {
+        "name": "giare",
+        "value": "18.990.000"
+      },
+      "specifications": {
+        "screen": "AMOLED, 6.43', Full HD+",
+        "os": "Android 13",
+        "camera": "Chính 50 MP & Phụ 8 MP, 2 MP",
+        "cameraFront": "32 MP",
+        "cpu": "Chip MediaTek Dimensity 8100 Max 8 nhân",
+        "ram": "12 GB",
+        "rom": "258 GB",
+        "microUSB": "USB Type-C",
+        "battery": " 4500 mAh, Sạc 80 W"
+      }
+    },
+    {
+      "productId": "Opp8",
+      "title": "OPPO Find X5 Pro 5G",
+      "company": "Oppo",
+      "photoImage": "https://cdn.tgdd.vn/Products/Images/42/250622/oppo-find-x5-pro-den-thumb-600x600.jpg",
+      "price": 19990000,
+      "star": 0,
+      "rateCount": 0,
+      "promotion": {
+        "name": "giare",
+        "value": "32.990.000"
+      },
+      "specifications": {
+        "screen": "AMOLED6.7 Quad HD+ (2K+)",
+        "os": "Android 13",
+        "camera": "Chính 50 MP & Phụ 50 MP, 13 MP",
+        "cameraFront": "32 MP",
+        "cpu": "Chip Snapdragon 8 Gen 1",
+        "ram": "12 GB",
+        "rom": "258 GB",
+        "microUSB": "USB Type-C",
+        "battery": " 4500 mAh, Sạc 80 W"
       }
     }
   ]
