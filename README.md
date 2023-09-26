@@ -12,7 +12,6 @@ The Phone Store App is a modern and user-friendly e-commerce web application bui
 - **User Authentication:** Create an account, sign in, and manage your profile for personalized shopping.
 - **Shopping Cart:** Easily add and remove items from your cart, view your order summary, and proceed to checkout.
 - **Payment Integration:** Securely complete purchases with integrated payment gateways.
-- **Order History:** Keep track of your previous orders and view order details.
 - **Product Reviews:** Read and leave reviews for products to help others make informed decisions.
 - **Responsive Design:** Enjoy a seamless shopping experience on both desktop and mobile devices.
 
