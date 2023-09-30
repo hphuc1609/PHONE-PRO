@@ -37,23 +37,20 @@ const ForgotPassword = () => {
     return firebaseAppAuth.sendPasswordResetEmail(email)
   }
 
-  const onSubmit = (data: FieldValues) => {
-    passwordReset(data.email)
-      .then((res) => {
-        setIsResetPassword(true)
-      })
-      .catch((error: any) => {
-        if (error.code === "auth/user-not-found") {
-          toast.error("Email không tồn tại, vui lòng thử lại!", toastConfig)
-        }
-
-        if (error.code === "auth/too-many-requests") {
-          toast.error(
-            "Bạn đã thử quá nhiều lần, vui lòng thử lại sau!",
-            toastConfig
-          )
-        }
-      })
+  const onSubmit = async (data: FieldValues) => {
+    try {
+      await passwordReset(data.email)
+      setIsResetPassword(true)
+    } catch (error: any) {
+      if (error.code === "auth/user-not-found") {
+        toast.error("Email không tồn tại, vui lòng thử lại!", toastConfig)
+      } else if (error.code === "auth/too-many-requests") {
+        toast.error(
+          "Bạn đã gửi quá nhiều lần, vui lòng gửi lại sau!",
+          toastConfig
+        )
+      } else toast.error(error.message, toastConfig)
+    }
   }
 
   return (

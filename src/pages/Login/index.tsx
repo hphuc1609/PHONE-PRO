@@ -1,6 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup"
 import { LockOutlined, Visibility, VisibilityOff } from "@mui/icons-material"
 import {
+  Alert,
   Box,
   Button,
   Container,
@@ -11,9 +12,9 @@ import {
   Typography,
 } from "@mui/material"
 import { makeStyles } from "@mui/styles"
+import { createComponentWithAuth } from "Firebase/firebaseConfig"
 import FormInputText from "components/common/FormInput/FormInputText"
 import { toastConfig } from "configs/toast"
-import { createComponentWithAuth } from "Firebase/firebaseConfig"
 import { useState } from "react"
 import { FieldValues, useForm } from "react-hook-form"
 import { Link, useNavigate } from "react-router-dom"
@@ -36,11 +37,18 @@ const useStyles = makeStyles(() => ({
   },
 }))
 
-const Login = ({ signInWithEmailAndPassword }: WrappedComponentProps) => {
+interface LoginForm {
+  email: string
+  password: string
+}
+
+const Login = ({
+  signInWithEmailAndPassword,
+  error,
+}: WrappedComponentProps) => {
   const classes = useStyles()
   const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false)
-  // const [isShrink, setIsShrink] = useState(false)
 
   const schema = yup.object().shape({
     email: yup
@@ -56,40 +64,27 @@ const Login = ({ signInWithEmailAndPassword }: WrappedComponentProps) => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: { email: "", password: "" },
   })
 
-  const toogleShowPassword = () => {
-    if (showPassword) {
-      setShowPassword(false)
-    } else {
-      setShowPassword(true)
-    }
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword)
   }
 
-  const signIn = (email: string, password: string) => {
-    try {
-      const res: any = signInWithEmailAndPassword(email, password)
+  const handleLogin = ({ email, password }: LoginForm) => {
+    const result: any = signInWithEmailAndPassword(email, password)
 
-      res.then((userCredential: any) => {
-        if (userCredential.user) {
-          toast.success("Đăng nhập thành công", toastConfig)
-          navigate("/")
-        } else {
-          toast.error(
-            "Email hoặc mật khẩu không đúng, vui lòng thử lại !",
-            toastConfig
-          )
-        }
-      })
-    } catch (error: any) {
-      toast.error(error.message, toastConfig)
-    }
+    result.then((userCredential: any) => {
+      if (userCredential.user) {
+        toast.success("Đăng nhập thành công!", toastConfig)
+        navigate("/")
+      }
+    })
   }
 
   const onSubmit = (data: FieldValues) => {
     const { email, password } = data
-
-    signIn(email, password)
+    handleLogin({ email, password })
   }
 
   return (
@@ -107,16 +102,20 @@ const Login = ({ signInWithEmailAndPassword }: WrappedComponentProps) => {
                 </Typography>
               </Box>
             </Grid>
-
+            {error && (
+              <Grid item md={12}>
+                <Alert severity="error" style={{ alignItems: "center" }}>
+                  {error}
+                </Alert>
+              </Grid>
+            )}
             <Grid item xs={12}>
               <FormInputText
                 name="email"
                 label="Email"
                 control={control}
                 error={errors}
-                TextFieldProps={{
-                  autoFocus: true,
-                }}
+                TextFieldProps={{ autoFocus: true }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -132,7 +131,7 @@ const Login = ({ signInWithEmailAndPassword }: WrappedComponentProps) => {
                       <InputAdornment position="end">
                         <IconButton
                           aria-label="toggle password"
-                          onClick={toogleShowPassword}
+                          onClick={toggleShowPassword}
                           edge="end"
                         >
                           {showPassword ? <VisibilityOff /> : <Visibility />}
@@ -157,10 +156,7 @@ const Login = ({ signInWithEmailAndPassword }: WrappedComponentProps) => {
 
               <Link
                 to="/forgot-password"
-                style={{
-                  color: "blue",
-                  textDecoration: "none",
-                }}
+                style={{ color: "blue", textDecoration: "none" }}
               >
                 Quên mật khẩu?
               </Link>
@@ -184,5 +180,4 @@ const Login = ({ signInWithEmailAndPassword }: WrappedComponentProps) => {
     </Box>
   )
 }
-
 export default createComponentWithAuth(Login)
