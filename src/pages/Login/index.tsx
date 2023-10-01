@@ -42,13 +42,11 @@ interface LoginForm {
   password: string
 }
 
-const Login = ({
-  signInWithEmailAndPassword,
-  error,
-}: WrappedComponentProps) => {
+const Login = ({ signInWithEmailAndPassword }: WrappedComponentProps) => {
   const classes = useStyles()
   const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("")
 
   const schema = yup.object().shape({
     email: yup
@@ -78,6 +76,12 @@ const Login = ({
       if (userCredential.user) {
         toast.success("Đăng nhập thành công!", toastConfig)
         navigate("/")
+      } else if (userCredential.code === "auth/user-not-found") {
+        setErrorMessage("Email không tồn tại!")
+      } else if (userCredential.code === "auth/wrong-password") {
+        setErrorMessage("Mật khẩu không chính xác!")
+      } else {
+        setErrorMessage("Đăng nhập thất bại. Network error")
       }
     })
   }
@@ -102,10 +106,10 @@ const Login = ({
                 </Typography>
               </Box>
             </Grid>
-            {error && (
+            {errorMessage && (
               <Grid item md={12}>
                 <Alert severity="error" style={{ alignItems: "center" }}>
-                  {error}
+                  {errorMessage}
                 </Alert>
               </Grid>
             )}
