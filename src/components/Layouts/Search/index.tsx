@@ -3,10 +3,8 @@ import {
   Autocomplete,
   InputBase,
   ListItem,
-  ListItemIcon,
   ListItemText,
   Tooltip,
-  Typography,
 } from "@mui/material"
 import { makeStyles } from "@mui/styles"
 import NumberFormat from "components/common/NumberFormat"
@@ -18,7 +16,7 @@ import { useNavigate } from "react-router-dom"
 const useStyles = makeStyles(() => ({
   input: {
     height: 40,
-    width: 400,
+    width: "100%",
     padding: 20,
     paddingRight: 10,
     borderRadius: 100,
@@ -36,6 +34,7 @@ const SearchSuggestion = () => {
   const classes = useStyles()
   const navigate = useNavigate()
   const [productList, setProductList] = useState([])
+  const isLoading = productList.length === 0
 
   useEffect(() => {
     realtimeDB.ref("products").once("value", (snapshot) => {
@@ -72,35 +71,36 @@ const SearchSuggestion = () => {
       value=""
       id="search"
       freeSolo
+      loading={isLoading}
+      loadingText="Đang tải..."
       selectOnFocus
       autoHighlight
-      loading={true}
-      loadingText="Không tìm thấy sản phẩm"
       options={productList}
+      sx={{ width: { xs: "80%", md: "33%" } }}
       renderOption={(props, option) => (
         <ListItem
           {...props}
           component="span"
           dense
           sx={{
-            columnGap: 1,
+            columnGap: 2,
             borderBottom: `1px solid #e8e8e8`,
             "&:last-child": { border: "none" },
           }}
         >
-          <ListItemIcon sx={{ width: 50, height: 80, py: 1 }}>
+          <div style={{ width: 70, height: 70 }}>
             <img
-              src={option.photoImage}
-              alt="..."
+              src={option.photoImage || "/"}
+              alt={option.title}
               width="100%"
               height="100%"
-              style={{ objectFit: "cover" }}
+              style={{ objectFit: "revert" }}
             />
-          </ListItemIcon>
-          <ListItemText primary={option.title} sx={{ cursor: "pointer" }} />
-          <Typography variant="body2" color="error" fontWeight={500}>
-            <NumberFormat value={option.price} />
-          </Typography>
+          </div>
+          <ListItemText
+            primary={option.title}
+            secondary={<NumberFormat value={option.price} color="#BB161C" />}
+          />
         </ListItem>
       )}
       getOptionLabel={(options) => options.title || ""}

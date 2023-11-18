@@ -2,6 +2,7 @@ import { AccountCircle, Logout, Person } from "@mui/icons-material"
 import { Box, Divider, Menu, MenuItem, Typography } from "@mui/material"
 import ListItemIcon from "@mui/material/ListItemIcon"
 import { createComponentWithAuth } from "Firebase/firebaseConfig"
+import scrollToTop from "helper/scrollToTop"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { WrappedComponentProps } from "react-with-firebase-auth"
@@ -20,7 +21,7 @@ const UserMenu = ({ signOut, user }: WrappedComponentProps) => {
   const handleLogOut = () => {
     setTimeout(() => {
       navigate("/login")
-      window.scrollTo(0, 0)
+      scrollToTop()
     }, 200)
 
     signOut()

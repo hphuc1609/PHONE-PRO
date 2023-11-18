@@ -6,17 +6,18 @@ import { WrappedComponentProps } from "react-with-firebase-auth"
 import { headerHeight, primaryDark } from "styles/config"
 import SearchSuggestion from "../Search"
 import UserMenu from "./UserMenu"
+import scrollToTop from "helper/scrollToTop"
 
 const Header = ({ user }: WrappedComponentProps) => {
   const navigate = useNavigate()
 
   const onLogin = () => {
     navigate("/login")
-    window.scrollTo(0, 0)
+    scrollToTop()
   }
   const onRegister = () => {
     navigate("/register")
-    window.scrollTo(0, 0)
+    scrollToTop()
   }
 
   return (
@@ -24,25 +25,23 @@ const Header = ({ user }: WrappedComponentProps) => {
       <Toolbar
         sx={{
           height: { xs: "4rem", md: headerHeight },
-          width: { xs: "100%", xl: 1500 },
-          margin: "auto",
-          justifyContent: "space-between",
+          justifyContent: { xs: "center", md: "space-between" },
         }}
       >
         <Link
           to="/"
           title="Trang chủ Phone Pro"
-          onClick={() => window.scrollTo(0, 0)}
-          style={{
-            textDecoration: "none",
-            color: "inherit",
-          }}
+          onClick={() => scrollToTop()}
+          style={{ textDecoration: "none", color: "inherit" }}
         >
-          <Box alignItems="center" display="flex">
+          <Box
+            alignItems="center"
+            display="flex"
+            sx={{ display: { xs: "none", md: "inline-flex" } }}
+          >
             <Typography
               variant="body1"
               textTransform="uppercase"
-              fontWeight={300}
               letterSpacing={2}
               fontSize={30}
             >
@@ -50,7 +49,7 @@ const Header = ({ user }: WrappedComponentProps) => {
             </Typography>
             <img
               src="../../assets/Logo-pro-white.png"
-              alt="Logo"
+              alt="Pro"
               height={40}
               width={80}
               style={{
@@ -61,6 +60,8 @@ const Header = ({ user }: WrappedComponentProps) => {
             />
           </Box>
         </Link>
+
+        {/* Search bar */}
         <SearchSuggestion />
 
         {user ? (

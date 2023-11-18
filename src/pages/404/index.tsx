@@ -1,4 +1,5 @@
 import { Box, Button, Typography } from "@mui/material"
+import scrollToTop from "helper/scrollToTop"
 import { Helmet } from "react-helmet"
 import { useNavigate } from "react-router-dom"
 
@@ -7,7 +8,7 @@ const Page404 = () => {
 
   const handleBackToHome = () => {
     navigate("/")
-    window.scrollTo(0, 0)
+    scrollToTop()
   }
 
   return (

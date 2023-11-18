@@ -7,11 +7,12 @@ export default defineConfig({
   resolve: {
     alias: {
       components: path.resolve(__dirname, "src/components"),
-      pages: path.resolve(__dirname, "src/pages"),
       styles: path.resolve(__dirname, "src/styles"),
+      pages: path.resolve(__dirname, "src/pages"),
       models: path.resolve(__dirname, "src/models"),
       router: path.resolve(__dirname, "src/router"),
       utils: path.resolve(__dirname, "src/utils"),
+      helper: path.resolve(__dirname, "src/helper"),
       services: path.resolve(__dirname, "src/services"),
       configs: path.resolve(__dirname, "src/configs"),
       data: path.resolve(__dirname, "src/data"),
@@ -19,4 +20,3 @@ export default defineConfig({
     },
   },
 })
-

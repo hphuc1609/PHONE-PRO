@@ -12,6 +12,7 @@ import * as yup from "yup"
 import PaymentForm from "./PaymentForm"
 import Invoice from "./PaymentInvoice"
 import { WrappedComponentProps } from "react-with-firebase-auth"
+import scrollToTop from "helper/scrollToTop"
 
 const Payment = ({ user }: WrappedComponentProps) => {
   const navigate = useNavigate()
@@ -45,7 +46,7 @@ const Payment = ({ user }: WrappedComponentProps) => {
 
   const handleCancelPayment = () => {
     navigate("/")
-    window.scrollTo(0, 0)
+    scrollToTop()
   }
 
   const handlePayment = (data: FieldValues) => {
@@ -65,7 +66,7 @@ const Payment = ({ user }: WrappedComponentProps) => {
 
       toast.success("Thanh toán thành công", toastConfig)
       emptyCart()
-      window.scrollTo(0, 0)
+      scrollToTop()
     }
   }
 

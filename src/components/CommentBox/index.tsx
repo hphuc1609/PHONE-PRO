@@ -9,6 +9,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { WrappedComponentProps } from "react-with-firebase-auth"
 import { borderColor } from "styles/config"
 import Comment from "./Comment"
+import scrollToTop from "helper/scrollToTop"
 
 const CommentBox = ({ user }: WrappedComponentProps) => {
   const { id } = useParams()
@@ -98,7 +99,7 @@ const CommentBox = ({ user }: WrappedComponentProps) => {
 
   const handleAccept = () => {
     navigate("/login")
-    window.scrollTo(0, 0)
+    scrollToTop()
   }
 
   const handleOpenReply = (commentId: any) => {
@@ -179,7 +180,7 @@ const CommentBox = ({ user }: WrappedComponentProps) => {
         open={open}
         handleClose={handleClose}
         fullWidthButton
-        content="Vui lòng đăng nhập tài khoản để bình luận !"
+        content="Vui lòng đăng nhập tài khoản để bình luận!"
         rightButton="Đăng nhập"
         onClickRightButton={handleAccept}
         leftButton="Đóng"

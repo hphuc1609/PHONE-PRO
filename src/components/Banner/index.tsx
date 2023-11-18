@@ -1,4 +1,4 @@
-import { Box } from "@mui/material"
+import { Box, Theme, useMediaQuery } from "@mui/material"
 import SwiperCore, { Autoplay, Pagination } from "swiper"
 import "swiper/css/pagination"
 import { Swiper, SwiperSlide } from "swiper/react"
@@ -21,9 +21,11 @@ const slideShow = [
 ]
 
 const SlideSwiper = () => {
+  const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"))
+
   return (
     <Swiper
-      slidesPerView={2}
+      slidesPerView={isMobile ? 1 : 2}
       spaceBetween={200}
       pagination={{ clickable: true }}
       autoplay={{ disableOnInteraction: false }}
@@ -32,7 +34,7 @@ const SlideSwiper = () => {
     >
       {slideShow.map((item, index) => (
         <SwiperSlide key={index}>
-          <Box height={{ xs: 200, md: 260 }} margin="auto">
+          <Box paddingTop={8} height={{ xs: 150, md: 260 }} margin="auto">
             <img
               src={item}
               alt="..."
