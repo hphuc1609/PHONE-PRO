@@ -1,10 +1,10 @@
-import { Typography } from "@mui/material"
+import { Typography, TypographyProps } from "@mui/material"
 
 interface NumberFormatProps {
   value: number
   locale?: string
   color?: string
-  TextProps?: object
+  TextProps?: TypographyProps
 }
 
 const NumberFormat = ({
