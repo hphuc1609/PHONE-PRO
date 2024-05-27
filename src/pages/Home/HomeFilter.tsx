@@ -1,64 +1,90 @@
-import { Grid } from "@mui/material"
+import { Refresh } from "@mui/icons-material"
+import { Button, Grid, IconButton, Tooltip } from "@mui/material"
 import FormInputDropDown from "components/common/FormInput/FormInputDropDown"
+import { Control, Controller, FieldValues } from "react-hook-form"
 import { priceOptions, promoOptions, starCountOptions } from "utils/options"
 
-interface Props {
-  filterPrice: string
-  handleFilterPrice: (event: React.ChangeEvent<HTMLInputElement>) => void
-
-  filterPromo: string
-  handleFilterPromo: (event: React.ChangeEvent<HTMLInputElement>) => void
-
-  filterStar: string
-  handleFilterStar: (event: React.ChangeEvent<HTMLInputElement>) => void
+interface HomeFilterProps {
+  control: Control<FieldValues>
+  isDirty: boolean
+  handleClickFilter: () => void
+  handleClearFilter: () => void
 }
 
 const HomeFilter = ({
-  filterPrice,
-  filterPromo,
-  filterStar,
-  handleFilterPrice,
-  handleFilterPromo,
-  handleFilterStar,
-}: Props) => {
+  control,
+  isDirty,
+  handleClickFilter,
+  handleClearFilter,
+}: HomeFilterProps) => {
   return (
     <Grid
       container
       columnGap={1}
-      justifyContent="center"
       mt={5}
       display={{ xs: "none", md: "flex" }}
+      justifyContent="center"
     >
-      <Grid item xs={2}>
-        <FormInputDropDown
-          label="Giá tiền"
+      <Grid item xs={3}>
+        <Controller
+          control={control}
           name="price"
-          value={filterPrice}
-          onChange={handleFilterPrice}
-          options={priceOptions}
+          render={({ field }) => (
+            <FormInputDropDown
+              {...field}
+              label="Giá tiền"
+              name="price"
+              options={priceOptions}
+            />
+          )}
         />
       </Grid>
-      <Grid item xs={2}>
-        <FormInputDropDown
-          label="Khuyến mãi"
-          name="saleOff"
-          value={filterPromo}
-          onChange={handleFilterPromo}
-          options={promoOptions}
+      <Grid item xs={3}>
+        <Controller
+          control={control}
+          name="promotion"
+          render={({ field }) => (
+            <FormInputDropDown
+              {...field}
+              label="Khuyến mãi"
+              name="promotion"
+              options={promoOptions}
+            />
+          )}
         />
       </Grid>
-      <Grid item xs={2}>
-        <FormInputDropDown
-          label="Số lượng sao"
+      <Grid item xs={3}>
+        <Controller
+          control={control}
           name="starCount"
-          value={filterStar}
-          onChange={handleFilterStar}
-          options={starCountOptions}
+          render={({ field }) => (
+            <FormInputDropDown
+              {...field}
+              label="Số lượng sao"
+              name="starCount"
+              options={starCountOptions}
+            />
+          )}
         />
       </Grid>
-      {/* <Grid item xs={2}>
-        <FormInputDropDown label="Sắp xếp" name="sort" options={priceOptions} />
-      </Grid> */}
+      <Grid item xs={"auto"}>
+        <Button
+          onClick={handleClickFilter}
+          variant="contained"
+          disabled={!isDirty}
+          disableElevation
+          sx={{ padding: "8px 20px", fontWeight: 550 }}
+        >
+          Lọc
+        </Button>
+      </Grid>
+      <Grid item xs={"auto"}>
+        <Tooltip title="Xóa lọc" placement="top" arrow>
+          <IconButton onClick={handleClearFilter} disabled={!isDirty}>
+            <Refresh color={isDirty ? "primary" : "disabled"} />
+          </IconButton>
+        </Tooltip>
+      </Grid>
     </Grid>
   )
 }

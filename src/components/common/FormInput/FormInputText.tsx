@@ -6,7 +6,7 @@ import { Controller } from "react-hook-form"
 interface Props {
   name: string
   label: string
-  control: Control<any>
+  control: Control<FieldValues>
   error: FieldErrors<FieldValues>
   className?: string
   TextFieldProps?: TextFieldProps

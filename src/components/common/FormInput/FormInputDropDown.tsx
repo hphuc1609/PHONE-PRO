@@ -1,4 +1,4 @@
-import { MenuItem, TextField } from "@mui/material"
+import { MenuItem, TextField, TextFieldProps } from "@mui/material"
 
 interface OptionsProps {
   label: string
@@ -11,6 +11,7 @@ interface Props {
   options: OptionsProps[]
   value?: string
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  TextFieldProps?: TextFieldProps
 }
 
 const FormInputDropDown = ({
@@ -19,7 +20,7 @@ const FormInputDropDown = ({
   value,
   onChange,
   options,
-  ...TextProps
+  TextFieldProps,
 }: Props) => {
   const generateSelectOptions = () =>
     options.map((option) => (
@@ -38,7 +39,7 @@ const FormInputDropDown = ({
       value={value || ""}
       onChange={onChange}
       fullWidth
-      {...TextProps}
+      {...TextFieldProps}
     >
       {generateSelectOptions()}
     </TextField>

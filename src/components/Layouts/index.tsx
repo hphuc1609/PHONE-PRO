@@ -5,7 +5,7 @@ import { mainBackground } from "styles/config"
 import Footer from "./Footer"
 import Header from "./Header"
 import Navbar from "./Navbar"
-import SupportServices from "./SupportServices"
+import Services from "./Liences"
 import { useLocation } from "react-router-dom"
 import scrollToTop from "helper/scrollToTop"
 interface Props {
@@ -68,7 +68,7 @@ const Layout = ({ children }: Props) => {
         <Box sx={{ flexGrow: 1 }}>{children}</Box>
       </Box>
 
-      {pathName && <SupportServices />}
+      {pathName && <Services />}
       {showScrollTop && <ScrollToTop />}
       <Footer />
     </Box>

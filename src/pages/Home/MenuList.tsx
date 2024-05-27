@@ -6,16 +6,16 @@ import { companies } from "utils/company"
 
 interface Props {
   products: ICustomAPIResponse[]
-  setProductBrand: Dispatch<SetStateAction<ICustomAPIResponse[]>>
   setTitle: Dispatch<SetStateAction<string>>
-  setIsShowProduct: Dispatch<SetStateAction<boolean>>
+  setIsShowFilter: Dispatch<SetStateAction<boolean>>
+  setDataFilter: Dispatch<SetStateAction<ICustomAPIResponse[]>>
 }
 
 const MenuList = ({
   products,
-  setProductBrand,
   setTitle,
-  setIsShowProduct,
+  setIsShowFilter,
+  setDataFilter,
 }: Props) => {
   const navigate = useNavigate()
 
@@ -25,17 +25,12 @@ const MenuList = ({
         (product) => product.company?.toLowerCase() === value.toLowerCase()
       )
 
-      setProductBrand(filteredProduct)
       setTitle(value)
-      setIsShowProduct(true)
-
+      setDataFilter(filteredProduct)
+      setIsShowFilter(true)
       navigate(`/brand/${value}`)
     }
-
-    window.scroll({
-      top: 500,
-      behavior: "smooth",
-    })
+    setTimeout(() => window.scroll({ top: 600, behavior: "smooth" }), 300)
   }
 
   return (

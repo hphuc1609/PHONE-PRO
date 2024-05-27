@@ -23,7 +23,7 @@ const useStyles = makeStyles(() => ({
   },
 }))
 
-const SupportServices = () => {
+const Services = () => {
   const classes = useStyles()
 
   return (
@@ -56,4 +56,4 @@ const SupportServices = () => {
   )
 }
 
-export default SupportServices
+export default Services

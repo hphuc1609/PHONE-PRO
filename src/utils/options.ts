@@ -36,12 +36,12 @@ export const promoOptions: IOptions[] = [
 
 export const starCountOptions: IOptions[] = [
   {
-    label: "Trên 2 sao",
-    value: "Trên 2 sao",
+    label: "Dưới 2 sao",
+    value: "Dưới 2 sao",
   },
   {
-    label: "Trên 3 sao",
-    value: "Trên 3 sao",
+    label: "Từ 3 - 4 sao",
+    value: "Từ 3 - 4 sao",
   },
   {
     label: "Trên 4 sao",

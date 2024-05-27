@@ -1,5 +1,5 @@
-import { Close } from "@mui/icons-material"
-import { Box, Button, Grid, Typography } from "@mui/material"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { Box } from "@mui/material"
 import { makeStyles } from "@mui/styles"
 import { realtimeDB } from "Firebase/firebaseConfig"
 import SlideSwiper from "components/Banner"
@@ -9,14 +9,16 @@ import { toastConfig } from "configs/toast"
 import { ICustomAPIResponse } from "models/product"
 import { useEffect, useState } from "react"
 import { Helmet } from "react-helmet"
+import { FieldValues, useForm } from "react-hook-form"
 import { toast } from "react-toastify"
+import { primaryDark } from "styles/config"
 import "swiper/css"
 import "swiper/css/navigation"
+import * as yup from "yup"
 import HomeFilter from "./HomeFilter"
 import HomeProduct from "./HomeProduct"
 import MenuList from "./MenuList"
 import "./style.css"
-import { primaryDark } from "styles/config"
 
 const useStyles = makeStyles(() => ({
   title: {
@@ -36,59 +38,33 @@ const useStyles = makeStyles(() => ({
 
 const HomePage = () => {
   const classes = useStyles()
+  const schema = yup.object().shape({
+    price: yup.string(),
+    promotion: yup.string(),
+    starCount: yup.string(),
+  })
+
+  const {
+    control,
+    formState: { isDirty },
+    handleSubmit,
+    reset,
+  } = useForm<FieldValues>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      price: "",
+      promotion: "",
+      starCount: "",
+    },
+  })
 
   const [productList, setProductList] = useState<ICustomAPIResponse[]>([])
-  const [productBrand, setProductBrand] = useState([])
   const [showLoading, setShowLoading] = useState(false)
-  const [isShowProduct, setIsShowProduct] = useState(false)
-  const [title, setTitle] = useState("")
+  const [isShowFilter, setIsShowFilter] = useState(false)
+  const [brand, setBrand] = useState("")
+  const [dataFilter, setDataFilter] = useState([])
 
-  // Filter price, promotion,
-  const [filterPrice, setFilterPrice] = useState("")
-  const [filterPromo, setFilterPromo] = useState("")
-  const [filterStar, setFilterStar] = useState("")
-
-  const filteredProductsPrice = productList?.filter((product) => {
-    switch (filterPrice) {
-      case "Dưới 2 triệu":
-        return product.price < 2000000
-      case "Từ 2 - 4 triệu":
-        return product.price >= 2000000 && product.price < 4000000
-      case "Từ 4 - 7 triệu":
-        return product.price >= 4000000 && product.price < 7000000
-      default:
-        return true
-    }
-  })
-
-  const filteredProductsPromotion = productList?.filter((product) => {
-    switch (filterPromo) {
-      case "Giảm giá":
-        return product.promotion.name?.toLowerCase() === "giamgia"
-      case "Mới ra mắt":
-        return product.promotion.name?.toLowerCase() === "moiramat"
-      case "Trả góp":
-        return product.promotion.name?.toLowerCase() === "tragop"
-      case "Giá rẻ online":
-        return product.promotion.name?.toLowerCase() === "giare"
-      default:
-        return true
-    }
-  })
-
-  const filteredProductsStar = productList?.filter((product) => {
-    switch (filterStar) {
-      case "Trên 2 sao":
-        return product.star > 2
-      case "Trên 3 sao":
-        return product.star > 3
-      case "Trên 4 sao":
-        return product.star > 4
-      default:
-        return true
-    }
-  })
-
+  // Effect: get product list
   useEffect(() => {
     setShowLoading(true)
     realtimeDB
@@ -107,39 +83,76 @@ const HomePage = () => {
       })
   }, [])
 
-  const handleFilterPrice = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFilterPrice(event.target.value)
-    setIsShowProduct(true)
-  }
-  const handleFilterPromo = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFilterPromo(event.target.value)
-    setIsShowProduct(true)
-  }
-  const handleFilterStar = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFilterStar(event.target.value)
-    setIsShowProduct(true)
+  const handleClickFilter = (valueFilter: FieldValues) => {
+    const filteredProducts = productList.filter((product) => {
+      const priceMatch = (() => {
+        if (!valueFilter?.price) return true
+
+        switch (valueFilter.price) {
+          case "Dưới 2 triệu":
+            return product.price < 2000000
+          case "Từ 2 - 4 triệu":
+            return product.price >= 2000000 && product.price < 4000000
+          case "Từ 4 - 7 triệu":
+            return product.price >= 4000000 && product.price < 7000000
+          default:
+            return false
+        }
+      })()
+
+      const promotionMatch = (() => {
+        if (!valueFilter?.promotion) return true
+
+        switch (valueFilter.promotion) {
+          case "Giảm giá":
+            return product.promotion.name?.toLowerCase() === "giamgia"
+          case "Mới ra mắt":
+            return product.promotion.name?.toLowerCase() === "moiramat"
+          case "Trả góp":
+            return product.promotion.name?.toLowerCase() === "tragop"
+          case "Giá rẻ online":
+            return product.promotion.name?.toLowerCase() === "giare"
+          default:
+            return false
+        }
+      })()
+
+      const starCountMatch = (() => {
+        if (!valueFilter?.starCount) return true
+
+        switch (valueFilter.starCount) {
+          case "Dưới 2 sao":
+            return product.star > 0 && product.star <= 2
+          case "Từ 3 - 4 sao":
+            return product.star > 2 && product.star <= 4
+          case "Trên 4 sao":
+            return product.star > 4
+          default:
+            return false
+        }
+      })()
+
+      return priceMatch && promotionMatch && starCountMatch
+    })
+
+    setDataFilter(filteredProducts)
+    setIsShowFilter(true)
+    setBrand("")
   }
 
   const handleClearFilter = () => {
-    setIsShowProduct(false)
-    setProductBrand([])
-    setFilterPrice("")
-    setFilterPromo("")
-    setFilterStar("")
+    setIsShowFilter(false)
+    reset()
   }
-
-  // const toTableOptions = (tables: string[]): IAutocompleteOption[] =>
-  //   tables.map((table) => ({ label: table, value: table }));
 
   return (
     <>
       <Helmet>
-        <title>Phone Pro - Trang chủ</title>
+        <title>Phone Pro - Thế giới điện thoại</title>
         <meta name="description" content="Description of HomePage ..." />
       </Helmet>
 
       <Loading open={showLoading} />
-
       {/* Banner */}
       <SlideSwiper />
       <Box width="100%" mt={2}>
@@ -151,76 +164,29 @@ const HomePage = () => {
           style={{ objectFit: "fill" }}
         />
       </Box>
-
-      {/* Company Menu */}
+      {/* List Brand */}
       <MenuList
         products={productList}
-        setTitle={setTitle}
-        setProductBrand={setProductBrand}
-        setIsShowProduct={setIsShowProduct}
+        setTitle={setBrand}
+        setIsShowFilter={setIsShowFilter}
+        setDataFilter={setDataFilter}
       />
-
-      {/* Filter Options */}
+      {/* Filters */}
       <HomeFilter
-        filterPrice={filterPrice}
-        handleFilterPrice={handleFilterPrice}
-        filterPromo={filterPromo}
-        handleFilterPromo={handleFilterPromo}
-        filterStar={filterStar}
-        handleFilterStar={handleFilterStar}
+        control={control}
+        isDirty={isDirty}
+        handleClickFilter={handleSubmit(handleClickFilter)}
+        handleClearFilter={handleClearFilter}
       />
 
-      {/* Show list product follow company filter */}
-      {isShowProduct ? (
-        <>
-          <Grid container justifyContent="center" mt={2}>
-            <Button
-              variant="outlined"
-              color="warning"
-              onClick={handleClearFilter}
-              sx={{ display: "flex", alignItems: "flex-start" }}
-            >
-              <Close fontSize="small" />
-              <Typography variant="subtitle2">Xóa lọc</Typography>
-            </Button>
-          </Grid>
-
-          {productBrand.length !== 0 && (
-            <RenderProduct
-              data={productBrand}
-              title={`Điện thoại ${title}`}
-              row={productBrand?.length}
-              className={classes}
-            />
-          )}
-
-          {filterPrice && (
-            <RenderProduct
-              data={filteredProductsPrice}
-              title={`Sản phẩm ${filterPrice}`}
-              row={filteredProductsPrice?.length}
-              className={classes}
-            />
-          )}
-
-          {filterPromo && (
-            <RenderProduct
-              data={filteredProductsPromotion}
-              title={`Sản phẩm ${filterPromo}`}
-              row={filteredProductsPromotion?.length}
-              className={classes}
-            />
-          )}
-
-          {filterStar && (
-            <RenderProduct
-              data={filteredProductsStar}
-              title={`Sản phẩm ${filterStar}`}
-              row={filteredProductsStar?.length}
-              className={classes}
-            />
-          )}
-        </>
+      {/* Show list product */}
+      {isShowFilter ? (
+        <RenderProduct
+          data={dataFilter}
+          title={brand ? `Điện thoại ${brand}` : "Sản phẩm lọc"}
+          row={dataFilter?.length}
+          className={classes}
+        />
       ) : (
         <HomeProduct productList={productList} />
       )}

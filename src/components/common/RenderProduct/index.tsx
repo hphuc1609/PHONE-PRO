@@ -26,11 +26,17 @@ const RenderProduct = ({ data, title, row, className }: ProductBrandProps) => {
       </Grid>
       <Grid item xs={12} px={2} pb={3}>
         <Swiper {...swiperConfig} grid={{ rows: row, fill: "row" }}>
-          {data.map((item) => (
-            <SwiperSlide key={item.productId}>
-              <ProductListRow data={item} />
-            </SwiperSlide>
-          ))}
+          {data.length > 0 ? (
+            data.map((item) => (
+              <SwiperSlide key={item.productId}>
+                <ProductListRow data={item} />
+              </SwiperSlide>
+            ))
+          ) : (
+            <Typography variant="h5" align="center">
+              Không có sản phẩm
+            </Typography>
+          )}
         </Swiper>
       </Grid>
     </Grid>
