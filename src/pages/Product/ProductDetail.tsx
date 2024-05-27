@@ -106,7 +106,7 @@ const Detail = ({ data, user }: Props) => {
                       <>
                         <NumberFormat
                           value={item.price}
-                          color="error"
+                          color="#ea1b23"
                           TextProps={{
                             fontSize: 25,
                             fontWeight: "bold",
@@ -148,31 +148,29 @@ const Detail = ({ data, user }: Props) => {
                       </>
                     ) : (
                       <>
-                        {item.promotion.value !== "" && (
-                          <Typography
-                            fontSize={25}
-                            fontWeight="bold"
+                        {item.promotion.value !== "" ? (
+                          <>
+                            <Typography
+                              fontSize={25}
+                              fontWeight="bold"
+                              color="#ea1b23"
+                            >
+                              {item.promotion.value + "₫"}
+                            </Typography>
+                            <NumberFormat
+                              value={item.price}
+                              TextProps={{
+                                sx: { textDecoration: "line-through" },
+                              }}
+                            />
+                          </>
+                        ) : (
+                          <NumberFormat
+                            value={item.price}
                             color="#ea1b23"
-                          >
-                            {item.promotion.value !== "" &&
-                              item.promotion.value + "₫"}
-                          </Typography>
+                            TextProps={{ fontSize: 25, fontWeight: "bold" }}
+                          />
                         )}
-                        <NumberFormat
-                          value={item.price}
-                          TextProps={
-                            (item.promotion.value === "" && {
-                              color: "#ea1b23",
-                              fontSize: 25,
-                              fontWeight: "bold",
-                            }) ||
-                            (item.promotion.value !== "" && {
-                              sx: {
-                                textDecoration: "line-through",
-                              },
-                            })
-                          }
-                        />
                       </>
                     )}
                   </Box>

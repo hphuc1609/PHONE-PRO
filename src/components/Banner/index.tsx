@@ -1,14 +1,10 @@
 import { Box, Theme, useMediaQuery } from "@mui/material"
-import SwiperCore, { Autoplay, Pagination } from "swiper"
+import { Autoplay, Pagination } from "swiper"
 import "swiper/css/pagination"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/swiper.css"
 
-// install Swiper modules
-SwiperCore.use([Autoplay, Pagination])
-
 const slideShow = [
-  "../assets/images/banner/banner0.gif",
   "../assets/images/banner/banner1.png",
   "../assets/images/banner/banner2.png",
   "../assets/images/banner/banner3.png",
@@ -18,29 +14,33 @@ const slideShow = [
   "../assets/images/banner/banner7.png",
   "../assets/images/banner/banner8.png",
   "../assets/images/banner/banner9.png",
+  // "../assets/images/banner/banner0.gif",
 ]
 
 const SlideSwiper = () => {
-  const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"))
+  const smallScreen = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down("md")
+  )
 
   return (
     <Swiper
-      slidesPerView={isMobile ? 1 : 2}
-      spaceBetween={200}
+      slidesPerView={smallScreen ? 1 : 2}
+      spaceBetween={smallScreen ? 0 : 400}
       pagination={{ clickable: true }}
       autoplay={{ disableOnInteraction: false }}
-      loop={true}
+      loop={slideShow.length > 2}
       grabCursor={true}
+      modules={[Autoplay, Pagination]}
     >
-      {slideShow.map((item, index) => (
-        <SwiperSlide key={index}>
-          <Box paddingTop={8} height={{ xs: 150, md: 260 }} margin="auto">
+      {slideShow.map((item) => (
+        <SwiperSlide key={item}>
+          <Box paddingTop={smallScreen && 8} height={{ xs: 200, md: 300 }}>
             <img
               src={item}
-              alt="..."
-              width="fit-content"
+              alt="IMG..."
+              width={smallScreen ? "100%" : "fit-content"}
               height="100%"
-              style={{ margin: "0 auto", display: "flex" }}
+              loading="lazy"
             />
           </Box>
         </SwiperSlide>

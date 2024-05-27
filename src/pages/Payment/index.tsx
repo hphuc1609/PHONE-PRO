@@ -8,11 +8,10 @@ import { useNavigate } from "react-router-dom"
 import { useReactToPrint } from "react-to-print"
 import { toast } from "react-toastify"
 import { useCart } from "react-use-cart"
+import { WrappedComponentProps } from "react-with-firebase-auth"
 import * as yup from "yup"
 import PaymentForm from "./PaymentForm"
 import Invoice from "./PaymentInvoice"
-import { WrappedComponentProps } from "react-with-firebase-auth"
-import scrollToTop from "helper/scrollToTop"
 
 const Payment = ({ user }: WrappedComponentProps) => {
   const navigate = useNavigate()
@@ -46,7 +45,6 @@ const Payment = ({ user }: WrappedComponentProps) => {
 
   const handleCancelPayment = () => {
     navigate("/")
-    scrollToTop()
   }
 
   const handlePayment = (data: FieldValues) => {
@@ -66,7 +64,6 @@ const Payment = ({ user }: WrappedComponentProps) => {
 
       toast.success("Thanh toán thành công", toastConfig)
       emptyCart()
-      scrollToTop()
     }
   }
 

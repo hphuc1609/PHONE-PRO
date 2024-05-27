@@ -9,7 +9,6 @@ import { useNavigate, useParams } from "react-router-dom"
 import { WrappedComponentProps } from "react-with-firebase-auth"
 import { borderColor } from "styles/config"
 import Comment from "./Comment"
-import scrollToTop from "helper/scrollToTop"
 
 const CommentBox = ({ user }: WrappedComponentProps) => {
   const { id } = useParams()
@@ -99,7 +98,6 @@ const CommentBox = ({ user }: WrappedComponentProps) => {
 
   const handleAccept = () => {
     navigate("/login")
-    scrollToTop()
   }
 
   const handleOpenReply = (commentId: any) => {

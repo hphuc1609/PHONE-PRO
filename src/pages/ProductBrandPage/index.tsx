@@ -5,7 +5,6 @@ import { realtimeDB } from "Firebase/firebaseConfig"
 import Loading from "components/Loading"
 import RenderProduct from "components/common/RenderProduct"
 import { toastConfig } from "configs/toast"
-import scrollToTop from "helper/scrollToTop"
 import { ICustomAPIResponse } from "models/product"
 import { useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
@@ -51,7 +50,6 @@ const ProductBrandPage = () => {
 
   const handleBackHome = () => {
     navigate("/")
-    scrollToTop()
   }
 
   const filteredProduct = productList.filter(

@@ -13,7 +13,6 @@ import { useNavigate } from "react-router-dom"
 import { useCart } from "react-use-cart"
 import { borderColor } from "styles/config"
 import EmptyCart from "./EmptyCart"
-import scrollToTop from "helper/scrollToTop"
 
 const useStyles = makeStyles(() => ({
   content: {
@@ -61,7 +60,6 @@ const DrawerContent = ({ handleClose }: Props) => {
   const handleOrderClick = () => {
     navigate("/payment")
     handleClose()
-    scrollToTop()
   }
 
   return (

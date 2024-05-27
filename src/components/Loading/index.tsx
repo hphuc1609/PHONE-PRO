@@ -18,14 +18,8 @@ const Loading = ({ open }: Props) => {
     >
       <CircularProgress color="primary" size={60} />
       <Typography variant="body1" color="white">
-        Loading...
+        Đang tải dữ liệu...
       </Typography>
-      {/* <img
-        width={100}
-        height={100}
-        src="../assets/Loading.gif"
-        alt="Loading..."
-      /> */}
     </Backdrop>
   )
 }
