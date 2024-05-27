@@ -2,7 +2,6 @@ import { AccountCircle, Logout, Person } from "@mui/icons-material"
 import { Box, Divider, Menu, MenuItem, Typography } from "@mui/material"
 import ListItemIcon from "@mui/material/ListItemIcon"
 import { createComponentWithAuth } from "Firebase/firebaseConfig"
-import scrollToTop from "helper/scrollToTop"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { WrappedComponentProps } from "react-with-firebase-auth"
@@ -18,12 +17,12 @@ const UserMenu = ({ signOut, user }: WrappedComponentProps) => {
     setOpenMenu(null)
   }
 
-  const handleLogOut = () => {
-    setTimeout(() => {
-      navigate("/login")
-      scrollToTop()
-    }, 200)
+  const handleAccountMenu = () => {
+    handleCloseMenu()
+    navigate("/profile")
+  }
 
+  const handleLogOut = () => {
     signOut()
     localStorage.clear()
   }
@@ -58,11 +57,7 @@ const UserMenu = ({ signOut, user }: WrappedComponentProps) => {
           {user?.email}
         </Typography>
         <Divider />
-        <MenuItem
-          onClick={() => {
-            handleCloseMenu(), navigate("/profile")
-          }}
-        >
+        <MenuItem onClick={handleAccountMenu}>
           <ListItemIcon>
             <Person fontSize="small" />
           </ListItemIcon>

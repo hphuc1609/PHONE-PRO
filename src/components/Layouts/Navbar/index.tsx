@@ -61,8 +61,11 @@ const Navbar = () => {
         justifyContent="center"
         bgcolor="white"
         boxShadow="0 2px 10px 0 rgba(0,0,0,0.15)"
-        position="relative"
-        pt={headerHeight}
+        position="fixed"
+        top={0}
+        width="100%"
+        zIndex={99}
+        mt={headerHeight}
       >
         <List
           sx={{

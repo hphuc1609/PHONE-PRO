@@ -1,19 +1,23 @@
 import { Search } from "@mui/icons-material"
-import {
-  Autocomplete,
-  InputBase,
-  ListItem,
-  ListItemText,
-  Tooltip,
-} from "@mui/material"
+import { Autocomplete, InputBase, ListItem, ListItemText } from "@mui/material"
 import { makeStyles } from "@mui/styles"
 import NumberFormat from "components/common/NumberFormat"
 import { realtimeDB } from "Firebase/firebaseConfig"
 import { ICustomAPIResponse } from "models/product"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { text } from "stream/consumers"
 
 const useStyles = makeStyles(() => ({
+  "@global": {
+    "*::-webkit-scrollbar": {
+      width: "0.5em",
+    },
+    "*::-webkit-scrollbar-thumb": {
+      backgroundColor: "rgba(0,0,0,.1)",
+      borderRadius: 5,
+    },
+  },
   input: {
     height: 40,
     width: "100%",
@@ -24,18 +28,19 @@ const useStyles = makeStyles(() => ({
     lineHeight: 38,
     fontSize: 13,
 
-    "&.Mui-focused": {
-      border: "1.5px solid #0C9",
-    },
+    // "&.Mui-focused": {
+    //   border: "1.5px solid #0C9",
+    // },
   },
 }))
 
 const SearchSuggestion = () => {
   const classes = useStyles()
   const navigate = useNavigate()
-  const [productList, setProductList] = useState([])
+  const [productList, setProductList] = useState<ICustomAPIResponse[]>([])
   const isLoading = productList.length === 0
 
+  // Effect: get product list
   useEffect(() => {
     realtimeDB.ref("products").once("value", (snapshot) => {
       if (snapshot.exists()) {
@@ -60,10 +65,8 @@ const SearchSuggestion = () => {
     })
   }, [])
 
-  const handleOnChange = (value: ICustomAPIResponse) => {
-    if (value.productId) {
-      navigate(`/product/details/${value.productId}`)
-    }
+  const handleOnChange = (productId: string) => {
+    navigate(`/product/details/${productId}`)
   }
 
   return (
@@ -72,39 +75,61 @@ const SearchSuggestion = () => {
       id="search"
       freeSolo
       loading={isLoading}
-      loadingText="Đang tải..."
+      loadingText="Tải tìm kiếm..."
       selectOnFocus
       autoHighlight
       options={productList}
       sx={{ width: { xs: "80%", md: "33%" } }}
       renderOption={(props, option) => (
-        <ListItem
-          {...props}
-          component="span"
-          dense
-          sx={{
-            columnGap: 2,
-            borderBottom: `1px solid #e8e8e8`,
-            "&:last-child": { border: "none" },
-          }}
-        >
+        <ListItem {...props} dense sx={{ columnGap: 2 }}>
           <div style={{ width: 70, height: 70 }}>
             <img
-              src={option.photoImage || "/"}
+              src={option.photoImage}
               alt={option.title}
               width="100%"
               height="100%"
-              style={{ objectFit: "revert" }}
+              style={{ objectFit: "contain" }}
             />
           </div>
           <ListItemText
+            style={{ padding: 20 }}
+            primaryTypographyProps={{ variant: "body1", fontWeight: 500 }}
             primary={option.title}
-            secondary={<NumberFormat value={option.price} color="#BB161C" />}
+            secondary={
+              <div>
+                {option.promotion.name === "giare" ? (
+                  option.promotion.value !== "" ? (
+                    <>
+                      <NumberFormat
+                        value={option.price}
+                        color="inherit"
+                        TextProps={{
+                          fontSize: 14,
+                          sx: { textDecoration: "line-through" },
+                        }}
+                      />
+                      <span style={{ color: "#BB161C", fontSize: 16 }}>
+                        {option.promotion.value + " ₫"}
+                      </span>
+                    </>
+                  ) : (
+                    <NumberFormat value={option.price} color="#BB161C" />
+                  )
+                ) : (
+                  <NumberFormat value={option.price} color="#BB161C" />
+                )}
+              </div>
+            }
           />
         </ListItem>
       )}
-      getOptionLabel={(options) => options.title || ""}
-      onChange={(e, value) => value !== undefined && handleOnChange(value)}
+      getOptionLabel={(option) =>
+        typeof option === "string" ? option : option.title || ""
+      }
+      onChange={(e, value) => {
+        const { productId } = value as ICustomAPIResponse
+        productId !== undefined && handleOnChange(productId)
+      }}
       renderInput={(params) => {
         return (
           <InputBase
@@ -112,11 +137,7 @@ const SearchSuggestion = () => {
             {...params.InputProps}
             placeholder="Bạn tìm gì..."
             className={classes.input}
-            endAdornment={
-              <Tooltip arrow title="Ctrl+F" placement="right">
-                <Search sx={{ cursor: "default" }} />
-              </Tooltip>
-            }
+            endAdornment={<Search sx={{ cursor: "default" }} />}
           />
         )
       }}
