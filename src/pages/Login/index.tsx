@@ -60,7 +60,7 @@ const Login = ({ signInWithEmailAndPassword }: WrappedComponentProps) => {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm({
+  } = useForm<FieldValues>({
     resolver: yupResolver(schema),
     defaultValues: { email: "", password: "" },
   })
