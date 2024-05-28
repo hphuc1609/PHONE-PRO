@@ -6,12 +6,12 @@ import {
   Star,
   WorkspacePremium,
 } from "@mui/icons-material"
-import { Box, Button, Grid, Typography } from "@mui/material"
+import { Box, Button, Grid, Icon, Typography } from "@mui/material"
 import AlertDialog from "components/common/Dialog"
 import NumberFormat from "components/common/NumberFormat"
 import { toastConfig } from "configs/toast"
 import { ICustomAPIResponse } from "models/product"
-import { useState } from "react"
+import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import { useCart } from "react-use-cart"
@@ -44,19 +44,66 @@ const Detail = ({ data, user }: Props) => {
     }
   }
 
-  const getDetailPromo = (item: ICustomAPIResponse) => {
+  const renderTextPromotion = (item: ICustomAPIResponse) => {
     switch (item.promotion.name) {
       case "Tragop":
         return `Khách hàng có thể mua trả góp sản phẩm lãi suất ${item.promotion.value}% với thời hạn 6 tháng kể từ khi mua hàng.`
-
       case "Giamgia":
         return `Khách hàng sẽ được giảm ${item.promotion.value}₫ khi tới mua trực tiếp tại cửa hàng.`
-
       case "Moiramat":
         return `Khách hàng sẽ được thử máy miễn phí tại cửa hàng. Có thể đổi trả lỗi trong vòng 2 tháng.`
-
       default:
         return `Cơ hội trúng giải thưởng khi trả góp Home Credit.`
+    }
+  }
+
+  const renderSubText = [
+    {
+      text: "Bộ sản phẩm gồm: Hộp, Sách hướng dẫn, Cây lấy sim, Cáp Lightning - Type C.",
+      icon: <Inventory2Outlined />,
+    },
+    {
+      text: "Bảo hành chính hãng điện thoại 1 năm tại các trung tâm bảo hành hãng.",
+      icon: <WorkspacePremium />,
+    },
+    {
+      text: "Hư gì đổi nấy 12 tháng tại 3385 cửa hàng điện thoại trên toàn quốc (miễn phí tháng đầu).",
+      icon: <CachedOutlined />,
+    },
+  ]
+
+  const renderBgColor = (item: ICustomAPIResponse) => {
+    return (
+      (item.promotion.name?.toLowerCase() === "giare" && "#1A73E8") ||
+      (item.promotion.name?.toLowerCase() === "giamgia" && "#ea1b23") ||
+      (item.promotion.name?.toLowerCase() === "moiramat" && "#00a650") ||
+      (item.promotion.name?.toLowerCase() === "tragop" && "#f7941d")
+    )
+  }
+
+  const renderLabel = (item: ICustomAPIResponse) => {
+    switch (item.promotion.name?.toLowerCase()) {
+      case "giare":
+        return "Giá rẻ online"
+      case "giamgia":
+        return "Giảm"
+      case "moiramat":
+        return "Mới ra mắt"
+      case "tragop":
+        return "Trả góp"
+      default:
+        return ""
+    }
+  }
+
+  const renderDiscount = (item: ICustomAPIResponse) => {
+    switch (item.promotion.name?.toLowerCase()) {
+      case "tragop":
+        return <span style={{ marginLeft: 5 }}>{item.promotion.value}%</span>
+      case "giamgia":
+        return <span style={{ marginLeft: 5 }}>{item.promotion.value}</span>
+      default:
+        return ""
     }
   }
 
@@ -99,11 +146,12 @@ const Detail = ({ data, user }: Props) => {
                 />
               </Grid>
 
+              {/* Price */}
               <Grid item xs={4}>
                 <Grid container item rowGap={1.5}>
                   <Box display="flex" alignItems="center" columnGap={2}>
                     {item.promotion.name !== "giare" ? (
-                      <>
+                      <React.Fragment>
                         <NumberFormat
                           value={item.price}
                           color="#ea1b23"
@@ -117,39 +165,16 @@ const Detail = ({ data, user }: Props) => {
                           fontWeight={500}
                           color="white"
                           p={0.5}
-                          bgcolor={
-                            (item.promotion.name?.toLowerCase() === "giamgia" &&
-                              "#ea1b23") ||
-                            (item.promotion.name?.toLowerCase() ===
-                              "moiramat" &&
-                              "#00a650") ||
-                            (item.promotion.name?.toLowerCase() === "tragop" &&
-                              "#f7941d")
-                          }
+                          bgcolor={renderBgColor(item)}
                         >
-                          {(item.promotion.name?.toLowerCase() === "giamgia" &&
-                            "Giảm") ||
-                            (item.promotion.name?.toLowerCase() ===
-                              "moiramat" &&
-                              "Mới ra mắt") ||
-                            (item.promotion.name?.toLowerCase() === "tragop" &&
-                              "Trả góp")}
-
-                          {item.promotion.name?.toLowerCase() === "tragop" ? (
-                            <span style={{ marginLeft: 5 }}>
-                              {item.promotion.value + "%"}
-                            </span>
-                          ) : (
-                            <span style={{ marginLeft: 5 }}>
-                              {item.promotion.value}
-                            </span>
-                          )}
+                          {renderLabel(item)}
+                          {renderDiscount(item)}
                         </Typography>
-                      </>
+                      </React.Fragment>
                     ) : (
-                      <>
+                      <React.Fragment>
                         {item.promotion.value !== "" ? (
-                          <>
+                          <React.Fragment>
                             <Typography
                               fontSize={25}
                               fontWeight="bold"
@@ -163,7 +188,7 @@ const Detail = ({ data, user }: Props) => {
                                 sx: { textDecoration: "line-through" },
                               }}
                             />
-                          </>
+                          </React.Fragment>
                         ) : (
                           <NumberFormat
                             value={item.price}
@@ -171,7 +196,16 @@ const Detail = ({ data, user }: Props) => {
                             TextProps={{ fontSize: 25, fontWeight: "bold" }}
                           />
                         )}
-                      </>
+                        <Typography
+                          fontSize={12}
+                          fontWeight={500}
+                          color="white"
+                          p={0.5}
+                          bgcolor={renderBgColor(item)}
+                        >
+                          {renderLabel(item)}
+                        </Typography>
+                      </React.Fragment>
                     )}
                   </Box>
                   <Box
@@ -187,11 +221,12 @@ const Detail = ({ data, user }: Props) => {
                     <Box display="flex" alignItems="center" columnGap={1}>
                       <CheckCircle fontSize="small" color="success" />
                       <Typography variant="body2">
-                        {getDetailPromo(item)}
+                        {renderTextPromotion(item)}
                       </Typography>
                     </Box>
                   </Box>
 
+                  {/* Thông tin bảo hành */}
                   <Grid
                     container
                     item
@@ -201,33 +236,14 @@ const Detail = ({ data, user }: Props) => {
                     py={1}
                     rowGap={1}
                   >
-                    <Grid item xs={12}>
-                      <Box display="flex" alignItems="center" columnGap={1}>
-                        <Inventory2Outlined fontSize="small" color="primary" />
-                        <Typography variant="body2">
-                          Bộ sản phẩm gồm: Hộp, Sách hướng dẫn, Cây lấy sim, Cáp
-                          Lightning - Type C.
-                        </Typography>
-                      </Box>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <Box display="flex" alignItems="center" columnGap={1}>
-                        <WorkspacePremium fontSize="small" color="primary" />
-                        <Typography variant="body2">
-                          Bảo hành chính hãng điện thoại 1 năm tại các trung tâm
-                          bảo hành hãng.
-                        </Typography>
-                      </Box>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <Box display="flex" alignItems="center" columnGap={1}>
-                        <CachedOutlined fontSize="small" color="primary" />
-                        <Typography variant="body2">
-                          Hư gì đổi nấy 12 tháng tại 3385 siêu thị toàn quốc
-                          (miễn phí tháng đầu).
-                        </Typography>
-                      </Box>
-                    </Grid>
+                    {renderSubText.map((item) => (
+                      <Grid key={item.text} item xs={12}>
+                        <Box display="flex" alignItems="center" columnGap={1}>
+                          <Icon color="primary">{item.icon}</Icon>
+                          <Typography variant="body2">{item.text}</Typography>
+                        </Box>
+                      </Grid>
+                    ))}
                   </Grid>
 
                   <Grid item xs={12}>

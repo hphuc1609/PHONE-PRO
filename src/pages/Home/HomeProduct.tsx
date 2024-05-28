@@ -20,90 +20,88 @@ interface Props {
 
 const HomeProduct = ({ productList }: Props) => {
   return (
-    <>
-      <Grid container>
-        <Grid container item rowSpacing={2}>
-          <Grid item xs={12}>
-            <ProductListTitle
-              title="Sản phẩm nổi bật"
-              icon={<Whatshot color="error" />}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Swiper {...swiperConfig}>
-              {productList.map(
-                (item) =>
-                  item.promotion.name?.toLowerCase() === "giare" && (
-                    <SwiperSlide key={item.productId}>
-                      <ProductListRow data={item} />
-                    </SwiperSlide>
-                  )
-              )}
-            </Swiper>
-          </Grid>
+    <Grid container>
+      <Grid container item rowSpacing={2}>
+        <Grid item xs={12}>
+          <ProductListTitle
+            title="Sản phẩm nổi bật"
+            icon={<Whatshot color="error" />}
+          />
         </Grid>
-        <Grid container rowSpacing={2}>
-          <Grid item xs={12}>
-            <ProductListTitle
-              title="Sản phẩm mới"
-              icon={<NewReleases color="secondary" />}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Swiper {...swiperConfig}>
-              {productList.map(
-                (item) =>
-                  item.promotion.name?.toLowerCase() === "moiramat" && (
-                    <SwiperSlide key={item.productId}>
-                      <ProductListRow data={item} />
-                    </SwiperSlide>
-                  )
-              )}
-            </Swiper>
-          </Grid>
-        </Grid>
-        <Grid container rowSpacing={2}>
-          <Grid item xs={12}>
-            <ProductListTitle
-              title="Trả góp 0%"
-              icon={<MonetizationOn color="warning" />}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Swiper {...swiperConfig}>
-              {productList.map(
-                (item) =>
-                  item.promotion.name?.toLowerCase() === "tragop" && (
-                    <SwiperSlide key={item.productId}>
-                      <ProductListRow data={item} />
-                    </SwiperSlide>
-                  )
-              )}
-            </Swiper>
-          </Grid>
-        </Grid>
-        <Grid container rowSpacing={2}>
-          <Grid item xs={12}>
-            <ProductListTitle
-              title="Giảm giá sốc"
-              icon={<Discount color="error" />}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Swiper {...swiperConfig}>
-              {productList.map(
-                (item) =>
-                  item.promotion.name?.toLowerCase() === "giamgia" && (
-                    <SwiperSlide key={item.productId}>
-                      <ProductListRow data={item} />
-                    </SwiperSlide>
-                  )
-              )}
-            </Swiper>
-          </Grid>
+        <Grid item xs={12}>
+          <Swiper {...swiperConfig}>
+            {productList.map(
+              (item) =>
+                item.star === 5 && (
+                  <SwiperSlide key={item.productId}>
+                    <ProductListRow data={item} />
+                  </SwiperSlide>
+                )
+            )}
+          </Swiper>
         </Grid>
       </Grid>
-    </>
+      <Grid container rowSpacing={2}>
+        <Grid item xs={12}>
+          <ProductListTitle
+            title="Sản phẩm mới"
+            icon={<NewReleases color="secondary" />}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Swiper {...swiperConfig}>
+            {productList.map(
+              (item) =>
+                item.promotion.name?.toLowerCase() === "moiramat" && (
+                  <SwiperSlide key={item.productId}>
+                    <ProductListRow data={item} />
+                  </SwiperSlide>
+                )
+            )}
+          </Swiper>
+        </Grid>
+      </Grid>
+      <Grid container rowSpacing={2}>
+        <Grid item xs={12}>
+          <ProductListTitle
+            title="Trả góp 0%"
+            icon={<MonetizationOn color="warning" />}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Swiper {...swiperConfig}>
+            {productList.map(
+              (item) =>
+                item.promotion.name?.toLowerCase() === "tragop" && (
+                  <SwiperSlide key={item.productId}>
+                    <ProductListRow data={item} />
+                  </SwiperSlide>
+                )
+            )}
+          </Swiper>
+        </Grid>
+      </Grid>
+      <Grid container rowSpacing={2}>
+        <Grid item xs={12}>
+          <ProductListTitle
+            title="Giảm giá sốc"
+            icon={<Discount color="error" />}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Swiper {...swiperConfig}>
+            {productList.map(
+              (item) =>
+                item.promotion.name?.toLowerCase() === "giamgia" && (
+                  <SwiperSlide key={item.productId}>
+                    <ProductListRow data={item} />
+                  </SwiperSlide>
+                )
+            )}
+          </Swiper>
+        </Grid>
+      </Grid>
+    </Grid>
   )
 }
 

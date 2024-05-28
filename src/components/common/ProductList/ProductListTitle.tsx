@@ -60,15 +60,19 @@ const ProductListTitle = ({ title, icon, disable = false }: Props) => {
           )}
         </Typography>
         {!disable ? (
-          <Button color="inherit">
-            <Typography
-              fontSize={{ xs: 12, md: 15 }}
-              textTransform="capitalize"
-            >
-              Xem thêm
-            </Typography>
+          <Typography
+            fontSize={{ xs: 12, md: 15 }}
+            textTransform="capitalize"
+            sx={{
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              ":hover": { textDecoration: "underline" },
+            }}
+          >
+            Xem thêm
             <ChevronRightOutlined fontSize="small" />
-          </Button>
+          </Typography>
         ) : null}
       </Box>
     </>
