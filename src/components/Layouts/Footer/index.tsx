@@ -9,17 +9,21 @@ const Footer = () => {
       display="flex"
       justifyContent="center"
     >
-      <Typography color="inherit" display="flex">
-        Copyright © 2023
-        <Typography
-          component="a"
-          href="/"
-          color="primary"
-          fontWeight={600}
-          sx={{ textDecoration: "none", ml: 0.5 }}
-        >
-          PhonePro
-        </Typography>
+      <Typography color="inherit" display="flex" gap={1}>
+        <span>
+          Copyright © {new Date().getFullYear()}
+          <Typography
+            component="a"
+            href="/"
+            color="primary"
+            fontWeight={600}
+            sx={{ ml: 0.5 }}
+          >
+            PhonePro
+          </Typography>
+          .
+        </span>
+        All Rights Reserved
       </Typography>
     </Box>
   )

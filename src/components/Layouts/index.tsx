@@ -52,7 +52,7 @@ const Layout = ({ children }: Props) => {
   }, [location])
 
   return (
-    <Box width="100%" height="100vh" maxHeight="-webkit-fill-available">
+    <Box position={"relative"} width="100%" minHeight="100vh">
       <CssBaseline />
       <Header />
       <Navbar />
@@ -62,12 +62,12 @@ const Layout = ({ children }: Props) => {
         pb={{ xs: 2, md: 8 }}
         px={{ xs: 1, md: 8 }}
         width={{ xl: "1500px" }}
+        minHeight={"100vh"}
         margin="auto"
         bgcolor={mainBackground}
       >
         <Box sx={{ flexGrow: 1 }}>{children}</Box>
       </Box>
-
       {pathName && <Services />}
       {showScrollTop && <ScrollToTop />}
       <Footer />
