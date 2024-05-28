@@ -4,24 +4,39 @@
 
 ## Overview
 
-The Phone Store App is a modern and user-friendly e-commerce web application built using React.js. It offers a seamless shopping experience for purchasing the latest smartphones and accessories. With a responsive design and an intuitive user interface, this application provides customers with a hassle-free way to browse, select, and purchase their favorite devices.
+The Phone Pro application is a modern and user-friendly built with:
+
+- React + Vite
+- Typescript
+- Material-UI
+- Swiper
+- Firebase
+- Tawk.to
 
 ## Features
 
-- **Product Catalog:** Browse a wide range of smartphones and accessories with detailed product information.
-- **User Authentication:** Create an account, sign in, and manage your profile for personalized shopping.
-- **Shopping Cart:** Easily add and remove items from your cart, view your order summary, and proceed to checkout.
-- **Payment Integration:** Securely complete purchases with integrated payment gateways.
-- **Product Reviews:** Read and leave reviews for products to help others make informed decisions.
-- **Responsive Design:** Enjoy a seamless shopping experience on both desktop and mobile devices.
+- Login / Register
+- Product Catalog
+- Shopping Cart
+- Adding Cart
+- Comment
+- Payment Cash
+- Print in Bill
+
+## Preview
+
+![Home Page](/demo/image.png)
+![Cart](/demo/image-2.png)
+![Detail Page](/demo/image-1.png)
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/yourusername/PHONE-STORE-UAT.git`
-2. Navigate to the project directory: `cd PHONE-STORE-UAT`
-3. Install dependencies: `npm install`
-4. Start the development server: `npm start`
+1. Clone the repository.
+2. Navigate to the project directory: `cd <project-name>`
+3. Run `npm install` or `yarn`
+4. Start the development server: `npm run dev` or `yarn dev`
 
-## Contributing
+## Support
 
-We welcome contributions from the community! If you'd like to contribute to the project, please follow our [contributing guidelines](CONTRIBUTING.md).
+Supporting me a star ⭐
+Thanks for visiting my repo
