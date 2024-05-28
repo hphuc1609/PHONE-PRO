@@ -60,7 +60,7 @@ const Navbar = () => {
         display={{ xs: "none", md: "flex" }}
         justifyContent="center"
         bgcolor="white"
-        boxShadow="0 2px 10px 0 rgba(0,0,0,0.15)"
+        boxShadow="0 2px 10px 0 rgba(0,0,0,0.1)"
         position="fixed"
         top={0}
         width="100%"
@@ -86,51 +86,51 @@ const Navbar = () => {
             />
           ))}
         </List>
-      </Box>
 
-      {openMenu && (
-        <List
-          sx={{
-            position: "absolute",
-            zIndex: 99,
-            top: `calc(${headerHeight} + 3.1rem)`,
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: "fit-content",
-            bgcolor: "white",
-            boxShadow: "0 2px 10px 0 rgba(0,0,0,0.15)",
-            p: 0,
-          }}
-          onMouseLeave={() => setOpenMenu(false)}
-        >
-          <Grid container display="flex" justifyContent="center">
-            {navItems.map((item) =>
-              item.children?.map((child) => (
-                <Grid item xs={0} key={child.name}>
-                  <ListItemText
-                    primary={child.name}
-                    sx={{
-                      flex: "unset",
-                      minWidth: 100,
-                      textAlign: "center",
-                      color:
-                        checkActiveNavLink(child.link) &&
-                        theme.palette.primary.main,
-                      position: "relative",
-                      cursor: "pointer",
-                      padding: "0.5rem 0",
-                      "&:hover": {
-                        color: theme.palette.primary.main,
-                      },
-                    }}
-                    onClick={() => handleClickProduct(child.link)}
-                  />
-                </Grid>
-              ))
-            )}
-          </Grid>
-        </List>
-      )}
+        {openMenu && (
+          <List
+            sx={{
+              position: "absolute",
+              zIndex: 99,
+              top: "100%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: "65%",
+              bgcolor: "white",
+              boxShadow: "0 2px 10px 0 rgba(0,0,0,0.1)",
+              p: 0,
+            }}
+            onMouseLeave={() => setOpenMenu(false)}
+          >
+            <Grid container display="flex" justifyContent="center">
+              {navItems.map((item) =>
+                item.children?.map((child) => (
+                  <Grid item xs={0} key={child.name}>
+                    <ListItemText
+                      primary={child.name}
+                      sx={{
+                        flex: "unset",
+                        minWidth: 100,
+                        textAlign: "center",
+                        color:
+                          checkActiveNavLink(child.link) &&
+                          theme.palette.primary.main,
+                        position: "relative",
+                        cursor: "pointer",
+                        padding: "0.5rem 0",
+                        "&:hover": {
+                          color: theme.palette.primary.main,
+                        },
+                      }}
+                      onClick={() => handleClickProduct(child.link)}
+                    />
+                  </Grid>
+                ))
+              )}
+            </Grid>
+          </List>
+        )}
+      </Box>
     </>
   )
 }

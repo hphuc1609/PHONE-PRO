@@ -1,7 +1,7 @@
 import { ShoppingBasket } from "@mui/icons-material"
-import { Grid } from "@mui/material"
+import { Grid, Skeleton } from "@mui/material"
 import { realtimeDB } from "Firebase/firebaseConfig"
-import Loading from "components/Loading"
+import CommentBox from "components/CommentBox"
 import ProductListRow from "components/common/ProductList/ProductListRow"
 import ProductListTitle from "components/common/ProductList/ProductListTitle"
 import { swiperConfig } from "configs/swiper"
@@ -16,17 +16,27 @@ import Detail from "./ProductDetail"
 
 import "swiper/css"
 import "swiper/css/grid"
-import CommentBox from "components/CommentBox"
 
 SwiperCore.use([GridSwiper])
 
+const LoadingDetail = () => {
+  return (
+    <div style={{ display: "grid", gap: 20 }}>
+      <Skeleton variant="text" height={45} width={500} />
+      <div style={{ display: "flex", justifyContent: "center", gap: 20 }}>
+        {Array.from({ length: 3 }).map((_, index) => (
+          <Skeleton key={index} variant="rounded" height={300} width={"100%"} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
 const Product = () => {
   const location = useLocation()
-
   const [showLoading, setShowLoading] = useState(false)
   const [productList, setProductList] = useState([])
   const [newProduct, setNewProduct] = useState([])
-
   const paramsId = location.pathname.split("/")[3]
 
   const filteredProduct = productList.filter(
@@ -66,11 +76,9 @@ const Product = () => {
         <title>Phone Pro - Chi tiết sản phẩm</title>
         <meta name="description" content="Description of Product details ..." />
       </Helmet>
-      <Loading open={showLoading} />
 
       <Detail data={filteredProduct} />
-
-      {!showLoading && (
+      {!showLoading ? (
         <>
           <CommentBox />
           <Grid container rowSpacing={2} mt={10}>
@@ -92,6 +100,8 @@ const Product = () => {
             </Grid>
           </Grid>
         </>
+      ) : (
+        <LoadingDetail />
       )}
     </>
   )

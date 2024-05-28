@@ -2,7 +2,7 @@ import { KeyboardArrowLeft } from "@mui/icons-material"
 import { Button, Grid } from "@mui/material"
 import { makeStyles } from "@mui/styles"
 import { realtimeDB } from "Firebase/firebaseConfig"
-import Loading from "components/Loading"
+import LoadingWithBackdrop from "components/Loading"
 import RenderProduct from "components/common/RenderProduct"
 import { toastConfig } from "configs/toast"
 import { ICustomAPIResponse } from "models/product"
@@ -81,8 +81,7 @@ const ProductBrandPage = () => {
         Trở về trang chủ
       </Button>
 
-      <Loading open={showLoading} />
-
+      <LoadingWithBackdrop open={showLoading} />
       <Grid container spacing={2} mt={1}>
         <Grid item xs={12}>
           <RenderProduct

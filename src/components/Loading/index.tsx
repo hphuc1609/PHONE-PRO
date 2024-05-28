@@ -1,11 +1,10 @@
 import { Backdrop, CircularProgress, Typography } from "@mui/material"
-import { primaryDark } from "styles/config"
 
 interface Props {
   open: boolean
 }
 
-const Loading = ({ open }: Props) => {
+const LoadingWithBackdrop = ({ open }: Props) => {
   return (
     <Backdrop
       sx={{
@@ -24,4 +23,4 @@ const Loading = ({ open }: Props) => {
   )
 }
 
-export default Loading
+export default LoadingWithBackdrop

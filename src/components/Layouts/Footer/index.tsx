@@ -11,19 +11,19 @@ const Footer = () => {
     >
       <Typography color="inherit" display="flex" gap={1}>
         <span>
-          Copyright © {new Date().getFullYear()}
+          Copyright ©
           <Typography
             component="a"
             href="/"
             color="primary"
             fontWeight={600}
-            sx={{ ml: 0.5 }}
+            sx={{ ml: 0.5, textDecoration: "none" }}
           >
             PhonePro
           </Typography>
           .
         </span>
-        All Rights Reserved
+        Disgned by Phuc Luu
       </Typography>
     </Box>
   )

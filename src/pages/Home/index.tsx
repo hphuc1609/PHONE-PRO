@@ -3,7 +3,7 @@ import { Box } from "@mui/material"
 import { makeStyles } from "@mui/styles"
 import { realtimeDB } from "Firebase/firebaseConfig"
 import SlideSwiper from "components/Banner"
-import Loading from "components/Loading"
+import LoadingWithBackdrop from "components/Loading"
 import RenderProduct from "components/common/RenderProduct"
 import { toastConfig } from "configs/toast"
 import { ICustomAPIResponse } from "models/product"
@@ -152,7 +152,7 @@ const HomePage = () => {
         <meta name="description" content="Description of HomePage ..." />
       </Helmet>
 
-      <Loading open={showLoading} />
+      <LoadingWithBackdrop open={showLoading} />
       {/* Banner */}
       <SlideSwiper />
       <Box width="100%" mt={2}>

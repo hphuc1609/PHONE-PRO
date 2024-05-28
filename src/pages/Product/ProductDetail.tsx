@@ -46,11 +46,11 @@ const Detail = ({ data, user }: Props) => {
 
   const renderTextPromotion = (item: ICustomAPIResponse) => {
     switch (item.promotion.name) {
-      case "Tragop":
-        return `Khách hàng có thể mua trả góp sản phẩm lãi suất ${item.promotion.value}% với thời hạn 6 tháng kể từ khi mua hàng.`
-      case "Giamgia":
-        return `Khách hàng sẽ được giảm ${item.promotion.value}₫ khi tới mua trực tiếp tại cửa hàng.`
-      case "Moiramat":
+      case "tragop":
+        return `Khách hàng có thể mua trả góp sản phẩm lãi suất 0% với thời hạn 6 tháng kể từ khi mua hàng.`
+      case "giamgia":
+        return `Khách hàng sẽ được giảm ${item.promotion.value} khi tới mua trực tiếp tại cửa hàng.`
+      case "moiramat":
         return `Khách hàng sẽ được thử máy miễn phí tại cửa hàng. Có thể đổi trả lỗi trong vòng 2 tháng.`
       default:
         return `Cơ hội trúng giải thưởng khi trả góp Home Credit.`

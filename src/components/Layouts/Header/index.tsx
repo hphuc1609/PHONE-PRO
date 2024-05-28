@@ -40,23 +40,26 @@ const Header = ({ user }: WrappedComponentProps) => {
             <Typography
               variant="body1"
               textTransform="uppercase"
-              letterSpacing={2}
-              fontSize={30}
+              letterSpacing={1}
+              fontSize={28}
               fontWeight={500}
             >
               Phone
+              <span
+                style={{
+                  borderTopLeftRadius: 8,
+                  borderBottomRightRadius: 8,
+                  backgroundColor: "white",
+                  padding: "3px 8px",
+                  color: primaryDark,
+                  letterSpacing: 0,
+                  marginLeft: 8,
+                  textShadow: `0px 0px 1px ${primaryDark}`,
+                }}
+              >
+                Pro
+              </span>
             </Typography>
-            <img
-              src="/assets/Logo-pro-white.png"
-              alt="Logo"
-              height={40}
-              width={80}
-              style={{
-                borderTopLeftRadius: 5,
-                borderBottomRightRadius: 5,
-                marginLeft: 5,
-              }}
-            />
           </Box>
         </Link>
 
