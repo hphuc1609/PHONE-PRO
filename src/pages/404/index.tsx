@@ -22,7 +22,17 @@ const Page404 = () => {
         justifyContent="space-between"
         flexDirection="column"
       >
-        <img src="../assets/404_page.png" alt="..." height={500} />
+        <div style={{ textAlign: "center", width: 500, height: 300 }}>
+          <img
+            src="../assets/404_page.png"
+            alt="Not found"
+            height="100%"
+            width="100%"
+            style={{ objectFit: "cover", flexShrink: 0 }}
+            loading="lazy"
+          />
+        </div>
+        <h1>404 - Trang không tồn tại</h1>
         <Button
           variant="contained"
           onClick={handleBackToHome}
