@@ -37,6 +37,7 @@ const GuaranteePage = () => {
                 textTransform="uppercase"
                 letterSpacing={1}
                 fontWeight={600}
+                sx={{ pointerEvents: "none" }}
               >
                 Danh sách các trung tâm bảo hành tại Phone Pro
               </Typography>
