@@ -14,23 +14,30 @@ interface Props {
 
 const Layout = ({ children }: Props) => {
   const location = useLocation()
-
   const [showScrollTop, setShowScrollTop] = useState<boolean>(false)
   const [pathName, setPathName] = useState("")
 
   useEffect(() => {
-    if (location.pathname === "/") {
-      setPathName(location.pathname)
-    }
+    const { pathname } = location
+    const paths = [
+      "/login",
+      "/register",
+      "/forgot-password",
+      "/profile",
+      "/bao-hanh",
+      "/lien-he",
+      "/ho-so",
+      "/gioi-thieu",
+    ]
 
-    if (location.pathname === "/profile") {
-      setPathName(location.pathname)
-    }
+    // Check if pathname is in the paths array
+    if (paths.includes(pathname)) return
 
+    setPathName(pathname)
     return () => {
       setPathName("")
     }
-  }, [location])
+  }, [location, setPathName])
 
   useEffect(() => {
     const handleScroll = () => {

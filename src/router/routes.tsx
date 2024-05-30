@@ -31,19 +31,19 @@ export const publicRoutes: Array<PathRouteProps> = [
     element: <HomePage />,
   },
   {
-    path: "/introduce",
+    path: "/gioi-thieu",
     element: <IntroPage />,
   },
   {
-    path: "/news",
+    path: "/tin-tuc",
     element: <NewsPage />,
   },
   {
-    path: "/guarantee",
+    path: "/bao-hanh",
     element: <GuaranteePage />,
   },
   {
-    path: "/contact",
+    path: "/lien-he",
     element: <ContactPage />,
   },
   {

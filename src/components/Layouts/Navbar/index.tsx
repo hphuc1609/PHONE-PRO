@@ -1,12 +1,12 @@
-import { Build, Call, Home, Info, Menu, Newspaper } from "@mui/icons-material"
-import { Box, Grid, List, ListItem, ListItemText } from "@mui/material"
-import type { IMenuChildren, INavItem } from "models/navigation"
+import { Build, Call, Home, Info, Menu } from "@mui/icons-material"
+import { Box, Grid, List, ListItemText } from "@mui/material"
+import type { INavItem } from "models/navigation"
 import { useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { headerHeight } from "styles/config"
 import theme from "styles/theme"
-import NavListItem from "./NavListItem"
 import { menuChildren } from "utils/menuChildren"
+import NavListItem from "./NavListItem"
 
 const navItems: INavItem[] = [
   {
@@ -17,7 +17,7 @@ const navItems: INavItem[] = [
   {
     name: "Giới thiệu",
     icon: <Info />,
-    link: "/introduce",
+    link: "/gioi-thieu",
   },
   {
     name: "Sản phẩm",
@@ -32,12 +32,12 @@ const navItems: INavItem[] = [
   {
     name: "Bảo hành",
     icon: <Build />,
-    link: "/guarantee",
+    link: "/bao-hanh",
   },
   {
     name: "Liên hệ",
     icon: <Call />,
-    link: "/contact",
+    link: "/lien-he",
   },
 ]
 
