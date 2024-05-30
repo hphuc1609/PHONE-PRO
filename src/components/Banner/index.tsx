@@ -17,36 +17,47 @@ const slideShow = [
   // "../assets/images/banner/banner0.gif",
 ]
 
-const SlideSwiper = () => {
+const BannerSwipe = () => {
   const smallScreen = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("md")
   )
 
   return (
-    <Swiper
-      slidesPerView={smallScreen ? 1 : 2}
-      spaceBetween={smallScreen ? 0 : 400}
-      pagination={{ clickable: true }}
-      autoplay={{ disableOnInteraction: false }}
-      loop={slideShow.length > 2}
-      grabCursor={true}
-      modules={[Autoplay, Pagination]}
-    >
-      {slideShow.map((item) => (
-        <SwiperSlide key={item}>
-          <Box paddingTop={smallScreen && 8} height={{ xs: 200, md: 300 }}>
-            <img
-              src={item}
-              alt="IMG..."
-              width={smallScreen ? "100%" : "fit-content"}
-              height="100%"
-              loading="lazy"
-            />
-          </Box>
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    <>
+      <Swiper
+        slidesPerView={smallScreen ? 1 : 2}
+        spaceBetween={smallScreen ? 0 : 400}
+        pagination={{ clickable: true }}
+        autoplay={{ disableOnInteraction: false }}
+        loop={slideShow.length > 2}
+        grabCursor={true}
+        modules={[Autoplay, Pagination]}
+      >
+        {slideShow.map((item) => (
+          <SwiperSlide key={item}>
+            <Box paddingTop={smallScreen && 8} height={{ xs: 200, md: 300 }}>
+              <img
+                src={item}
+                alt="IMG..."
+                width={smallScreen ? "100%" : "fit-content"}
+                height="100%"
+                loading="lazy"
+              />
+            </Box>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      <Box width="100%" mt={2}>
+        <img
+          src="../assets/blackFriday.gif"
+          alt="img..."
+          width="100%"
+          height="100%"
+          style={{ objectFit: "fill" }}
+        />
+      </Box>
+    </>
   )
 }
 
-export default SlideSwiper
+export default BannerSwipe

@@ -2,7 +2,7 @@ import { KeyboardArrowLeft } from "@mui/icons-material"
 import { Button, Grid } from "@mui/material"
 import { makeStyles } from "@mui/styles"
 import { realtimeDB } from "Firebase/firebaseConfig"
-import LoadingWithBackdrop from "components/Loading"
+import LoadingWithDots from "components/Loading"
 import RenderProduct from "components/common/RenderProduct"
 import { toastConfig } from "configs/toast"
 import { ICustomAPIResponse } from "models/product"
@@ -71,35 +71,39 @@ const ProductBrandPage = () => {
 
   return (
     <div>
-      <Button
-        variant="text"
-        onClick={handleBackHome}
-        color="inherit"
-        sx={{ fontWeight: 400 }}
-      >
-        <KeyboardArrowLeft fontSize="small" />
-        Trở về trang chủ
-      </Button>
-
-      <LoadingWithBackdrop open={showLoading} />
-      <Grid container spacing={2} mt={1}>
-        <Grid item xs={12}>
-          <RenderProduct
-            data={filteredProduct}
-            title={`Điện thoại ${params[3]}`}
-            row={filteredProduct.length || 10}
-            className={classes}
-          />
-        </Grid>
-        {/* <Grid item xs={12} display="flex" justifyContent="center">
-          <Pagination
-            count={totalPages}
-            color="primary"
-            page={currentPage}
-            onChange={handlePageChange}
-          />
-        </Grid> */}
-      </Grid>
+      {showLoading ? (
+        <LoadingWithDots />
+      ) : (
+        <>
+          <Button
+            variant="text"
+            onClick={handleBackHome}
+            color="inherit"
+            sx={{ fontWeight: 400 }}
+          >
+            <KeyboardArrowLeft fontSize="small" />
+            Trở về trang chủ
+          </Button>
+          <Grid container spacing={2} mt={1}>
+            <Grid item xs={12}>
+              <RenderProduct
+                data={filteredProduct}
+                title={`Điện thoại ${params[3]}`}
+                row={filteredProduct.length || 10}
+                className={classes}
+              />
+            </Grid>
+            {/* <Grid item xs={12} display="flex" justifyContent="center">
+              <Pagination
+                count={totalPages}
+                color="primary"
+                page={currentPage}
+                onChange={handlePageChange}
+              />
+            </Grid> */}
+          </Grid>
+        </>
+      )}
     </div>
   )
 }

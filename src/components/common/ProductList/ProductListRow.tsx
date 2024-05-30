@@ -133,7 +133,14 @@ const ProductListRow = ({ data, user }: Props) => {
           </Typography>
           {data.promotion.name === "giare" ? (
             data.promotion.value !== "" ? (
-              <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 5,
+                  whiteSpace: "nowrap",
+                }}
+              >
                 <span style={{ color: "#BB161C", fontSize: 18 }}>
                   {data.promotion.value + " ₫"}
                 </span>

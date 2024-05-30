@@ -1,9 +1,8 @@
 import { yupResolver } from "@hookform/resolvers/yup"
-import { Box } from "@mui/material"
 import { makeStyles } from "@mui/styles"
 import { realtimeDB } from "Firebase/firebaseConfig"
-import SlideSwiper from "components/Banner"
-import LoadingWithBackdrop from "components/Loading"
+import BannerSwipe from "components/Banner"
+import LoadingWithDots from "components/Loading"
 import RenderProduct from "components/common/RenderProduct"
 import { toastConfig } from "configs/toast"
 import { ICustomAPIResponse } from "models/product"
@@ -152,43 +151,37 @@ const HomePage = () => {
         <meta name="description" content="Description of HomePage ..." />
       </Helmet>
 
-      <LoadingWithBackdrop open={showLoading} />
-      {/* Banner */}
-      <SlideSwiper />
-      <Box width="100%" mt={2}>
-        <img
-          src="../assets/blackFriday.gif"
-          alt="img..."
-          width="100%"
-          height="100%"
-          style={{ objectFit: "fill" }}
-        />
-      </Box>
-      {/* List Brand */}
-      <MenuList
-        products={productList}
-        setTitle={setBrand}
-        setIsShowFilter={setIsShowFilter}
-        setDataFilter={setDataFilter}
-      />
-      {/* Filters */}
-      <HomeFilter
-        control={control}
-        isDirty={isDirty}
-        handleClickFilter={handleSubmit(handleClickFilter)}
-        handleClearFilter={handleClearFilter}
-      />
-
-      {/* Show list product */}
-      {isShowFilter ? (
-        <RenderProduct
-          data={dataFilter}
-          title={brand ? `Điện thoại ${brand}` : "Sản phẩm lọc"}
-          row={dataFilter?.length}
-          className={classes}
-        />
+      {!showLoading ? (
+        <>
+          <BannerSwipe />
+          {/* List Brand */}
+          <MenuList
+            products={productList}
+            setTitle={setBrand}
+            setIsShowFilter={setIsShowFilter}
+            setDataFilter={setDataFilter}
+          />
+          {/* Filters */}
+          <HomeFilter
+            control={control}
+            isDirty={isDirty}
+            handleClickFilter={handleSubmit(handleClickFilter)}
+            handleClearFilter={handleClearFilter}
+          />
+          {/* Show list product */}
+          {isShowFilter ? (
+            <RenderProduct
+              data={dataFilter}
+              title={brand ? `Điện thoại ${brand}` : "Sản phẩm lọc"}
+              row={dataFilter?.length}
+              className={classes}
+            />
+          ) : (
+            <HomeProduct productList={productList} />
+          )}
+        </>
       ) : (
-        <HomeProduct productList={productList} />
+        <LoadingWithDots />
       )}
     </>
   )
