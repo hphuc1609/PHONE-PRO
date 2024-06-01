@@ -1,31 +1,45 @@
-import { Grid, Typography } from "@mui/material"
+import { Grid, Theme, Typography, useMediaQuery } from "@mui/material"
+import { makeStyles } from "@mui/styles"
 import ProductListRow from "components/common/ProductList/ProductListRow"
 import { swiperConfig } from "configs/swiper"
 import { ICustomAPIResponse } from "models/product"
 import { Swiper, SwiperSlide } from "swiper/react"
 
+const useStyles = makeStyles(() => ({
+  title: {
+    backgroundImage: "linear-gradient(to right, #3977ce, #2e3192)",
+    color: "#fff",
+    padding: "10px 0",
+    textTransform: "capitalize",
+    textAlign: "center",
+  },
+}))
+
 interface ProductBrandProps {
   data: ICustomAPIResponse[]
   title: string
   row: number
-  className?: ClassNameProps
 }
 
-interface ClassNameProps {
-  root?: string
-  title?: string
-}
+const RenderProduct = ({ data, title, row }: ProductBrandProps) => {
+  const classes = useStyles()
+  const smallScreen = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down("lg")
+  )
 
-const RenderProduct = ({ data, title, row, className }: ProductBrandProps) => {
   return (
-    <Grid container className={className.root}>
+    <Grid container>
       <Grid item xs={12}>
-        <Typography className={className.title} variant="h5">
+        <Typography gutterBottom className={classes.title} variant="h5">
           {title}
         </Typography>
       </Grid>
-      <Grid item xs={12} px={2} pb={3}>
-        <Swiper {...swiperConfig} grid={{ rows: row, fill: "row" }}>
+      <Grid item xs={12}>
+        <Swiper
+          {...swiperConfig}
+          slidesPerView={smallScreen ? 4 : 5}
+          grid={{ rows: row, fill: "row" }}
+        >
           {data.length > 0 ? (
             data.map((item) => (
               <SwiperSlide key={item.productId}>

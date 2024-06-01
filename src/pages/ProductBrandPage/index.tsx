@@ -10,19 +10,7 @@ import { useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 
-const useStyles = makeStyles(() => ({
-  title: {
-    backgroundImage: "linear-gradient(to right, #3977ce, #2e3192)",
-    color: "#fff",
-    padding: "10px 0",
-    textTransform: "capitalize",
-    textAlign: "center",
-    marginBottom: 20,
-  },
-}))
-
 const ProductBrandPage = () => {
-  const classes = useStyles()
   const navigate = useNavigate()
   const location = useLocation()
   const params = location.pathname.split("/")
@@ -84,13 +72,12 @@ const ProductBrandPage = () => {
             <KeyboardArrowLeft fontSize="small" />
             Trở về trang chủ
           </Button>
-          <Grid container spacing={2} mt={1}>
+          <Grid container p={3}>
             <Grid item xs={12}>
               <RenderProduct
                 data={filteredProduct}
                 title={`Điện thoại ${params[3]}`}
                 row={filteredProduct.length || 10}
-                className={classes}
               />
             </Grid>
             {/* <Grid item xs={12} display="flex" justifyContent="center">

@@ -1,5 +1,6 @@
 import StarIcon from "@mui/icons-material/Star"
 import { Box, Button, Typography } from "@mui/material"
+import { makeStyles } from "@mui/styles"
 import { createComponentWithAuth } from "Firebase/firebaseConfig"
 import { toastConfig } from "configs/toast"
 import { ICustomAPIResponse } from "models/product"
@@ -11,12 +12,11 @@ import { WrappedComponentProps } from "react-with-firebase-auth"
 import { borderColor } from "styles/config"
 import AlertDialog from "../Dialog"
 import NumberFormat from "../NumberFormat"
-import { makeStyles } from "@mui/styles"
 
 const useStyles = makeStyles(() => ({
   text: {
     position: "absolute",
-    bottom: "42%",
+    bottom: 0,
     left: "auto",
     padding: "3px 8px",
     color: "white",
@@ -24,6 +24,13 @@ const useStyles = makeStyles(() => ({
     fontSize: 12,
     textAlign: "center",
     borderRadius: 3,
+  },
+  lineClampText: {
+    display: "-webkit-box",
+    WebkitLineClamp: 1,
+    WebkitBoxOrient: "vertical",
+    textOverflow: "ellipsis",
+    overflow: "hidden",
   },
 }))
 
@@ -95,12 +102,24 @@ const ProductListRow = ({ data, user }: Props) => {
 
   return (
     <>
-      <Box border={1} borderColor={borderColor} px={2} py={3}>
+      <Box
+        border={1}
+        borderColor={borderColor}
+        px={2}
+        py={2}
+        display="flex"
+        flexDirection="column"
+        sx={{ height: { xs: 330, lg: 400 } }}
+      >
         <Link
           to={`/product/details/${data.productId}`}
-          style={{ textDecoration: "none", color: "inherit" }}
+          style={{
+            textDecoration: "none",
+            color: "inherit",
+            position: "relative",
+          }}
         >
-          <Box height={{ xs: 150, md: 200 }}>
+          <Box height={{ xs: 150, lg: 200 }}>
             <img
               src={data.photoImage}
               alt="IMG..."
@@ -110,37 +129,28 @@ const ProductListRow = ({ data, user }: Props) => {
                 transition: "all 0.3s",
                 position: "relative",
                 top: isHovered ? -5 : 0,
-                objectFit: "contain",
+                objectFit: "inherit",
               }}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             />
           </Box>
+          {/* Khuyến mãi */}
           <Typography bgcolor={renderBgColor} className={classes.text}>
             {renderLabel()}
             {renderDiscount()}
           </Typography>
         </Link>
 
-        {/* Title */}
-        <Box mt={2} display="grid" rowGap={0.3}>
-          <Typography
-            textOverflow="ellipsis"
-            whiteSpace="nowrap"
-            overflow="hidden"
-          >
+        <Box mt={2} display="flex" flexDirection="column" rowGap={0.5}>
+          {/* Title */}
+          <Typography className={classes.lineClampText}>
             {data.title}
           </Typography>
+          {/* Giá */}
           {data.promotion.name === "giare" ? (
             data.promotion.value !== "" ? (
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 5,
-                  whiteSpace: "nowrap",
-                }}
-              >
+              <div>
                 <span style={{ color: "#BB161C", fontSize: 18 }}>
                   {data.promotion.value + " ₫"}
                 </span>
@@ -167,7 +177,8 @@ const ProductListRow = ({ data, user }: Props) => {
               TextProps={{ fontSize: 18 }}
             />
           )}
-
+        </Box>
+        <Box sx={{ marginTop: "auto" }}>
           {/* Rating */}
           <Box display="flex" alignItems="flex-end">
             {Array(data.star)
@@ -190,15 +201,20 @@ const ProductListRow = ({ data, user }: Props) => {
               {data.rateCount} đánh giá
             </Typography>
           </Box>
+          <Button
+            variant="outlined"
+            onClick={handleAddToCart}
+            disabled={inCart(data.productId) ? true : false}
+            sx={{
+              mt: 2,
+              padding: "10px 0",
+              fontSize: { xs: 12, lg: 14 },
+              width: "100%",
+            }}
+          >
+            {inCart(data.productId) ? "Đã thêm vào giỏ" : "Thêm vào giỏ hàng"}
+          </Button>
         </Box>
-        <Button
-          variant="outlined"
-          onClick={handleAddToCart}
-          disabled={inCart(data.productId) ? true : false}
-          sx={{ mt: 2 }}
-        >
-          {inCart(data.productId) ? "Đã thêm vào giỏ" : "Thêm vào giỏ hàng"}
-        </Button>
       </Box>
 
       <AlertDialog
