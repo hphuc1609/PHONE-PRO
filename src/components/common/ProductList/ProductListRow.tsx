@@ -103,13 +103,14 @@ const ProductListRow = ({ data, user }: Props) => {
   return (
     <>
       <Box
-        border={1}
+        borderRight={1}
+        borderBottom={1}
         borderColor={borderColor}
         px={2}
         py={2}
         display="flex"
         flexDirection="column"
-        sx={{ height: { xs: 330, lg: 400 } }}
+        sx={{ height: { xs: 350, lg: 380 } }}
       >
         <Link
           to={`/product/details/${data.productId}`}
@@ -119,7 +120,7 @@ const ProductListRow = ({ data, user }: Props) => {
             position: "relative",
           }}
         >
-          <Box height={{ xs: 150, lg: 200 }}>
+          <Box height={{ xs: 160, lg: 200 }}>
             <img
               src={data.photoImage}
               alt="IMG..."
@@ -129,7 +130,6 @@ const ProductListRow = ({ data, user }: Props) => {
                 transition: "all 0.3s",
                 position: "relative",
                 top: isHovered ? -5 : 0,
-                objectFit: "inherit",
               }}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
@@ -212,7 +212,7 @@ const ProductListRow = ({ data, user }: Props) => {
               width: "100%",
             }}
           >
-            {inCart(data.productId) ? "Đã thêm vào giỏ" : "Thêm vào giỏ hàng"}
+            {inCart(data.productId) ? "Đã thêm" : "Thêm vào giỏ hàng"}
           </Button>
         </Box>
       </Box>

@@ -42,7 +42,7 @@ export const menuChildren: IMenuChildren[] = [
     link: "/product/brand/htc",
   },
   {
-    name: "Itel-Mobile",
+    name: "Itel",
     link: "/product/brand/itel",
   },
   {

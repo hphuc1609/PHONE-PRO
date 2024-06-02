@@ -6,7 +6,14 @@ import {
   Star,
   WorkspacePremium,
 } from "@mui/icons-material"
-import { Box, Button, Grid, Icon, Typography } from "@mui/material"
+import {
+  Box,
+  Button,
+  Grid,
+  Icon,
+  Typography,
+  useMediaQuery,
+} from "@mui/material"
 import AlertDialog from "components/common/Dialog"
 import NumberFormat from "components/common/NumberFormat"
 import { toastConfig } from "configs/toast"
@@ -29,6 +36,7 @@ const Detail = ({ data, user }: Props) => {
   const navigate = useNavigate()
   const { addItem, inCart } = useCart()
   const [open, setOpen] = useState(false)
+  const mobileScreen = useMediaQuery("(max-width: 576px)")
 
   const handleClose = () => {
     setOpen(false)
@@ -112,10 +120,19 @@ const Detail = ({ data, user }: Props) => {
       {data.map((item) => (
         <Grid container spacing={3} key={item.productId}>
           <Grid item xs={12}>
-            <Box display="flex" alignItems="center" columnGap={1.5}>
-              <Typography component="h1" fontSize={28}>
+            <Box
+              display="flex"
+              alignItems={{ xs: "flex-start", md: "center" }}
+              columnGap={1.5}
+              flexDirection={{ xs: "column", md: "row" }}
+            >
+              <Typography
+                component="h1"
+                fontSize={{ xs: "1.5rem", md: "2rem" }}
+              >
                 Điện thoại {item.title}
               </Typography>
+              {/* Số lượng đánh giá */}
               <Box display="flex" columnGap={0.5}>
                 <Box alignItems="flex-start" display="flex">
                   {Array(item.star)
@@ -135,19 +152,26 @@ const Detail = ({ data, user }: Props) => {
             </Box>
           </Grid>
 
+          {/* Thông tin */}
           <Grid item xs={12}>
-            <Grid container item columnSpacing={2}>
-              <Grid item xs={4}>
+            <Grid container item spacing={2}>
+              <Grid
+                item
+                xs={12}
+                md={4}
+                display={"flex"}
+                height={!mobileScreen && 350}
+              >
                 <img
                   src={item.photoImage}
-                  alt="img..."
-                  width="100%"
-                  style={{ objectFit: "contain" }}
+                  alt="IMG..."
+                  width={mobileScreen ? "100%" : "fit-content"}
+                  loading="lazy"
+                  style={{ margin: !mobileScreen && "0 auto" }}
                 />
               </Grid>
-
-              {/* Price */}
-              <Grid item xs={4}>
+              {/* Chương trình khuyến mãi */}
+              <Grid item xs={12} md={4}>
                 <Grid container item rowGap={1.5}>
                   <Box display="flex" alignItems="center" columnGap={2}>
                     {item.promotion.name !== "giare" ? (
@@ -225,8 +249,6 @@ const Detail = ({ data, user }: Props) => {
                       </Typography>
                     </Box>
                   </Box>
-
-                  {/* Thông tin bảo hành */}
                   <Grid
                     container
                     item
@@ -245,14 +267,10 @@ const Detail = ({ data, user }: Props) => {
                       </Grid>
                     ))}
                   </Grid>
-
                   <Grid item xs={12}>
                     <Button
                       variant="contained"
-                      sx={{
-                        color: "white",
-                        bgcolor: primaryDark,
-                      }}
+                      sx={{ color: "white", bgcolor: primaryDark }}
                       fullWidth
                       onClick={() => handleAddToCart(item)}
                       disabled={inCart(item.productId) ? true : false}
@@ -265,7 +283,7 @@ const Detail = ({ data, user }: Props) => {
                         py={1.5}
                       >
                         {inCart(item.productId) ? (
-                          <Typography>Đã thêm vào giỏ</Typography>
+                          <Typography>Đã thêm</Typography>
                         ) : (
                           <>
                             <Typography
@@ -289,7 +307,8 @@ const Detail = ({ data, user }: Props) => {
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid item xs={4}>
+              {/* Thông số kỹ thuật */}
+              <Grid item xs={12} md={4}>
                 <ProductInfo item={item.specifications} />
               </Grid>
             </Grid>

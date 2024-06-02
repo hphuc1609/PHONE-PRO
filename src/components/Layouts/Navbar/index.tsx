@@ -1,4 +1,4 @@
-import { Build, Call, Home, Info, Menu } from "@mui/icons-material"
+import { Build, Call, Home, Info, Menu, Newspaper } from "@mui/icons-material"
 import { Box, Grid, List, ListItemText } from "@mui/material"
 import type { INavItem } from "models/navigation"
 import { useState } from "react"
@@ -20,15 +20,15 @@ const navItems: INavItem[] = [
     link: "/gioi-thieu",
   },
   {
-    name: "Sản phẩm",
+    name: "Điện thoại",
     icon: <Menu />,
     children: menuChildren,
   },
-  // {
-  //   name: "Tin tức",
-  //   icon: <Newspaper />,
-  //   link: "/news",
-  // },
+  {
+    name: "Tin tức",
+    icon: <Newspaper />,
+    link: "/tin-tuc",
+  },
   {
     name: "Bảo hành",
     icon: <Build />,
@@ -53,40 +53,38 @@ const Navbar = () => {
     setOpenMenu(false)
   }
   return (
-    <>
-      <Box
-        component="nav"
-        gridArea="nav"
-        display={{ xs: "none", md: "flex" }}
-        justifyContent="center"
-        bgcolor="white"
-        boxShadow="0 2px 10px 0 rgba(0,0,0,0.1)"
-        position="fixed"
-        top={0}
-        width="100%"
-        zIndex={99}
-        mt={headerHeight}
+    <Box
+      component="nav"
+      gridArea="nav"
+      display={{ xs: "none", md: "flex" }}
+      justifyContent="center"
+      bgcolor="white"
+      boxShadow="0 2px 10px 0 rgba(0,0,0,0.1)"
+      position="fixed"
+      top={0}
+      width="100%"
+      zIndex={99}
+      mt={headerHeight}
+    >
+      <List
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          p: 0,
+          position: "relative",
+        }}
       >
-        <List
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "80%",
-            p: 0,
-          }}
-        >
-          {navItems.map((item) => (
-            <NavListItem
-              key={item.name}
-              item={item}
-              isActive={checkActiveNavLink(item.link)}
-              openMenu={openMenu}
-              setOpenMenu={setOpenMenu}
-            />
-          ))}
-        </List>
-
+        {navItems.map((item) => (
+          <NavListItem
+            key={item.name}
+            item={item}
+            isActive={checkActiveNavLink(item.link)}
+            openMenu={openMenu}
+            setOpenMenu={setOpenMenu}
+          />
+        ))}
+        {/* Sub menu */}
         {openMenu && (
           <List
             sx={{
@@ -95,27 +93,30 @@ const Navbar = () => {
               top: "100%",
               left: "50%",
               transform: "translateX(-50%)",
-              width: "65%",
+              width: "100%",
               bgcolor: "white",
               boxShadow: "0 2px 10px 0 rgba(0,0,0,0.1)",
               p: 0,
             }}
-            onMouseLeave={() => setOpenMenu(false)}
           >
-            <Grid container display="flex" justifyContent="center">
+            <Grid
+              container
+              display="flex"
+              alignItems="center"
+              columnGap={3}
+              px={2}
+            >
               {navItems.map((item) =>
                 item.children?.map((child) => (
                   <Grid item xs={0} key={child.name}>
                     <ListItemText
                       primary={child.name}
                       sx={{
-                        flex: "unset",
-                        minWidth: 100,
+                        minWidth: 50,
                         textAlign: "center",
                         color:
                           checkActiveNavLink(child.link) &&
                           theme.palette.primary.main,
-                        position: "relative",
                         cursor: "pointer",
                         padding: "0.5rem 0",
                         "&:hover": {
@@ -130,8 +131,8 @@ const Navbar = () => {
             </Grid>
           </List>
         )}
-      </Box>
-    </>
+      </List>
+    </Box>
   )
 }
 

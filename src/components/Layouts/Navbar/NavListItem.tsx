@@ -13,7 +13,7 @@ const NavListItem = ({ item, isActive, openMenu, setOpenMenu }: Props) => {
   const navigate = useNavigate()
 
   const handleClickItem = (data: INavItem) => {
-    if (data.name === "Sản phẩm") {
+    if (data.name.toLowerCase() === "điện thoại") {
       setOpenMenu(!openMenu)
     } else {
       navigate(data.link)
@@ -22,20 +22,18 @@ const NavListItem = ({ item, isActive, openMenu, setOpenMenu }: Props) => {
   }
 
   return (
-    <>
-      <ListItemButton
-        sx={{
-          flex: "unset",
-          minWidth: 150,
-          textAlign: "center",
-          bgcolor: isActive ? "#e8e8e8" : "transparent",
-        }}
-        onClick={() => handleClickItem(item)}
-      >
-        <ListItemIcon sx={{ minWidth: "unset" }}>{item.icon}</ListItemIcon>
-        <ListItemText primary={item.name} />
-      </ListItemButton>
-    </>
+    <ListItemButton
+      sx={{
+        flex: "unset",
+        minWidth: 150,
+        textAlign: "center",
+        bgcolor: isActive ? "#e8e8e8" : "transparent",
+      }}
+      onClick={() => handleClickItem(item)}
+    >
+      <ListItemIcon sx={{ minWidth: "unset" }}>{item.icon}</ListItemIcon>
+      <ListItemText primary={item.name} />
+    </ListItemButton>
   )
 }
 

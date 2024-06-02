@@ -1,4 +1,4 @@
-import { Box, CssBaseline } from "@mui/material"
+import { Box, CssBaseline, useMediaQuery } from "@mui/material"
 import { ScrollToTop } from "components/GoToTop"
 import React, { useEffect, useState } from "react"
 import { mainBackground } from "styles/config"
@@ -8,14 +8,17 @@ import Navbar from "./Navbar"
 import Services from "./Liences"
 import { useLocation } from "react-router-dom"
 import scrollToTop from "helper/scrollToTop"
-interface Props {
+
+interface LayoutProps {
   children: React.ReactNode
 }
 
-const Layout = ({ children }: Props) => {
+const Layout = ({ children }: LayoutProps) => {
   const location = useLocation()
   const [showScrollTop, setShowScrollTop] = useState<boolean>(false)
   const [pathName, setPathName] = useState("")
+  const mobileScreen = useMediaQuery("(max-width: 576px)")
+  const tabletScreen = useMediaQuery("(max-width: 1024px)")
 
   useEffect(() => {
     const { pathname } = location
@@ -59,25 +62,32 @@ const Layout = ({ children }: Props) => {
   }, [location])
 
   return (
-    <Box position={"relative"} width="100%" minHeight="100vh">
+    <Box
+      position={"relative"}
+      width="100%"
+      minHeight="100vh"
+      pb={pathName && (mobileScreen ? 45 : tabletScreen ? 25 : 15)}
+    >
       <CssBaseline />
       <Header />
       <Navbar />
       <Box
         component="main"
-        pt={{ xs: 2, md: 18 }}
-        pb={{ xs: 2, md: 8 }}
-        px={{ xs: 1, md: 8 }}
+        pt={{ xs: 10, md: 18 }}
+        pb={{ xs: 2, lg: 8 }}
+        px={{ xs: 2, lg: 8 }}
         width={{ xl: "1500px" }}
-        minHeight={"100vh"}
+        height="100%"
         margin="auto"
         bgcolor={mainBackground}
       >
-        <Box sx={{ flexGrow: 1 }}>{children}</Box>
+        {children}
       </Box>
-      {pathName && <Services />}
+      <div style={{ position: "absolute", bottom: 0, width: "100%" }}>
+        {pathName && <Services />}
+        <Footer />
+      </div>
       {showScrollTop && <ScrollToTop />}
-      <Footer />
     </Box>
   )
 }

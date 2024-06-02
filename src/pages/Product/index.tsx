@@ -6,18 +6,28 @@ import ProductListRow from "components/common/ProductList/ProductListRow"
 import ProductListTitle from "components/common/ProductList/ProductListTitle"
 import { swiperConfig } from "configs/swiper"
 import { toastConfig } from "configs/toast"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { Helmet } from "react-helmet"
 import { useLocation } from "react-router-dom"
 import { toast } from "react-toastify"
 import SwiperCore, { Grid as GridSwiper } from "swiper"
-import { Swiper, SwiperSlide } from "swiper/react"
+import { Swiper, SwiperProps, SwiperSlide } from "swiper/react"
 import Detail from "./ProductDetail"
 
 import "swiper/css"
 import "swiper/css/grid"
+import { makeStyles } from "@mui/styles"
+import { borderColor } from "styles/config"
 
 SwiperCore.use([GridSwiper])
+
+const useStyles = makeStyles(() => ({
+  swiper: {
+    borderTop: "1px solid",
+    borderLeft: "1px solid",
+    borderColor: borderColor,
+  },
+}))
 
 const LoadingDetail = () => {
   return (
@@ -34,15 +44,40 @@ const LoadingDetail = () => {
 
 const Product = () => {
   const location = useLocation()
+  const classes = useStyles()
   const [showLoading, setShowLoading] = useState(false)
   const [productList, setProductList] = useState([])
   const [newProduct, setNewProduct] = useState([])
   const paramsId = location.pathname.split("/")[3]
 
-  const filteredProduct = productList.filter(
-    (product) => product.productId === paramsId
+  const filteredProduct = useMemo(
+    () => productList.filter((product) => product.productId === paramsId),
+    [productList, paramsId]
   )
 
+  const config: SwiperProps = {
+    ...swiperConfig,
+    breakpoints: {
+      // when window width is >= 320px
+      320: {
+        slidesPerView: 2,
+      },
+      // when window width is >= 640px
+      640: {
+        slidesPerView: 3,
+      },
+      // when window width is >= 768px
+      768: {
+        slidesPerView: 4,
+      },
+      // when window width is >= 1024px
+      1024: {
+        slidesPerView: 5,
+      },
+    },
+  }
+
+  // Get 10 random product
   useEffect(() => {
     const getProductRandom = (arr: string[], num: number) => {
       const shuffled = [...arr].sort(() => 0.5 - Math.random())
@@ -52,6 +87,7 @@ const Product = () => {
     getProductRandom(productList, 10)
   }, [productList])
 
+  // Get all product
   useEffect(() => {
     setShowLoading(true)
     realtimeDB
@@ -81,16 +117,15 @@ const Product = () => {
       {!showLoading ? (
         <>
           <CommentBox />
-          <Grid container rowSpacing={2} mt={10}>
+          <Grid container mt={10}>
             <Grid item xs={12}>
               <ProductListTitle
                 title="Các sản phẩm khác"
                 icon={<ShoppingBasket color="error" />}
-                disable
               />
             </Grid>
             <Grid item xs={12}>
-              <Swiper {...swiperConfig} grid={{ rows: 2, fill: "row" }}>
+              <Swiper {...config} className={classes.swiper}>
                 {newProduct?.map((product, index) => (
                   <SwiperSlide key={index}>
                     <ProductListRow data={product} />

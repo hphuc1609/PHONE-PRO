@@ -1,4 +1,4 @@
-import { Box, Theme, useMediaQuery } from "@mui/material"
+import { Box, useMediaQuery } from "@mui/material"
 import { Autoplay, Pagination } from "swiper"
 import "swiper/css/pagination"
 import { Swiper, SwiperSlide } from "swiper/react"
@@ -18,15 +18,13 @@ const slideShow = [
 ]
 
 const BannerSwipe = () => {
-  const smallScreen = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.down("md")
-  )
+  const smallScreen = useMediaQuery("( max-width: 640px )")
 
   return (
     <>
       <Swiper
         slidesPerView={smallScreen ? 1 : 2}
-        spaceBetween={smallScreen ? 0 : 400}
+        spaceBetween={10}
         pagination={{ clickable: true }}
         autoplay={{ disableOnInteraction: false }}
         loop={slideShow.length > 2}
@@ -35,19 +33,20 @@ const BannerSwipe = () => {
       >
         {slideShow.map((item) => (
           <SwiperSlide key={item}>
-            <Box paddingTop={smallScreen && 8} height={{ xs: 200, md: 300 }}>
+            <Box height={"fit-content"} width={"100%"}>
               <img
                 src={item}
                 alt="IMG..."
-                width={smallScreen ? "100%" : "fit-content"}
+                width="100%"
                 height="100%"
                 loading="lazy"
+                style={{ objectFit: "contain", flexShrink: 0 }}
               />
             </Box>
           </SwiperSlide>
         ))}
       </Swiper>
-      <Box width="100%" mt={2}>
+      <Box width="100%">
         <img
           src="../assets/blackFriday.gif"
           alt="img..."

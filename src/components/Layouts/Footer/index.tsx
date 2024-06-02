@@ -27,7 +27,13 @@ const Footer = () => {
       alignItems="center"
     >
       <p
-        style={{ display: "flex", gap: 20, color: "#1119", margin: "0 0 10px" }}
+        style={{
+          display: "flex",
+          gap: 20,
+          color: "#1119",
+          margin: "0 0 10px",
+          fontSize: 14,
+        }}
       >
         <Link to="/gioi-thieu" className={classes.textLink}>
           Về Chúng Tôi
@@ -56,7 +62,7 @@ const Footer = () => {
         <span className={classes.textLink} style={{ color: "inherit" }}>
           PhonePro.
         </span>
-        <span>Bảo lưu mọi quyền. Thiết kế bởi Phúc Lưu</span>
+        <span>Bản quyền thuộc về LT. Hoàng Phúc</span>
       </Typography>
     </Box>
   )

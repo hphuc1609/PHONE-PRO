@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import Routings from "router/Routings"
 import "configs/toastStyles.css"
+import "./global.css"
 
 const App = () => {
   return (

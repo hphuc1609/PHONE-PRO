@@ -1,14 +1,13 @@
 import { KeyboardArrowLeft } from "@mui/icons-material"
 import { Button, Grid } from "@mui/material"
-import { makeStyles } from "@mui/styles"
 import { realtimeDB } from "Firebase/firebaseConfig"
 import LoadingWithDots from "components/Loading"
-import RenderProduct from "components/common/RenderProduct"
 import { toastConfig } from "configs/toast"
 import { ICustomAPIResponse } from "models/product"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
+import TableProduct from "./TableProduct"
 
 const ProductBrandPage = () => {
   const navigate = useNavigate()
@@ -40,8 +39,12 @@ const ProductBrandPage = () => {
     navigate("/")
   }
 
-  const filteredProduct = productList.filter(
-    (product) => product.company.toLowerCase() === params[3]
+  const filteredProduct = useMemo(
+    () =>
+      productList.filter(
+        (product) => product.company.toLowerCase() === params[3]
+      ),
+    [productList, params]
   )
 
   // const productsPerPage = 5
@@ -58,7 +61,7 @@ const ProductBrandPage = () => {
   // const [autoplayEnabled, setAutoplayEnabled] = useState(true)
 
   return (
-    <div>
+    <>
       {showLoading ? (
         <LoadingWithDots />
       ) : (
@@ -67,17 +70,23 @@ const ProductBrandPage = () => {
             variant="text"
             onClick={handleBackHome}
             color="inherit"
-            sx={{ fontWeight: 400 }}
+            sx={{
+              fontWeight: 400,
+              textTransform: "none",
+              padding: "0",
+              marginBottom: "1rem",
+              fontSize: "1rem",
+            }}
           >
             <KeyboardArrowLeft fontSize="small" />
             Trở về trang chủ
           </Button>
-          <Grid container p={3}>
+          <Grid container>
             <Grid item xs={12}>
-              <RenderProduct
+              <TableProduct
                 data={filteredProduct}
-                title={`Điện thoại ${params[3]}`}
-                row={filteredProduct.length || 10}
+                title={`Điện thoại ${filteredProduct[0]?.company}`}
+                row={filteredProduct?.length}
               />
             </Grid>
             {/* <Grid item xs={12} display="flex" justifyContent="center">
@@ -91,7 +100,7 @@ const ProductBrandPage = () => {
           </Grid>
         </>
       )}
-    </div>
+    </>
   )
 }
 

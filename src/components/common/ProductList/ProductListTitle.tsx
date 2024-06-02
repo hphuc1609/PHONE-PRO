@@ -1,5 +1,5 @@
 import { ChevronRightOutlined } from "@mui/icons-material"
-import { Box, Button, Icon, Typography } from "@mui/material"
+import { Box, Icon, Typography } from "@mui/material"
 import { makeStyles } from "@mui/styles"
 import React from "react"
 import { primaryDark } from "styles/config"
@@ -7,7 +7,6 @@ import { primaryDark } from "styles/config"
 interface Props {
   title: string
   icon?: React.ReactNode
-  disable?: boolean
 }
 
 const useStyles = makeStyles(() => ({
@@ -25,7 +24,7 @@ const useStyles = makeStyles(() => ({
   },
 }))
 
-const ProductListTitle = ({ title, icon, disable = false }: Props) => {
+const ProductListTitle = ({ title, icon }: Props) => {
   const classes = useStyles()
 
   // const handleShowMore = () => {}
@@ -35,10 +34,8 @@ const ProductListTitle = ({ title, icon, disable = false }: Props) => {
       <Box
         bgcolor="#e8e8e8"
         width="100%"
-        mt={8}
-        sx={{
-          borderTop: `2px solid ${primaryDark}`,
-        }}
+        mt={4}
+        sx={{ borderTop: `2px solid ${primaryDark}` }}
         display="flex"
         alignItems="center"
         justifyContent="space-between"
@@ -59,21 +56,19 @@ const ProductListTitle = ({ title, icon, disable = false }: Props) => {
             </Icon>
           )}
         </Typography>
-        {!disable ? (
-          <Typography
-            fontSize={{ xs: 12, md: 15 }}
-            textTransform="capitalize"
-            sx={{
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              ":hover": { textDecoration: "underline" },
-            }}
-          >
-            Xem thêm
-            <ChevronRightOutlined fontSize="small" />
-          </Typography>
-        ) : null}
+        <Typography
+          fontSize={{ xs: 12, md: 15 }}
+          textTransform="capitalize"
+          sx={{
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            ":hover": { textDecoration: "underline" },
+          }}
+        >
+          Xem thêm
+          <ChevronRightOutlined fontSize="small" />
+        </Typography>
       </Box>
     </>
   )

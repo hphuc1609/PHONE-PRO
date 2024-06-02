@@ -3,7 +3,6 @@ import { makeStyles } from "@mui/styles"
 import { realtimeDB } from "Firebase/firebaseConfig"
 import BannerSwipe from "components/Banner"
 import LoadingWithDots from "components/Loading"
-import RenderProduct from "components/common/RenderProduct"
 import { toastConfig } from "configs/toast"
 import { ICustomAPIResponse } from "models/product"
 import { useEffect, useState } from "react"
@@ -18,6 +17,7 @@ import HomeFilter from "./HomeFilter"
 import HomeProduct from "./HomeProduct"
 import MenuList from "./MenuList"
 import "./style.css"
+import TableProduct from "pages/ProductBrandPage/TableProduct"
 
 const useStyles = makeStyles(() => ({
   title: {
@@ -170,12 +170,13 @@ const HomePage = () => {
           />
           {/* Show list product */}
           {isShowFilter ? (
-            <RenderProduct
-              data={dataFilter}
-              title={brand ? `Điện thoại ${brand}` : "Sản phẩm lọc"}
-              row={dataFilter?.length}
-              className={classes}
-            />
+            <div style={{ marginTop: 32 }}>
+              <TableProduct
+                data={dataFilter}
+                title={brand ? `Điện thoại ${brand}` : "Sản phẩm lọc"}
+                row={dataFilter?.length}
+              />
+            </div>
           ) : (
             <HomeProduct productList={productList} />
           )}
