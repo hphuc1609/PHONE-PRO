@@ -1,12 +1,5 @@
-import { Delete } from "@mui/icons-material"
-import {
-  Box,
-  Button,
-  Divider,
-  Grid,
-  IconButton,
-  Typography,
-} from "@mui/material"
+import { Close, Delete } from "@mui/icons-material"
+import { Box, Button, Grid, IconButton, Typography } from "@mui/material"
 import { makeStyles } from "@mui/styles"
 import NumberFormat from "components/common/NumberFormat"
 import { useNavigate } from "react-router-dom"
@@ -15,36 +8,39 @@ import { borderColor } from "styles/config"
 import EmptyCart from "./EmptyCart"
 
 const useStyles = makeStyles(() => ({
-  content: {
+  listCart: {
     height: 400,
     overflowY: "scroll",
-    padding: 10,
+    borderTop: `1px solid ${borderColor}`,
+    borderRight: `1px solid ${borderColor}`,
+    borderBottom: `1px solid ${borderColor}`,
     "&::-webkit-scrollbar": {
-      width: 8,
+      width: 5,
     },
     "&::-webkit-scrollbar-thumb": {
-      backgroundColor: "#ccc",
+      backgroundColor: "#efefef",
+      borderRadius: 0,
     },
     "&::-webkit-scrollbar-track": {
-      backgroundColor: "#eee",
+      backgroundColor: "transparent",
     },
   },
-  borderBox: {
+  boxQuantity: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    border: 1,
+    border: "1px solid",
     borderColor: borderColor,
     width: 100,
     height: 30,
   },
 }))
 
-interface Props {
+interface ListCartProps {
   handleClose: () => void
 }
 
-const DrawerContent = ({ handleClose }: Props) => {
+const ListCart = ({ handleClose }: ListCartProps) => {
   const classes = useStyles()
   const navigate = useNavigate()
   const {
@@ -65,19 +61,29 @@ const DrawerContent = ({ handleClose }: Props) => {
   return (
     <>
       {isEmpty ? (
-        <EmptyCart />
+        <EmptyCart handleClose={handleClose} />
       ) : (
-        <Box width={500} p={2} overflow="hidden">
-          <Typography variant="h6" fontWeight={400} gutterBottom>
-            Giỏ hàng của tôi ({totalItems})
-          </Typography>
-          <Divider />
-          <Box className={classes.content}>
+        <Box width={{ xs: "100%", md: 500 }} p={2} overflow="hidden">
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginBottom: 10,
+            }}
+          >
+            <Typography variant="h6" fontWeight={400}>
+              Giỏ hàng của tôi ({totalItems})
+            </Typography>
+            <IconButton size="small" onClick={handleClose}>
+              <Close />
+            </IconButton>
+          </div>
+          <Box className={classes.listCart}>
             {items.map((item) => (
               <Box
                 key={item.id}
-                border={`1px solid ${borderColor}`}
-                my={3}
+                borderBottom={`1px solid ${borderColor}`}
+                borderLeft={`1px solid ${borderColor}`}
                 py={2}
                 px={1}
               >
@@ -85,7 +91,7 @@ const DrawerContent = ({ handleClose }: Props) => {
                   <Grid item xs={3}>
                     <img
                       src={item.photoImage}
-                      alt="img..."
+                      alt="IMG..."
                       width="100%"
                       height="100%"
                       style={{ objectFit: "contain" }}
@@ -95,16 +101,23 @@ const DrawerContent = ({ handleClose }: Props) => {
                     <Box display="grid" rowGap={2}>
                       <Typography fontWeight={500}>{item.title}</Typography>
                       <Box display="flex" columnGap={1}>
-                        <Typography>Giá:</Typography>
+                        <Typography fontWeight={500} color={"primary"}>
+                          Giá:
+                        </Typography>
                         <NumberFormat value={item.price} />
                       </Box>
                       <Box display="flex" justifyContent="space-between">
-                        <Box className={classes.borderBox}>
+                        <Box className={classes.boxQuantity}>
                           <IconButton
                             onClick={() =>
                               updateItemQuantity(item.id, item.quantity - 1)
                             }
-                            sx={{ width: 30, height: "100%" }}
+                            sx={{
+                              width: 30,
+                              height: "100%",
+                              borderRight: `1px solid ${borderColor}`,
+                              borderRadius: 0,
+                            }}
                           >
                             -
                           </IconButton>
@@ -115,7 +128,12 @@ const DrawerContent = ({ handleClose }: Props) => {
                             onClick={() =>
                               updateItemQuantity(item.id, item.quantity + 1)
                             }
-                            sx={{ width: 30, height: "100%" }}
+                            sx={{
+                              width: 30,
+                              height: "100%",
+                              borderLeft: `1px solid ${borderColor}`,
+                              borderRadius: 0,
+                            }}
                           >
                             +
                           </IconButton>
@@ -130,11 +148,10 @@ const DrawerContent = ({ handleClose }: Props) => {
               </Box>
             ))}
           </Box>
-          <Divider />
-
+          {/* Total */}
           <Grid container mt={2} spacing={1}>
             <Grid item xs={12}>
-              <Box display="flex" columnGap={1} alignItems="baseline">
+              <Box display="flex" columnGap={1} alignItems="baseline" mb={1}>
                 <Typography variant="body1" fontWeight={500}>
                   Tổng cộng:
                 </Typography>
@@ -185,4 +202,4 @@ const DrawerContent = ({ handleClose }: Props) => {
   )
 }
 
-export default DrawerContent
+export default ListCart

@@ -20,12 +20,11 @@ const ContactPage = () => {
         <meta name="description" content="Description of Contact Page ..." />
       </Helmet>
 
-      <Grid container spacing={{ xs: 2, md: 5 }}>
-        <Grid container item xs={6} spacing={2}>
+      <Grid container spacing={{ xs: 2, md: 5 }} marginBottom={10}>
+        <Grid container item xs={12} md={6} spacing={2}>
           <ContactInfo />
         </Grid>
-
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <Box width="100%" height={500}>
             <GoogleMap
               bootstrapURLKeys={{

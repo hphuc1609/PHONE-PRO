@@ -1,4 +1,11 @@
-import { Build, Call, Home, Info, Menu, Newspaper } from "@mui/icons-material"
+import {
+  Build,
+  Home,
+  Info,
+  Newspaper,
+  Phone,
+  PhoneAndroid,
+} from "@mui/icons-material"
 import { Box, Grid, List, ListItemText } from "@mui/material"
 import type { INavItem } from "models/navigation"
 import { useState } from "react"
@@ -8,7 +15,7 @@ import theme from "styles/theme"
 import { menuChildren } from "utils/menuChildren"
 import NavListItem from "./NavListItem"
 
-const navItems: INavItem[] = [
+export const navItems: INavItem[] = [
   {
     name: "Trang chủ",
     icon: <Home />,
@@ -21,7 +28,7 @@ const navItems: INavItem[] = [
   },
   {
     name: "Điện thoại",
-    icon: <Menu />,
+    icon: <PhoneAndroid />,
     children: menuChildren,
   },
   {
@@ -36,7 +43,7 @@ const navItems: INavItem[] = [
   },
   {
     name: "Liên hệ",
-    icon: <Call />,
+    icon: <Phone />,
     link: "/lien-he",
   },
 ]
@@ -110,6 +117,7 @@ const Navbar = () => {
                 item.children?.map((child) => (
                   <Grid item xs={0} key={child.name}>
                     <ListItemText
+                      primaryTypographyProps={{ textTransform: "capitalize" }}
                       primary={child.name}
                       sx={{
                         minWidth: 50,

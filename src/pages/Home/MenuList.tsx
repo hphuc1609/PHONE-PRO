@@ -34,7 +34,10 @@ const MenuList = ({
   }
 
   return (
-    <Paper variant="outlined" sx={{ mt: 5 }}>
+    <Paper
+      variant="outlined"
+      sx={{ mt: 5, display: { xs: "none", md: "block" } }}
+    >
       <Typography
         variant="h5"
         textTransform="capitalize"
@@ -44,13 +47,8 @@ const MenuList = ({
       >
         Danh mục sản phẩm
       </Typography>
-      <Grid
-        container
-        py={3}
-        display={{ xs: "none", md: "flex" }}
-        justifyContent="center"
-      >
-        {/* Render menu list brands company */}
+      {/* Render menu list brands company */}
+      <Grid container py={3} justifyContent="center">
         {companies.map((item) => (
           <Grid
             item

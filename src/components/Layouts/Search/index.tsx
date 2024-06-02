@@ -50,6 +50,7 @@ const SearchSuggestion = () => {
     })
   }, [])
 
+  // Effect: keyboard ctrl + F shortcut for search
   useEffect(() => {
     window.addEventListener("keydown", (e) => {
       if ((e.ctrlKey || e.metaKey) && e.keyCode === 70) {
@@ -79,7 +80,7 @@ const SearchSuggestion = () => {
       selectOnFocus
       autoHighlight
       options={productList}
-      sx={{ width: { xs: "80%", md: "33%" } }}
+      sx={{ width: { xs: "60%", md: "33%" } }}
       renderOption={(props, option) => (
         <ListItem {...props} dense sx={{ columnGap: 2 }}>
           <div style={{ width: 70, height: 70 }}>

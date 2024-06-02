@@ -108,7 +108,7 @@ const Register = ({
   }
 
   return (
-    <Box display="flex" alignItems="center">
+    <Box display="flex" alignItems="center" marginBottom={10}>
       <Container maxWidth="xs">
         <Paper elevation={3} component="form" noValidate sx={{ p: 3 }}>
           <Grid container spacing={2}>

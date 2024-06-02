@@ -21,7 +21,7 @@ const FormContact = () => {
     fullName: yup.string().required("Vui lòng điền vào trường này"),
     phone: yup
       .string()
-      .matches(/^[0-9]{10}$/gm, "Số điện thoại không hợp lệ")
+      .matches(/^[0-9]{10}$/gm, "Số điện thoại ít nhất 10 số")
       .required("Vui lòng điền vào trường này"),
     email: yup
       .string()
@@ -60,13 +60,11 @@ const FormContact = () => {
 
   return (
     <Box mt={2}>
-      <Typography variant="subtitle1" fontWeight={600} textAlign="justify">
-        Quý khách có thể gửi liên hệ tới chúng tôi bằng cách hoàn tất biểu mẫu
-        dưới đây. Hân hạnh phục vụ và chân thành cảm ơn sự quan tâm, đóng góp ý
-        kiến đến Phone Pro.
+      <Typography variant="subtitle1" fontWeight={500}>
+        Hân hạnh phục vụ và chân thành cảm ơn sự quan tâm, đóng góp ý kiến đến
+        PhonePro.
       </Typography>
       <Divider />
-
       <Grid
         component="form"
         onSubmit={handleSubmit(onSubmit)}
@@ -75,76 +73,63 @@ const FormContact = () => {
         mt={2}
       >
         <Grid item xs={12}>
-          <Box display="flex">
-            <Typography width={100}>Họ và tên</Typography>
+          <Box display="flex" alignItems="center">
+            <Typography width={100}>Họ tên</Typography>
             <Box flex={1}>
               <FormInputText
                 name="fullName"
-                label=""
                 control={control}
                 error={errors}
-                TextFieldProps={{
-                  size: "small",
-                }}
+                TextFieldProps={{ size: "small" }}
               />
             </Box>
           </Box>
         </Grid>
         <Grid item xs={12}>
-          <Box display="flex">
+          <Box display="flex" alignItems="center">
             <Typography width={100}>Điện thoại</Typography>
             <Box flex={1}>
               <FormInputText
                 name="phone"
-                label=""
                 control={control}
                 error={errors}
-                TextFieldProps={{
-                  size: "small",
-                }}
+                TextFieldProps={{ size: "small", type: "number" }}
               />
             </Box>
           </Box>
         </Grid>
         <Grid item xs={12}>
-          <Box display="flex">
+          <Box display="flex" alignItems="center">
             <Typography width={100}>Email</Typography>
             <Box flex={1}>
               <FormInputText
                 name="email"
-                label=""
                 control={control}
                 error={errors}
-                TextFieldProps={{
-                  size: "small",
-                }}
+                TextFieldProps={{ size: "small" }}
               />
             </Box>
           </Box>
         </Grid>
         <Grid item xs={12}>
-          <Box display="flex">
+          <Box display="flex" alignItems="center">
             <Typography width={100}>Tiêu đề</Typography>
             <Box flex={1}>
               <FormInputText
                 name="subject"
-                label=""
                 control={control}
                 error={errors}
-                TextFieldProps={{
-                  size: "small",
-                }}
+                TextFieldProps={{ size: "small" }}
               />
             </Box>
           </Box>
         </Grid>
         <Grid item xs={12}>
-          <Box display="flex">
+          <Box display="flex" alignItems="center">
             <Typography width={100}>Nội dung</Typography>
             <Box flex={1}>
               <FormInputText
                 name="message"
-                label=""
                 control={control}
                 error={errors}
                 TextFieldProps={{
@@ -155,7 +140,6 @@ const FormContact = () => {
             </Box>
           </Box>
         </Grid>
-
         <Grid item xs={12} sx={{ display: "flex", justifyContent: "flex-end" }}>
           <Button type="submit" variant="outlined" sx={{ px: 2, py: 1 }}>
             Gửi thông tin
@@ -180,7 +164,7 @@ const FormContact = () => {
             </Typography>
             <Typography variant="subtitle1">
               Cảm ơn quý khách đã gửi thông tin, chúng tôi sẽ phản hồi sớm cho
-              bạn !
+              bạn!
             </Typography>
           </>
         }

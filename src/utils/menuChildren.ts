@@ -2,11 +2,11 @@ import { IMenuChildren } from "models/navigation"
 
 export const menuChildren: IMenuChildren[] = [
   {
-    name: "IPhone",
+    name: "Apple",
     link: "/product/brand/apple",
   },
   {
-    name: "Samsung",
+    name: "Sam sung",
     link: "/product/brand/samsung",
   },
   {

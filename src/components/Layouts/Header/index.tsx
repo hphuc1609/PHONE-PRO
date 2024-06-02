@@ -1,4 +1,11 @@
-import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material"
+import {
+  AppBar,
+  Box,
+  Button,
+  IconButton,
+  Toolbar,
+  Typography,
+} from "@mui/material"
 import { createComponentWithAuth } from "Firebase/firebaseConfig"
 import ShoppingCart from "components/Cart"
 import { Link, useLocation, useNavigate } from "react-router-dom"
@@ -6,10 +13,14 @@ import { WrappedComponentProps } from "react-with-firebase-auth"
 import { headerHeight, primaryDark } from "styles/config"
 import SearchSuggestion from "../Search"
 import UserMenu from "./UserMenu"
+import { Menu } from "@mui/icons-material"
+import DrawerNav from "./DrawerNav"
+import { useState } from "react"
 
 const Header = ({ user }: WrappedComponentProps) => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
+  const [openDrawer, setOpenDrawer] = useState(false)
 
   const onLogin = () => {
     navigate("/login")
@@ -24,18 +35,18 @@ const Header = ({ user }: WrappedComponentProps) => {
         sx={{
           minHeight: { xs: "4rem", md: headerHeight },
           maxHeight: { xs: "4rem", md: headerHeight },
-          justifyContent: { xs: "center", md: "space-between" },
+          justifyContent: "space-between",
         }}
       >
-        <Link
-          to="/"
-          title="Trang chủ Phone Pro"
-          style={{ textDecoration: "none", color: "inherit" }}
+        <Box
+          alignItems="center"
+          display="flex"
+          sx={{ display: { xs: "none", md: "inline-flex" } }}
         >
-          <Box
-            alignItems="center"
-            display="flex"
-            sx={{ display: { xs: "none", md: "inline-flex" } }}
+          <Link
+            to="/"
+            title="Trang chủ Phone Pro"
+            style={{ textDecoration: "none", color: "inherit" }}
           >
             <Typography
               variant="body1"
@@ -60,14 +71,21 @@ const Header = ({ user }: WrappedComponentProps) => {
                 Pro
               </span>
             </Typography>
-          </Box>
-        </Link>
-
+          </Link>
+        </Box>
+        {/* Hamburger */}
+        <IconButton
+          sx={{ display: { xs: "inline-flex", md: "none" }, color: "inherit" }}
+          onClick={() => setOpenDrawer(true)}
+        >
+          <Menu />
+        </IconButton>
+        <DrawerNav open={openDrawer} handleClose={() => setOpenDrawer(false)} />
         {/* Search bar */}
         <SearchSuggestion />
 
         {user ? (
-          <Box display={{ xs: "none", md: "flex" }}>
+          <Box display={"flex"}>
             <UserMenu />
             <ShoppingCart />
           </Box>

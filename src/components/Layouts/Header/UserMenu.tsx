@@ -34,9 +34,10 @@ const UserMenu = ({ signOut, user }: WrappedComponentProps) => {
         onClick={handleOpenMenu}
       >
         <AccountCircle />
-        <Typography>Tài khoản</Typography>
+        <Typography sx={{ display: { xs: "none", md: "inline-flex" } }}>
+          Tài khoản
+        </Typography>
       </Box>
-
       <Menu
         id="account-menu"
         open={Boolean(openMenu)}

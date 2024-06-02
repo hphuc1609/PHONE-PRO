@@ -8,4 +8,5 @@ export interface INavItem {
 export interface IMenuChildren {
   name: string
   link: string
+  icon?: string
 }

@@ -19,13 +19,11 @@ const GuaranteePage = () => {
         <meta name="description" content="Description of Guarantee Page ..." />
       </Helmet>
 
-      <Grid container spacing={1}>
+      <Grid container marginBottom={10}>
         <Grid item xs={12}>
           <Box
             p={3}
-            sx={{
-              bgcolor: (theme) => theme.palette.primary.dark,
-            }}
+            sx={{ bgcolor: (theme) => theme.palette.primary.dark }}
             overflow="hidden"
             display={{ xs: "none", md: "block" }}
           >

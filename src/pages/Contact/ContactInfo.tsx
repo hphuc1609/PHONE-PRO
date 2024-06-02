@@ -18,12 +18,12 @@ const ContactInfo = () => {
         <Box gap={1} display="flex" alignItems="center">
           <Box display="flex" alignItems="center">
             <LocationOnOutlined />
-            <Typography variant="body1" fontWeight={600} ml={1}>
+            <Typography variant="body1" ml={1}>
               Địa chỉ:
             </Typography>
           </Box>
           <Typography variant="body1">
-            Dương Thị Mười, Tân Thới Hiệp, Quận 12
+            Thành phố Hồ Chí Minh, Việt Nam
           </Typography>
         </Box>
       </Grid>
@@ -31,7 +31,7 @@ const ContactInfo = () => {
         <Box gap={1} display="flex" alignItems="center">
           <Box display="flex" alignItems="center">
             <LocalPhoneOutlined />
-            <Typography variant="body1" fontWeight={600} ml={1}>
+            <Typography variant="body1" ml={1}>
               Telephone:
             </Typography>
           </Box>
@@ -42,7 +42,7 @@ const ContactInfo = () => {
             color="inherit"
             sx={{ textDecoration: "none" }}
           >
-            123 456 789
+            123 456 xxx
           </Typography>
         </Box>
       </Grid>
@@ -50,8 +50,8 @@ const ContactInfo = () => {
         <Box gap={1} display="flex" alignItems="center">
           <Box display="flex" alignItems="center">
             <EmailOutlined />
-            <Typography variant="body1" fontWeight={600} ml={1}>
-              Email:
+            <Typography variant="body1" ml={1}>
+              Mail:
             </Typography>
           </Box>
           <Typography
@@ -61,11 +61,10 @@ const ContactInfo = () => {
             color="inherit"
             sx={{ textDecoration: "none" }}
           >
-            phucluu1609@gmail.com
+            phonepro@support.vn
           </Typography>
         </Box>
       </Grid>
-
       <Grid item xs={12}>
         <FormContact />
       </Grid>

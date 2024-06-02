@@ -15,6 +15,7 @@ export default defineConfig({
       helper: path.resolve(__dirname, "src/helper"),
       services: path.resolve(__dirname, "src/services"),
       configs: path.resolve(__dirname, "src/configs"),
+      constants: path.resolve(__dirname, "src/constants"),
       data: path.resolve(__dirname, "src/data"),
       Firebase: path.resolve(__dirname, "src/Firebase"),
     },
