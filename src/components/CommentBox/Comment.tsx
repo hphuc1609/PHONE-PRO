@@ -5,13 +5,11 @@ import React from "react"
 import { FieldValues, useForm } from "react-hook-form"
 import { primaryDark } from "styles/config"
 
-interface Props {
+interface CommentProps {
   openReply: boolean | number
   replyRef?: React.MutableRefObject<HTMLButtonElement>
   comment: IComment
   replies?: IComment[]
-  autoFocus?: boolean
-
   handleDeleteComment: (id: number) => void
   handleAddComment: (data: FieldValues) => void
   handleOpenReply: (id: number) => void
@@ -22,11 +20,10 @@ const Comment = ({
   replyRef,
   comment,
   replies,
-  autoFocus,
   handleDeleteComment,
   handleAddComment,
   handleOpenReply,
-}: Props) => {
+}: CommentProps) => {
   const createDate = new Date(comment.createDate).toLocaleString().split(" ")[1]
   const isReplyOpen = openReply === comment.id
 
@@ -113,7 +110,6 @@ const Comment = ({
               errors={errors}
               reset={reset}
               watchContent={watchContent}
-              autoFocus={autoFocus}
             />
             <Button
               variant="contained"

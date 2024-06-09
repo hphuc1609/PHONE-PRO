@@ -19,13 +19,12 @@ const GuaranteePage = () => {
         <meta name="description" content="Description of Guarantee Page ..." />
       </Helmet>
 
-      <Grid container marginBottom={10}>
+      <Grid container>
         <Grid item xs={12}>
           <Box
             p={3}
             sx={{ bgcolor: (theme) => theme.palette.primary.dark }}
             overflow="hidden"
-            display={{ xs: "none", md: "block" }}
           >
             <animated.div style={springProps}>
               <Typography
@@ -36,6 +35,8 @@ const GuaranteePage = () => {
                 letterSpacing={1}
                 fontWeight={600}
                 sx={{ pointerEvents: "none" }}
+                fontSize={{ xs: "1rem", md: "2rem" }}
+                whiteSpace={"nowrap"}
               >
                 Danh sách các trung tâm bảo hành tại Phone Pro
               </Typography>

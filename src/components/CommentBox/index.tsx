@@ -3,7 +3,7 @@ import { createComponentWithAuth, firestoreDB } from "Firebase/firebaseConfig"
 import AlertDialog from "components/common/Dialog"
 import InputTextEmoji from "components/common/InputTextEmoji"
 import { IComment } from "models/product"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { FieldValues, useForm } from "react-hook-form"
 import { useNavigate, useParams } from "react-router-dom"
 import { WrappedComponentProps } from "react-with-firebase-auth"
@@ -18,8 +18,8 @@ const CommentBox = ({ user }: WrappedComponentProps) => {
   const [dataComment, setDataComment] = useState([])
   const [open, setOpen] = useState(false)
   const [openReply, setOpenReply] = useState<number | boolean>()
-  const [autoFocus, setAutoFocus] = useState(false)
 
+  // Effect: Get comments from Firestore
   useEffect(() => {
     const getDataComment = firestoreDB
       .collection("comments")
@@ -76,8 +76,9 @@ const CommentBox = ({ user }: WrappedComponentProps) => {
       )
   }
 
-  const filterdComments = dataComment.filter(
-    (comment) => comment.productId === id
+  const filterdComments = useMemo(
+    () => dataComment.filter((comment) => comment.productId === id),
+    [dataComment, id]
   )
 
   const handleDeleteComment = (id: number) => {
@@ -86,7 +87,6 @@ const CommentBox = ({ user }: WrappedComponentProps) => {
       .get()
       .then((res) => {
         res.forEach((doc) => {
-          console.log(doc.data().id)
           if (doc.data().id === id) {
             doc.ref.delete()
           }
@@ -100,11 +100,10 @@ const CommentBox = ({ user }: WrappedComponentProps) => {
     navigate("/login")
   }
 
-  const handleOpenReply = (commentId: any) => {
+  const handleOpenReply = (commentId: number) => {
     if (openReply === commentId) {
       setOpenReply(false)
     } else {
-      setAutoFocus(true)
       setOpenReply(commentId)
     }
   }
@@ -118,7 +117,7 @@ const CommentBox = ({ user }: WrappedComponentProps) => {
         p={3}
         mt={10}
       >
-        <Grid container spacing={5}>
+        <Grid container rowSpacing={5}>
           <Grid item xs={12}>
             <Typography variant="h5" fontWeight={500} gutterBottom>
               Bình luận
@@ -134,7 +133,6 @@ const CommentBox = ({ user }: WrappedComponentProps) => {
                 reset={reset}
                 watchContent={watchContent}
               />
-
               <Button
                 variant="contained"
                 color="primary"
@@ -146,7 +144,7 @@ const CommentBox = ({ user }: WrappedComponentProps) => {
               </Button>
             </form>
           </Grid>
-
+          {/* Comments */}
           <Grid item xs={12}>
             {filterdComments
               ?.sort(
@@ -163,7 +161,6 @@ const CommentBox = ({ user }: WrappedComponentProps) => {
                       replyRef={replyRef}
                       comment={comment}
                       replies={getReplies(comment.id)}
-                      autoFocus={autoFocus}
                       handleDeleteComment={handleDeleteComment}
                       handleAddComment={handleAddComment}
                       handleOpenReply={handleOpenReply}

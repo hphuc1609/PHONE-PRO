@@ -9,7 +9,7 @@ const IntroPage = () => {
         <meta name="description" content="Description of Introduce Page ..." />
       </Helmet>
 
-      <Grid container spacing={2} marginBottom={20}>
+      <Grid container spacing={2}>
         <Grid item xs={12}>
           <Typography component="h1" variant="h4">
             Giới thiệu

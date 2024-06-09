@@ -2,9 +2,9 @@ import { KeyboardArrowLeft } from "@mui/icons-material"
 import { Drawer, List, ListItem, ListItemText } from "@mui/material"
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
-import { zIndex } from "styles/config"
-import { navItems } from "../Navbar"
+import theme from "styles/theme"
 import { companies } from "utils/company"
+import { navItems } from "../Navbar"
 
 interface DrawerNavProps {
   open: boolean
@@ -19,7 +19,7 @@ const DrawerNav = ({ open, handleClose }: DrawerNavProps) => {
       anchor="left"
       open={open}
       onClose={handleClose}
-      sx={{ zIndex: zIndex }}
+      sx={{ zIndex: theme.zIndex.drawer }}
     >
       <List>
         {openSubMenu && (

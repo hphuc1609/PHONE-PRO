@@ -3,6 +3,8 @@ import {
   Box,
   Button,
   IconButton,
+  Menu,
+  MenuItem,
   Toolbar,
   Typography,
 } from "@mui/material"
@@ -13,7 +15,8 @@ import { WrappedComponentProps } from "react-with-firebase-auth"
 import { headerHeight, primaryDark } from "styles/config"
 import SearchSuggestion from "../Search"
 import UserMenu from "./UserMenu"
-import { Menu } from "@mui/icons-material"
+import { AccountCircle } from "@mui/icons-material"
+import MenuIcon from "@mui/icons-material/Menu"
 import DrawerNav from "./DrawerNav"
 import { useState } from "react"
 
@@ -21,12 +24,22 @@ const Header = ({ user }: WrappedComponentProps) => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
   const [openDrawer, setOpenDrawer] = useState(false)
+  const [openAccount, setOpenAccount] = useState<null | HTMLElement>(null)
+
+  const handleOpenAccount = (event: React.MouseEvent<HTMLElement>) => {
+    setOpenAccount(event.currentTarget)
+  }
+  const handleClose = () => {
+    setOpenAccount(null)
+  }
 
   const onLogin = () => {
     navigate("/login")
+    setOpenAccount(null)
   }
   const onRegister = () => {
     navigate("/register")
+    setOpenAccount(null)
   }
 
   return (
@@ -78,7 +91,7 @@ const Header = ({ user }: WrappedComponentProps) => {
           sx={{ display: { xs: "inline-flex", md: "none" }, color: "inherit" }}
           onClick={() => setOpenDrawer(true)}
         >
-          <Menu />
+          <MenuIcon />
         </IconButton>
         <DrawerNav open={openDrawer} handleClose={() => setOpenDrawer(false)} />
         {/* Search bar */}
@@ -90,24 +103,56 @@ const Header = ({ user }: WrappedComponentProps) => {
             <ShoppingCart />
           </Box>
         ) : (
-          <Box display={{ xs: "none", md: "flex" }} columnGap={1}>
-            <Button
-              color="inherit"
-              variant="text"
-              onClick={onLogin}
-              sx={{ backgroundColor: pathname === "/login" && primaryDark }}
-            >
-              Đăng nhập
-            </Button>
-            <Button
-              color="inherit"
-              variant="text"
-              onClick={onRegister}
-              sx={{ backgroundColor: pathname === "/register" && primaryDark }}
-            >
-              Đăng ký
-            </Button>
-          </Box>
+          <>
+            {/* Mobile */}
+            <Box display="flex" alignItems="center" mr={2}>
+              <Box
+                sx={{ display: "flex", columnGap: 1, cursor: "pointer" }}
+                onClick={handleOpenAccount}
+              >
+                <AccountCircle />
+              </Box>
+              <Menu
+                id="account-menu"
+                open={Boolean(openAccount)}
+                anchorEl={openAccount}
+                onClose={handleClose}
+                autoFocus={false}
+                keepMounted
+                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                transformOrigin={{ vertical: "top", horizontal: "right" }}
+              >
+                <MenuItem onClick={onLogin}>
+                  <Typography>Đăng nhập</Typography>
+                </MenuItem>
+                <MenuItem onClick={onRegister}>
+                  <Typography>Đăng ký</Typography>
+                </MenuItem>
+              </Menu>
+            </Box>
+
+            {/* Large screen */}
+            <Box display={{ xs: "none", sm: "flex" }} columnGap={1}>
+              <Button
+                color="inherit"
+                variant="text"
+                onClick={onLogin}
+                sx={{ backgroundColor: pathname === "/login" && primaryDark }}
+              >
+                Đăng nhập
+              </Button>
+              <Button
+                color="inherit"
+                variant="text"
+                onClick={onRegister}
+                sx={{
+                  backgroundColor: pathname === "/register" && primaryDark,
+                }}
+              >
+                Đăng ký
+              </Button>
+            </Box>
+          </>
         )}
       </Toolbar>
     </AppBar>

@@ -1,5 +1,5 @@
 import { ShoppingBasket } from "@mui/icons-material"
-import { Grid, Skeleton } from "@mui/material"
+import { Box, Grid, Skeleton } from "@mui/material"
 import { realtimeDB } from "Firebase/firebaseConfig"
 import CommentBox from "components/CommentBox"
 import ProductListRow from "components/common/ProductList/ProductListRow"
@@ -31,13 +31,28 @@ const useStyles = makeStyles(() => ({
 
 const LoadingDetail = () => {
   return (
-    <div style={{ display: "grid", gap: 20 }}>
-      <Skeleton variant="text" height={45} width={500} />
-      <div style={{ display: "flex", justifyContent: "center", gap: 20 }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+      <Skeleton
+        variant="text"
+        height={45}
+        sx={{ width: { xs: 300, md: 500 } }}
+      />
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", md: "row" },
+          gap: 3,
+        }}
+      >
         {Array.from({ length: 3 }).map((_, index) => (
-          <Skeleton key={index} variant="rounded" height={300} width={"100%"} />
+          <Skeleton
+            key={index}
+            variant="rounded"
+            width={"100%"}
+            sx={{ height: { xs: 150, md: 300 } }}
+          />
         ))}
-      </div>
+      </Box>
     </div>
   )
 }

@@ -5,12 +5,11 @@ import { useEffect, useState } from "react"
 import { Control, FieldErrors, FieldValues } from "react-hook-form"
 import FormInputText from "../FormInput/FormInputText"
 
-interface Props {
+interface InputTextEmojiProps {
   control: Control<FieldValues>
   errors: FieldErrors<FieldValues>
   watchContent: string
   reset: (values?: FieldValues) => void
-  autoFocus?: boolean
 }
 
 const InputTextEmoji = ({
@@ -18,8 +17,7 @@ const InputTextEmoji = ({
   errors,
   reset,
   watchContent,
-  autoFocus,
-}: Props) => {
+}: InputTextEmojiProps) => {
   const [toggleEmoji, setToogleEmoji] = useState(false)
   const [selectedEmoji, setSelectedEmoji] = useState("")
 
@@ -36,16 +34,19 @@ const InputTextEmoji = ({
   const renderEmoji = () => {
     if (selectedEmoji) {
       return String.fromCodePoint(parseInt(selectedEmoji, 16))
-        .split(" ")
-        .join("")
     }
+
+    return ""
   }
 
+  // Effect: Add emoji to input content
   useEffect(() => {
     if (selectedEmoji) {
-      const content = watchContent + renderEmoji()
+      const content = watchContent
+        ? watchContent + renderEmoji()
+        : renderEmoji()
       reset({ content })
-      setSelectedEmoji("")
+      setSelectedEmoji("") // Reset emoji after input
     }
   }, [selectedEmoji])
 
@@ -60,10 +61,9 @@ const InputTextEmoji = ({
       <FormInputText
         control={control}
         error={errors}
-        label=""
         name="content"
         TextFieldProps={{
-          placeholder: "Mời bạn bình luận hoặc đặt câu hỏi",
+          placeholder: "Bình luận hoặc đặt câu hỏi",
           multiline: true,
           rows: 3,
           InputProps: {
@@ -76,17 +76,10 @@ const InputTextEmoji = ({
               </IconButton>
             ),
           },
-          autoFocus: autoFocus,
         }}
       />
       {toggleEmoji && (
-        <Box
-          width={300}
-          position="absolute"
-          top={-280}
-          right={-260}
-          zIndex={99}
-        >
+        <Box width={300} position="absolute" top={0} right={0} zIndex={99}>
           <EmojiPicker
             width="100%"
             height={350}

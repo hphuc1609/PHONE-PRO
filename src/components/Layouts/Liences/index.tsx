@@ -9,12 +9,11 @@ import { makeStyles } from "@mui/styles"
 
 const useStyles = makeStyles(() => ({
   root: {
-    height: "100%",
     display: "flex",
     justifyContent: "space-between",
     borderTop: "1px solid #E5E5E5",
     background: "#F1F6F9",
-    padding: "10px 25px",
+    padding: "20px 24px",
     gap: 20,
     flexWrap: "wrap",
   },

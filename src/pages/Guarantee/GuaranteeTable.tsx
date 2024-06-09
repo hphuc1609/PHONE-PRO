@@ -15,8 +15,12 @@ const TableDetail = () => {
   }
 
   return (
-    <TableContainer component={Paper} square>
-      <Table sx={{ minWidth: 700 }}>
+    <TableContainer
+      component={Paper}
+      square
+      sx={{ maxHeight: { xs: 700, md: 500 } }}
+    >
+      <Table stickyHeader sx={{ minWidth: 800 }}>
         <TableHead>
           <TableRow>
             <StyledTableCell align="center">STT</StyledTableCell>

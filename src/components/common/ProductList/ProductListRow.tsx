@@ -110,7 +110,7 @@ const ProductListRow = ({ data, user }: Props) => {
         py={2}
         display="flex"
         flexDirection="column"
-        sx={{ height: { xs: 350, lg: 380 } }}
+        sx={{ height: { xs: 320, lg: 360 } }}
       >
         <Link
           to={`/product/details/${data.productId}`}
@@ -120,7 +120,7 @@ const ProductListRow = ({ data, user }: Props) => {
             position: "relative",
           }}
         >
-          <Box height={{ xs: 160, lg: 200 }}>
+          <Box height={{ xs: 130, lg: 180 }}>
             <img
               src={data.photoImage}
               alt="IMG..."
@@ -130,6 +130,7 @@ const ProductListRow = ({ data, user }: Props) => {
                 transition: "all 0.3s",
                 position: "relative",
                 top: isHovered ? -5 : 0,
+                objectFit: "contain",
               }}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}

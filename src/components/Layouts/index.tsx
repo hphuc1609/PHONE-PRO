@@ -17,8 +17,6 @@ const Layout = ({ children }: LayoutProps) => {
   const location = useLocation()
   const [showScrollTop, setShowScrollTop] = useState<boolean>(false)
   const [pathName, setPathName] = useState("")
-  const mobileScreen = useMediaQuery("(max-width: 576px)")
-  const tabletScreen = useMediaQuery("(max-width: 1024px)")
 
   useEffect(() => {
     const { pathname } = location
@@ -31,6 +29,7 @@ const Layout = ({ children }: LayoutProps) => {
       "/lien-he",
       "/ho-so",
       "/gioi-thieu",
+      "/tin-tuc",
     ]
 
     // Check if pathname is in the paths array
@@ -62,31 +61,24 @@ const Layout = ({ children }: LayoutProps) => {
   }, [location])
 
   return (
-    <Box
-      position={"relative"}
-      width="100%"
-      minHeight="100vh"
-      pb={pathName && (mobileScreen ? 45 : tabletScreen ? 25 : 15)}
-    >
+    <Box position={"relative"} width="100%" height="100vh">
       <CssBaseline />
       <Header />
       <Navbar />
       <Box
         component="main"
-        pt={{ xs: 10, md: 18 }}
-        pb={{ xs: 2, lg: 8 }}
-        px={{ xs: 2, lg: 8 }}
-        width={{ xl: "1500px" }}
-        height="100%"
+        pt={{ xs: 10, md: 20 }}
+        pb={{ xs: 4 }}
+        px={{ xs: 3, lg: 8 }}
+        width="100%"
+        minHeight="100%"
         margin="auto"
         bgcolor={mainBackground}
       >
         {children}
       </Box>
-      <div style={{ position: "absolute", bottom: 0, width: "100%" }}>
-        {pathName && <Services />}
-        <Footer />
-      </div>
+      {pathName && <Services />}
+      <Footer />
       {showScrollTop && <ScrollToTop />}
     </Box>
   )

@@ -15,18 +15,29 @@ const NewsRow = ({ detail }: Props) => {
   const date = generateRandomDate().toLocaleDateString()
 
   return (
-    <Grid
-      container
-      columnGap={2}
-      border={`1px solid ${borderColor}`}
-      position="relative"
-    >
+    <Grid container border={`1px solid ${borderColor}`} position="relative">
       <Grid item xs={3}>
         <Link to={detail.path} target="_blank">
-          <img src={detail.photoLink} alt="..." width="100%" height="100%" />
+          <img
+            src={detail.photoLink}
+            alt="IMG..."
+            width="100%"
+            height="100%"
+            style={{ objectFit: "cover", flexShrink: 0 }}
+          />
         </Link>
       </Grid>
-      <Grid item xs={8}>
+      <Grid
+        item
+        sx={{
+          height: 180,
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          padding: "0.5rem 1rem",
+        }}
+      >
         <Link
           to={detail.path}
           target="_blank"
@@ -34,37 +45,57 @@ const NewsRow = ({ detail }: Props) => {
             textDecoration: "none",
             color: "black",
             fontWeight: 400,
-            fontSize: "1.4rem",
             marginBottom: "0.5rem",
             marginTop: "0.5rem",
-            display: "block",
           }}
         >
-          {detail.name}
+          <Typography
+            sx={{
+              fontSize: { xs: "1rem", sm: "1.5rem" },
+              overflow: "hidden",
+              display: "-webkit-box",
+              WebkitLineClamp: 3,
+              WebkitBoxOrient: "vertical",
+            }}
+          >
+            {detail.name}
+          </Typography>
         </Link>
-        <Box display="flex">
-          <Typography variant="body2" color="gray">
-            {detail.category}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            width: "100%",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              gap: 1,
+              flexDirection: { xs: "column", sm: "row" },
+            }}
+          >
+            <Typography variant="body2" color="gray">
+              {detail.category}
+            </Typography>
+            <Typography variant="body2" color="gray">
+              {date}
+            </Typography>
+          </Box>
+          <Typography
+            component="a"
+            variant="body1"
+            color="gray"
+            height="fit-content"
+            sx={{ textDecoration: "none" }}
+            href={detail.path}
+            target="_blank"
+          >
+            Xem thêm
           </Typography>
-          <Typography variant="body2" color="gray" ml={2}>
-            {date}
-          </Typography>
-        </Box>
+        </div>
       </Grid>
-      <Typography
-        component="a"
-        variant="body1"
-        color="gray"
-        height="fit-content"
-        position="absolute"
-        bottom={10}
-        right={20}
-        sx={{ textDecoration: "none" }}
-        href={detail.path}
-        target="_blank"
-      >
-        Xem thêm
-      </Typography>
     </Grid>
   )
 }

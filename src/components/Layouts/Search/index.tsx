@@ -6,7 +6,6 @@ import { realtimeDB } from "Firebase/firebaseConfig"
 import { ICustomAPIResponse } from "models/product"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { text } from "stream/consumers"
 
 const useStyles = makeStyles(() => ({
   "@global": {
@@ -136,7 +135,7 @@ const SearchSuggestion = () => {
           <InputBase
             {...params}
             {...params.InputProps}
-            placeholder="Bạn tìm gì..."
+            placeholder="Bạn tìm điện thoại gì?"
             className={classes.input}
             endAdornment={<Search sx={{ cursor: "default" }} />}
           />
