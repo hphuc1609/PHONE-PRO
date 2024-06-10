@@ -105,13 +105,10 @@ const Header = ({ user }: WrappedComponentProps) => {
         ) : (
           <>
             {/* Mobile */}
-            <Box display="flex" alignItems="center" mr={2}>
-              <Box
-                sx={{ display: "flex", columnGap: 1, cursor: "pointer" }}
-                onClick={handleOpenAccount}
-              >
+            <Box display={{ xs: "inline-flex", sm: "none" }}>
+              <IconButton color="inherit" onClick={handleOpenAccount}>
                 <AccountCircle />
-              </Box>
+              </IconButton>
               <Menu
                 id="account-menu"
                 open={Boolean(openAccount)}
