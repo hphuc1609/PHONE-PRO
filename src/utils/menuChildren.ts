@@ -6,7 +6,7 @@ export const menuChildren: IMenuChildren[] = [
     link: "/product/brand/apple",
   },
   {
-    name: "Sam sung",
+    name: "Samsung",
     link: "/product/brand/samsung",
   },
   {

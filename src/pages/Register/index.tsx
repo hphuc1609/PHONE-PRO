@@ -1,6 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup"
 import { LockOpen, Visibility, VisibilityOff } from "@mui/icons-material"
 import {
+  Alert,
   Box,
   Button,
   Container,
@@ -43,6 +44,8 @@ const Register = ({
   const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false)
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false)
+  const [errorAlert, setErrorAlert] = useState("")
+  const [loading, setLoading] = useState(false)
 
   const schema = yup.object().shape({
     email: yup
@@ -80,31 +83,29 @@ const Register = ({
     }
   }
 
-  const signUp = (email: string, password: string) => {
+  const handleRegister = (data: FieldValues) => {
     try {
-      const res: any = createUserWithEmailAndPassword(email, password)
+      const email = data.email
+      const password = data.password
+      const result: any = createUserWithEmailAndPassword(email, password)
 
-      res.then((userCredential: any) => {
+      if (loading) return
+      setLoading(true)
+      result.then((userCredential: any) => {
         if (userCredential.user) {
           toast.success("Đăng ký thành công", toastConfig)
           navigate("/")
         } else {
-          toast.error(
-            "Tài khoản đã tồn tại, vui lòng đăng ký lại !",
-            toastConfig
+          setErrorAlert(
+            "Tài khoản đã đăng ký, vui lòng đăng ký tài khoản khác!"
           )
         }
       })
     } catch (error: any) {
       toast.error(error.message, toastConfig)
+    } finally {
+      setLoading(false)
     }
-  }
-
-  const handleRegister = (data: FieldValues) => {
-    const email = data.email
-    const password = data.password
-
-    signUp(email, password)
   }
 
   return (
@@ -122,7 +123,13 @@ const Register = ({
                 </Typography>
               </Box>
             </Grid>
-
+            {errorAlert && (
+              <Grid item md={12}>
+                <Alert severity="error" style={{ alignItems: "center" }}>
+                  {errorAlert}
+                </Alert>
+              </Grid>
+            )}
             <Grid item xs={12}>
               <FormInputText
                 name="email"

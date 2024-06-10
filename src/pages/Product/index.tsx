@@ -95,12 +95,13 @@ const Product = () => {
   // Get 10 random product
   useEffect(() => {
     const getProductRandom = (arr: string[], num: number) => {
+      if (!arr) return
       const shuffled = [...arr].sort(() => 0.5 - Math.random())
       setNewProduct(shuffled.slice(0, num))
     }
 
     getProductRandom(productList, 10)
-  }, [productList])
+  }, [productList, paramsId])
 
   // Get all product
   useEffect(() => {
@@ -110,13 +111,15 @@ const Product = () => {
       .once("value", (snapshot) => {
         if (snapshot.exists()) {
           const data = snapshot.val()
-          setProductList(data)
+          setProductList(data ?? [])
         } else {
-          toast.error("No data available!", toastConfig)
+          throw new Error("No data available!")
         }
       })
+      .catch((error) => {
+        toast.error(error.message, toastConfig)
+      })
       .finally(() => {
-        toast.clearWaitingQueue()
         setShowLoading(false)
       })
   }, [])

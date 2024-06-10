@@ -46,7 +46,6 @@ const Detail = ({ data, user }: Props) => {
     if (user) {
       addItem({ ...product, id: product.productId })
       toast.success(`Đã thêm ${product.title} vào giỏ hàng`, toastConfig)
-      toast.clearWaitingQueue()
     } else {
       setOpen(true)
     }

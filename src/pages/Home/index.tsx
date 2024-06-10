@@ -68,16 +68,19 @@ const HomePage = () => {
     setShowLoading(true)
     realtimeDB
       .ref("products")
-      .once("value", (snapshot) => {
+      .once("value")
+      .then((snapshot) => {
         if (snapshot.exists()) {
           const data = snapshot.val()
           setProductList(data)
         } else {
-          toast.error("No data available!", toastConfig)
+          throw new Error("No data available!")
         }
       })
+      .catch((error) => {
+        toast.error(error.message, toastConfig)
+      })
       .finally(() => {
-        toast.clearWaitingQueue()
         setShowLoading(false)
       })
   }, [])

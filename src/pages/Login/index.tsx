@@ -40,13 +40,15 @@ const useStyles = makeStyles(() => ({
 interface LoginForm {
   email: string
   password: string
+  [key: string]: any
 }
 
 const Login = ({ signInWithEmailAndPassword }: WrappedComponentProps) => {
   const classes = useStyles()
   const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false)
-  const [errorMessage, setErrorMessage] = useState("")
+  const [errorAlert, setErrorAlert] = useState("")
+  const [loading, setLoading] = useState(false)
 
   const schema = yup.object().shape({
     email: yup
@@ -69,26 +71,32 @@ const Login = ({ signInWithEmailAndPassword }: WrappedComponentProps) => {
     setShowPassword(!showPassword)
   }
 
-  const handleLogin = ({ email, password }: LoginForm) => {
-    const result: any = signInWithEmailAndPassword(email, password)
+  const handleLogin = (data: FieldValues) => {
+    const { email, password } = data as LoginForm
 
-    result.then((userCredential: any) => {
-      if (userCredential.user) {
-        toast.success("Đăng nhập thành công!", toastConfig)
-        navigate("/")
-      } else if (userCredential.code === "auth/user-not-found") {
-        setErrorMessage("Email không tồn tại!")
-      } else if (userCredential.code === "auth/wrong-password") {
-        setErrorMessage("Mật khẩu không chính xác!")
-      } else {
-        setErrorMessage("Đăng nhập thất bại. Network error")
-      }
-    })
-  }
-
-  const onSubmit = (data: FieldValues) => {
-    const { email, password } = data
-    handleLogin({ email, password })
+    if (loading) return
+    try {
+      const result: any = signInWithEmailAndPassword(email, password)
+      setLoading(true)
+      result.then((userCredential: any) => {
+        if (userCredential.user) {
+          toast.success("Đăng nhập thành công!", toastConfig)
+          navigate("/")
+        } else if (userCredential.code === "auth/user-not-found") {
+          setErrorAlert("Email không tồn tại!")
+        } else if (userCredential.code === "auth/wrong-password") {
+          setErrorAlert("Mật khẩu không chính xác!")
+        } else {
+          setErrorAlert(
+            "Có lỗi xảy ra, vui lòng kiểm tra kết nối mạng và thử lại!"
+          )
+        }
+      })
+    } catch (error: any) {
+      toast.error(error.message, toastConfig)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -106,10 +114,10 @@ const Login = ({ signInWithEmailAndPassword }: WrappedComponentProps) => {
                 </Typography>
               </Box>
             </Grid>
-            {errorMessage && (
+            {errorAlert && (
               <Grid item md={12}>
                 <Alert severity="error" style={{ alignItems: "center" }}>
-                  {errorMessage}
+                  {errorAlert}
                 </Alert>
               </Grid>
             )}
@@ -150,7 +158,7 @@ const Login = ({ signInWithEmailAndPassword }: WrappedComponentProps) => {
               <Button
                 type="submit"
                 variant="contained"
-                onClick={handleSubmit(onSubmit)}
+                onClick={handleSubmit(handleLogin)}
                 sx={{ p: "8px", bgcolor: primaryDark, mb: 2 }}
                 fullWidth
                 disableElevation
